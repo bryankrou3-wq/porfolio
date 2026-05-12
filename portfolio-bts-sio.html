@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bryan Krou — Portfolio BTS SIO SISR</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#080808;--card:#111111;--card2:#161616;
+  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);
+  --accent:#00d4ff;--accent2:#7c3aed;--accent3:#10b981;--accent4:#f59e0b;
+  --text:#f0f0f0;--muted:#777;--muted2:#444;
+  --font-d:'Syne',sans-serif;--font-b:'DM Sans',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--font-b);font-size:16px;line-height:1.7;overflow-x:hidden}
+
+/* CURSOR */
+.cursor{position:fixed;width:10px;height:10px;border-radius:50%;background:var(--accent);pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:screen}
+.cursor-ring{position:fixed;width:36px;height:36px;border-radius:50%;border:1px solid rgba(0,212,255,0.4);pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .2s,height .2s,border-color .2s}
+
+/* PARTICLES */
+#particles{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.particle{position:absolute;width:2px;height:2px;border-radius:50%;background:var(--accent);opacity:0;animation:float-p linear infinite}
+@keyframes float-p{0%{opacity:0;transform:translateY(100vh)}10%{opacity:.5}90%{opacity:.1}100%{opacity:0;transform:translateY(-5vh)}}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(8,8,8,0.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);padding:0 2.5rem;display:flex;align-items:center;justify-content:space-between;height:64px;transition:box-shadow .3s}
+nav.scrolled{box-shadow:0 4px 40px rgba(0,212,255,.06)}
+.nav-logo{font-family:var(--font-d);font-weight:800;font-size:1.1rem;color:var(--text);text-decoration:none}
+.nav-logo span{color:var(--accent)}
+.nav-links{display:flex;gap:0;list-style:none}
+.nav-links a{display:block;padding:.4rem .75rem;color:var(--muted);text-decoration:none;font-size:.78rem;font-weight:500;border-radius:6px;transition:color .2s,background .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--text);background:rgba(255,255,255,.06)}
+.nav-contact-btn{background:var(--accent)!important;color:#000!important;font-weight:700!important;border-radius:6px}
+.nav-contact-btn:hover{opacity:.85}
+
+/* SECTIONS */
+section{padding:6rem 2rem;max-width:1100px;margin:0 auto;position:relative;z-index:1}
+section+section{border-top:1px solid var(--border)}
+
+/* HERO */
+#accueil{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding-top:80px;max-width:100%;padding-left:6vw;padding-right:6vw;overflow:hidden}
+#accueil::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(0,212,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,.025) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0}
+#accueil::after{content:'';position:absolute;bottom:0;left:0;right:0;height:200px;background:linear-gradient(transparent,var(--bg));pointer-events:none;z-index:1}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;max-width:1100px;margin:0 auto;position:relative;z-index:2}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(0,212,255,.07);border:1px solid rgba(0,212,255,.2);padding:6px 14px;border-radius:100px;font-size:.75rem;color:var(--accent);font-weight:600;letter-spacing:.07em;text-transform:uppercase;margin-bottom:1.4rem}
+.hero-tag::before{content:'';width:6px;height:6px;background:var(--accent);border-radius:50%;animation:blink 1.5s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.1}}
+.hero-title{font-family:var(--font-d);font-size:clamp(3rem,6vw,5.2rem);font-weight:800;line-height:1;letter-spacing:-.04em;margin-bottom:.2rem}
+.hero-title .sub{font-size:clamp(1.5rem,3vw,2.4rem);color:var(--accent);display:block;font-weight:700;letter-spacing:-.02em;margin-top:.2rem}
+.hero-school{font-size:.85rem;color:var(--muted);margin-bottom:1.5rem}
+.hero-school strong{color:#aaa}
+.hero-desc{color:var(--muted);font-size:.97rem;max-width:460px;margin-bottom:2rem;line-height:1.8}
+.hero-btns{display:flex;gap:9px;flex-wrap:wrap}
+.btn-primary{display:inline-flex;align-items:center;gap:7px;background:var(--accent);color:#000;padding:11px 20px;border-radius:8px;font-weight:700;font-size:.86rem;text-decoration:none;transition:opacity .2s,transform .2s,box-shadow .2s}
+.btn-primary:hover{opacity:.85;transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,212,255,.25)}
+.btn-ghost{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--border2);color:var(--text);padding:11px 20px;border-radius:8px;font-weight:500;font-size:.86rem;text-decoration:none;transition:background .2s,transform .2s}
+.btn-ghost:hover{background:rgba(255,255,255,.05);transform:translateY(-2px)}
+.btn-cv{display:inline-flex;align-items:center;gap:7px;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3);color:#f59e0b;padding:11px 20px;border-radius:8px;font-weight:600;font-size:.86rem;text-decoration:none;transition:background .2s,transform .2s,box-shadow .2s;cursor:pointer}
+.btn-cv:hover{background:rgba(245,158,11,.18);transform:translateY(-2px);box-shadow:0 6px 24px rgba(245,158,11,.15)}
+.hero-visual{position:relative;display:flex;align-items:center;justify-content:center}
+.hero-img-wrap{width:310px;height:390px;border-radius:24px;overflow:hidden;border:1px solid var(--border2);transition:box-shadow .4s}
+.hero-img-wrap:hover{box-shadow:0 0 60px rgba(0,212,255,.12)}
+.hero-img-placeholder{width:100%;height:100%;background:linear-gradient(135deg,#080c14,#0d1a2e,#0a1530);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem}
+.avatar-circle{width:110px;height:110px;border-radius:50%;background:rgba(0,212,255,.08);border:2px solid rgba(0,212,255,.3);display:flex;align-items:center;justify-content:center;font-family:var(--font-d);font-size:2.5rem;font-weight:800;color:var(--accent);position:relative}
+.avatar-circle::after{content:'';position:absolute;inset:-10px;border-radius:50%;border:1px solid rgba(0,212,255,.1);animation:pulse-ring 2.5s ease-out infinite}
+@keyframes pulse-ring{0%{transform:scale(.95);opacity:.8}100%{transform:scale(1.2);opacity:0}}
+.avatar-label{color:var(--muted);font-size:.82rem}
+.hero-badge{position:absolute;bottom:-14px;left:-14px;background:var(--card);border:1px solid var(--border2);border-radius:12px;padding:10px 14px;display:flex;align-items:center;gap:10px;font-size:.8rem;box-shadow:0 8px 30px rgba(0,0,0,.6)}
+.badge-dot{width:8px;height:8px;background:#f59e0b;border-radius:50%;flex-shrink:0;animation:blink 1.8s infinite}
+.badge-text strong{display:block;font-weight:600;color:var(--text);font-size:.82rem}
+.badge-text span{color:var(--muted)}
+.hero-stats{display:flex;gap:2.5rem;margin-top:2.5rem}
+.hero-stat .num{font-family:var(--font-d);font-size:2rem;font-weight:800;color:var(--accent);line-height:1}
+.hero-stat .lbl{font-size:.7rem;color:var(--muted);margin-top:2px;letter-spacing:.04em;text-transform:uppercase}
+
+/* SECTION HEADERS */
+.section-label{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem;display:flex;align-items:center;gap:8px}
+.section-label::before{content:'';width:20px;height:1px;background:var(--accent)}
+.section-title{font-family:var(--font-d);font-size:clamp(1.8rem,3vw,2.6rem);font-weight:800;letter-spacing:-.03em;line-height:1.1;margin-bottom:.8rem}
+.section-desc{color:var(--muted);max-width:580px;margin-bottom:3rem;font-size:.93rem}
+
+/* BTS */
+.bts-intro{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.8rem}
+.bts-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2rem;transition:border-color .3s,transform .3s,box-shadow .3s;position:relative;overflow:hidden}
+.bts-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.bts-card.sisr::before{background:linear-gradient(90deg,var(--accent),#0099cc)}
+.bts-card.slam::before{background:linear-gradient(90deg,var(--accent2),#a78bfa)}
+.bts-card:hover{border-color:var(--border2);transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.bts-card-icon{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:1.1rem}
+.sisr .bts-card-icon{background:rgba(0,212,255,.1)}.slam .bts-card-icon{background:rgba(124,58,237,.1)}
+.bts-card h3{font-family:var(--font-d);font-weight:700;font-size:1.1rem;margin-bottom:.4rem}
+.sisr h3{color:var(--accent)}.slam h3{color:#a78bfa}
+.bts-card .subtitle{font-size:.79rem;color:var(--muted);margin-bottom:.9rem;font-style:italic}
+.bts-card p{font-size:.88rem;color:#aaa;line-height:1.75}
+.bts-skills{display:flex;flex-wrap:wrap;gap:5px;margin-top:1.1rem}
+.skill-tag{font-size:.72rem;padding:3px 9px;border-radius:100px;font-weight:500}
+.sisr .skill-tag{background:rgba(0,212,255,.07);color:var(--accent);border:1px solid rgba(0,212,255,.17)}
+.slam .skill-tag{background:rgba(124,58,237,.08);color:#a78bfa;border:1px solid rgba(124,58,237,.2)}
+.bts-global{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2rem}
+.bts-global h3{font-family:var(--font-d);font-size:.95rem;font-weight:700;margin-bottom:.8rem}
+.bts-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;margin-top:1.1rem}
+.bts-col-item{font-size:.84rem;color:#999}
+.bts-col-item strong{display:block;color:var(--text);font-weight:600;margin-bottom:3px}
+
+/* COMPETENCES */
+.comp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;margin-bottom:1.8rem}
+.comp-cat{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.4rem;transition:border-color .3s,transform .3s}
+.comp-cat:hover{border-color:var(--border2);transform:translateY(-3px)}
+.comp-cat-header{display:flex;align-items:center;gap:10px;margin-bottom:1.1rem}
+.comp-cat-icon{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.comp-cat-icon.net{background:rgba(0,212,255,.1)}
+.comp-cat-icon.sys{background:rgba(16,185,129,.1)}
+.comp-cat-icon.sec{background:rgba(245,158,11,.1)}
+.comp-cat-icon.virt{background:rgba(124,58,237,.1)}
+.comp-cat-icon.dev{background:rgba(239,68,68,.1)}
+.comp-cat-icon.tool{background:rgba(99,102,241,.1)}
+.comp-cat h3{font-family:var(--font-d);font-size:.88rem;font-weight:700}
+.comp-items{display:flex;flex-direction:column;gap:9px}
+.comp-item{display:flex;flex-direction:column;gap:3px}
+.comp-item-top{display:flex;justify-content:space-between;font-size:.77rem}
+.comp-item-name{color:#ccc}
+.comp-item-pct{color:var(--accent);font-weight:600}
+.comp-bar{height:3px;background:rgba(255,255,255,.07);border-radius:100px;overflow:hidden}
+.comp-fill{height:100%;border-radius:100px;width:0;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
+.fill-blue{background:linear-gradient(90deg,var(--accent),#0099cc)}
+.fill-green{background:linear-gradient(90deg,var(--accent3),#059669)}
+.fill-amber{background:linear-gradient(90deg,#f59e0b,#d97706)}
+.fill-purple{background:linear-gradient(90deg,#a78bfa,#7c3aed)}
+.fill-red{background:linear-gradient(90deg,#f87171,#ef4444)}
+.fill-indigo{background:linear-gradient(90deg,#818cf8,#6366f1)}
+.cisco-block{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.8rem}
+.cisco-block h3{font-family:var(--font-d);font-weight:700;font-size:.95rem;margin-bottom:1.2rem;color:var(--accent)}
+.cisco-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+.cisco-item{background:rgba(0,212,255,.04);border:1px solid rgba(0,212,255,.11);border-radius:10px;padding:12px 10px;text-align:center;font-size:.76rem;color:#999;transition:background .2s,transform .2s}
+.cisco-item:hover{background:rgba(0,212,255,.09);transform:translateY(-2px)}
+.cisco-item .ci{font-size:1.3rem;margin-bottom:5px}
+.cisco-item strong{display:block;color:var(--text);font-size:.78rem;margin-bottom:2px}
+
+/* STAGES */
+.stage-alert{background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.22);border-radius:12px;padding:1rem 1.4rem;display:flex;align-items:flex-start;gap:12px;margin-bottom:2rem;font-size:.88rem;color:#fbbf24;line-height:1.6}
+.stages-list{display:flex;flex-direction:column;gap:1.5rem}
+.stage-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.8rem;display:grid;grid-template-columns:auto 1fr;gap:1.5rem;align-items:start;transition:border-color .3s,transform .3s}
+.stage-card:hover{border-color:var(--border2);transform:translateX(6px)}
+.stage-year{font-family:var(--font-d);font-size:.7rem;font-weight:700;color:var(--accent);background:rgba(0,212,255,.07);border:1px solid rgba(0,212,255,.14);padding:6px 12px;border-radius:8px;white-space:nowrap;text-align:center}
+.stage-info h3{font-family:var(--font-d);font-size:1rem;font-weight:700;margin-bottom:4px}
+.stage-info .company{color:var(--accent);font-size:.82rem;font-weight:500;margin-bottom:.7rem}
+.stage-info p{color:#aaa;font-size:.87rem}
+.stage-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:.7rem}
+.stage-tag{font-size:.72rem;padding:3px 9px;border-radius:100px;background:rgba(255,255,255,.04);border:1px solid var(--border2);color:var(--muted)}
+
+/* PROFIL */
+.profil-grid{display:grid;grid-template-columns:1fr 2fr;gap:3rem;align-items:start}
+.profil-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2rem;text-align:center}
+.profil-avatar{width:110px;height:110px;border-radius:50%;background:rgba(0,212,255,.07);border:2px solid rgba(0,212,255,.25);display:flex;align-items:center;justify-content:center;font-family:var(--font-d);font-size:2.2rem;font-weight:800;color:var(--accent);margin:0 auto 1rem}
+.profil-name{font-family:var(--font-d);font-weight:700;font-size:1.15rem;margin-bottom:3px}
+.profil-role{color:var(--muted);font-size:.83rem;margin-bottom:1.2rem}
+.profil-meta{display:flex;flex-direction:column;gap:7px;text-align:left;margin-top:1.2rem}
+.profil-meta-item{display:flex;gap:10px;align-items:flex-start;font-size:.82rem;color:#aaa}
+.profil-meta-item span:first-child{width:18px;text-align:center;flex-shrink:0}
+.profil-details{display:flex;flex-direction:column;gap:1.8rem}
+.profil-block h3{font-family:var(--font-d);font-weight:700;font-size:.93rem;margin-bottom:.8rem}
+.skill-bars{display:flex;flex-direction:column;gap:11px}
+.skill-row{display:flex;flex-direction:column;gap:4px}
+.skill-label{display:flex;justify-content:space-between;font-size:.81rem;color:#aaa}
+.skill-label span:last-child{color:var(--accent);font-weight:600}
+.skill-bar{height:4px;background:rgba(255,255,255,.06);border-radius:100px;overflow:hidden}
+.skill-fill-bar{height:100%;border-radius:100px;width:0;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
+.lang-list{display:flex;gap:7px;flex-wrap:wrap}
+.lang-item{padding:6px 13px;border-radius:8px;font-size:.79rem;font-weight:500;background:rgba(255,255,255,.04);border:1px solid var(--border2);color:#aaa}
+.lang-item strong{color:var(--text);display:block;font-size:.84rem}
+
+/* VEILLE */
+.veille-intro{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:3rem}
+.veille-intro-text{color:#aaa;font-size:.9rem;line-height:1.85}
+.veille-intro-text p+p{margin-top:.8rem}
+.veille-tools{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.5rem}
+.veille-tools h4{font-family:var(--font-d);font-weight:700;font-size:.87rem;margin-bottom:1rem}
+.tool-list{display:flex;flex-direction:column;gap:7px}
+.tool-item{display:flex;align-items:flex-start;gap:10px;font-size:.81rem;color:#aaa;padding:8px 10px;border-radius:8px;background:rgba(255,255,255,.03);border:1px solid var(--border)}
+.tool-item .ti{font-size:1rem;flex-shrink:0;margin-top:2px}
+.tool-item strong{color:var(--text)}
+.veille-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem}
+.veille-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.4rem;transition:border-color .3s,transform .3s}
+.veille-card:hover{border-color:var(--border2);transform:translateY(-4px)}
+.veille-cat{font-size:.67rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:.7rem}
+.veille-card h3{font-family:var(--font-d);font-size:.9rem;font-weight:700;margin-bottom:.5rem}
+.veille-card p{font-size:.82rem;color:#888;line-height:1.65}
+
+/* PROJETS */
+.projets-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.4rem}
+.projet-card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:border-color .3s,transform .3s,box-shadow .3s}
+.projet-card:hover{border-color:var(--border2);transform:translateY(-5px);box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.projet-img{height:150px;display:flex;align-items:center;justify-content:center;font-size:2.8rem;position:relative}
+.projet-img::after{content:'';position:absolute;inset:0;background:linear-gradient(transparent 40%,rgba(0,0,0,.65))}
+.p1{background:linear-gradient(135deg,#0f2027,#203a43,#2c5364)}
+.p2{background:linear-gradient(135deg,#1a0533,#2d1b69,#4c1d95)}
+.p3{background:linear-gradient(135deg,#064e3b,#065f46,#047857)}
+.p4{background:linear-gradient(135deg,#1e1b4b,#312e81,#4338ca)}
+.p5{background:linear-gradient(135deg,#7f1d1d,#991b1b,#b91c1c)}
+.projet-body{padding:1.3rem}
+.projet-body h3{font-family:var(--font-d);font-weight:700;font-size:.93rem;margin-bottom:5px}
+.projet-body p{font-size:.82rem;color:#888;margin-bottom:1rem;line-height:1.65}
+.projet-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:7px}
+.projet-tags{display:flex;flex-wrap:wrap;gap:4px}
+.projet-tag{font-size:.7rem;padding:3px 9px;border-radius:100px;background:rgba(0,212,255,.07);border:1px solid rgba(0,212,255,.15);color:var(--accent)}
+.btn-pdf{display:inline-flex;align-items:center;gap:5px;font-size:.74rem;padding:5px 11px;border-radius:8px;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.22);color:#f87171;font-weight:600;text-decoration:none;transition:background .2s,transform .2s;cursor:pointer}
+.btn-pdf:hover{background:rgba(239,68,68,.15);transform:translateY(-1px)}
+
+/* CERTIF */
+.certif-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem}
+.certif-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.4rem;display:flex;flex-direction:column;align-items:flex-start;gap:.7rem;transition:border-color .3s,transform .3s}
+.certif-card:hover{border-color:var(--border2);transform:translateY(-3px)}
+.certif-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;background:rgba(0,212,255,.08)}
+.certif-card h3{font-family:var(--font-d);font-size:.86rem;font-weight:700;line-height:1.35}
+.certif-card .org{font-size:.74rem;color:var(--accent);font-weight:500}
+.certif-card .detail{font-size:.74rem;color:var(--muted)}
+.status{font-size:.69rem;padding:3px 10px;border-radius:100px;font-weight:600}
+.status.obtained{background:rgba(16,185,129,.1);color:#10b981;border:1px solid rgba(16,185,129,.2)}
+.status.progress{background:rgba(251,191,36,.08);color:#fbbf24;border:1px solid rgba(251,191,36,.2)}
+.status.planned{background:rgba(255,255,255,.05);color:var(--muted);border:1px solid var(--border2)}
+
+/* CONTACT */
+.contact-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:3rem}
+.contact-info h3{font-family:var(--font-d);font-weight:700;font-size:.97rem;margin-bottom:1.3rem}
+.contact-links{display:flex;flex-direction:column;gap:9px}
+.contact-link{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;background:var(--card);border:1px solid var(--border);text-decoration:none;color:var(--text);font-size:.87rem;font-weight:500;transition:border-color .2s,background .2s,transform .2s}
+.contact-link:hover{border-color:var(--border2);background:rgba(255,255,255,.03);transform:translateX(4px)}
+.contact-link-icon{font-size:1.1rem}
+.contact-form{display:flex;flex-direction:column;gap:12px}
+.form-group{display:flex;flex-direction:column;gap:5px}
+.form-group label{font-size:.79rem;color:var(--muted);font-weight:500}
+.form-group input,.form-group textarea{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:11px 13px;color:var(--text);font-family:var(--font-b);font-size:.87rem;outline:none;transition:border-color .2s;resize:none}
+.form-group input:focus,.form-group textarea:focus{border-color:var(--accent)}
+.form-group input::placeholder,.form-group textarea::placeholder{color:var(--muted2)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.submit-btn{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--accent);color:#000;border:none;padding:13px 24px;border-radius:10px;font-family:var(--font-b);font-weight:700;font-size:.9rem;cursor:pointer;transition:opacity .2s,transform .2s,box-shadow .2s}
+.submit-btn:hover{opacity:.85;transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,212,255,.2)}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:2rem;text-align:center;color:var(--muted);font-size:.79rem;position:relative;z-index:1}
+footer strong{color:var(--accent)}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .hero-grid,.bts-intro,.profil-grid,.veille-intro,.contact-grid{grid-template-columns:1fr}
+  .comp-grid,.certif-grid{grid-template-columns:repeat(2,1fr)}
+  .bts-cols,.cisco-grid{grid-template-columns:repeat(2,1fr)}
+  .hero-visual{order:-1}
+  .hero-img-wrap{width:100%;max-width:280px;height:240px}
+  .nav-links{display:none}
+  section{padding:4rem 1.2rem}
+  .form-row,.veille-grid,.projets-grid{grid-template-columns:1fr}
+}
+@media(max-width:580px){
+  .comp-grid,.certif-grid,.cisco-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div id="particles"></div>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a class="nav-logo" href="#accueil">Bryan<span>.</span>Krou</a>
+  <ul class="nav-links">
+    <li><a href="#accueil" class="active">Accueil</a></li>
+    <li><a href="#bts">BTS SIO</a></li>
+    <li><a href="#competences">Compétences</a></li>
+    <li><a href="#stages">Stages</a></li>
+    <li><a href="#profil">Profil</a></li>
+    <li><a href="#veille">Veille</a></li>
+    <li><a href="#projets">Projets</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#contact" class="nav-contact-btn">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="accueil">
+  <div class="hero-grid">
+    <div>
+      <div class="hero-tag">BTS SIO · SISR — Lycée Jean Vilar, Plaisir</div>
+      <h1 class="hero-title">Bryan<span class="sub">Krou</span></h1>
+      <p class="hero-school">🏫 <strong>Lycée Jean Vilar</strong> · Plaisir (78) · Promotion 2025</p>
+      <p class="hero-desc">Passionné par les réseaux, les systèmes et la cybersécurité. En BTS SIO option SISR, je construis mes compétences à travers des TP pratiques, des projets concrets et une veille active sur l'actualité IT.</p>
+      <div class="hero-btns">
+        <a href="#projets" class="btn-primary">Voir mes projets →</a>
+        <a href="#" class="btn-cv" id="cv-btn">📄 Mon CV</a>
+        <a href="#contact" class="btn-ghost">Me contacter</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="num" data-target="2">0</div><div class="lbl">Ans formation</div></div>
+        <div class="hero-stat"><div class="num" data-target="6">0</div><div class="lbl">Projets</div></div>
+        <div class="hero-stat"><div class="num" data-target="3">0</div><div class="lbl">Certifications</div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-img-wrap">
+        <div class="hero-img-placeholder">
+          <div class="avatar-circle">BK</div>
+          <span class="avatar-label">Votre photo ici</span>
+        </div>
+      </div>
+      <div class="hero-badge">
+        <div class="badge-dot"></div>
+        <div class="badge-text">
+          <strong>En recherche</strong>
+          <span>Stage SISR 2025</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BTS SIO -->
+<section id="bts">
+  <p class="section-label">Formation</p>
+  <h2 class="section-title">BTS Services Informatiques<br>aux Organisations</h2>
+  <p class="section-desc">Le BTS SIO prépare aux métiers de l'informatique. Je suis la spécialité <strong style="color:var(--accent)">SISR</strong>, axée sur les infrastructures systèmes et réseaux, au Lycée Jean Vilar de Plaisir.</p>
+  <div class="bts-intro">
+    <div class="bts-card sisr reveal">
+      <div class="bts-card-icon">🖧</div>
+      <h3>Option SISR ★ Ma spécialité</h3>
+      <p class="subtitle">Solutions d'Infrastructure, Systèmes et Réseaux</p>
+      <p>Formation axée sur l'administration des systèmes, la gestion des réseaux, la cybersécurité et la maintenance du parc informatique. L'objectif : devenir administrateur systèmes et réseaux capable de gérer une infrastructure complète en entreprise.</p>
+      <div class="bts-skills">
+        <span class="skill-tag">Administration Linux/Windows</span>
+        <span class="skill-tag">Réseaux TCP/IP</span>
+        <span class="skill-tag">Cisco / Switching</span>
+        <span class="skill-tag">Cybersécurité</span>
+        <span class="skill-tag">Virtualisation</span>
+        <span class="skill-tag">Active Directory</span>
+      </div>
+    </div>
+    <div class="bts-card slam reveal" style="transition-delay:.12s">
+      <div class="bts-card-icon">💻</div>
+      <h3>Option SLAM</h3>
+      <p class="subtitle">Solutions Logicielles et Applications Métiers</p>
+      <p>Formation orientée vers la conception, le développement et la maintenance d'applications web, mobile et desktop. L'étudiant SLAM maîtrise la programmation orientée objet et les bases de données relationnelles.</p>
+      <div class="bts-skills">
+        <span class="skill-tag">Développement Web</span>
+        <span class="skill-tag">POO</span>
+        <span class="skill-tag">SQL / BDD</span>
+        <span class="skill-tag">PHP / Python</span>
+        <span class="skill-tag">API REST</span>
+        <span class="skill-tag">Frameworks</span>
+      </div>
+    </div>
+  </div>
+  <div class="bts-global reveal" style="transition-delay:.2s">
+    <h3>🎓 Informations générales</h3>
+    <p style="color:#999;font-size:.88rem">Le BTS SIO se prépare en 2 ans et comprend des matières générales et des blocs de compétences professionnels validés par des épreuves E4, E5 et E6.</p>
+    <div class="bts-cols">
+      <div class="bts-col-item"><strong>📅 Durée</strong>2 ans post-baccalauréat</div>
+      <div class="bts-col-item"><strong>🏢 Stages</strong>Min. 10 semaines en entreprise</div>
+      <div class="bts-col-item"><strong>📋 Épreuves</strong>E4 (BCI), E5 (SI), E6 (prof.)</div>
+      <div class="bts-col-item"><strong>💼 Débouchés</strong>Admin sys/réseau, tech. infra, support N2/N3</div>
+      <div class="bts-col-item"><strong>📈 Poursuites</strong>Bachelor, Licence Pro, BUT Informatique</div>
+      <div class="bts-col-item"><strong>📍 Lycée</strong>Jean Vilar — Plaisir (78370)</div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPÉTENCES -->
+<section id="competences">
+  <p class="section-label">Savoir-faire</p>
+  <h2 class="section-title">Mes compétences</h2>
+  <p class="section-desc">Compétences acquises en formation, en TP et en projets. Axées sur l'option SISR : réseaux Cisco, administration système, sécurité et infrastructure.</p>
+  <div class="comp-grid">
+    <div class="comp-cat reveal">
+      <div class="comp-cat-header"><div class="comp-cat-icon net">🌐</div><h3>Réseaux Cisco</h3></div>
+      <div class="comp-items">
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Config. switch / routeur Cisco</span><span class="comp-item-pct">70%</span></div><div class="comp-bar"><div class="comp-fill fill-blue" data-w="70"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">VLAN & Trunking 802.1Q</span><span class="comp-item-pct">65%</span></div><div class="comp-bar"><div class="comp-fill fill-blue" data-w="65"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Protocoles OSPF / RIP / STP</span><span class="comp-item-pct">60%</span></div><div class="comp-bar"><div class="comp-fill fill-blue" data-w="60"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">TCP/IP — IPv4 / IPv6</span><span class="comp-item-pct">75%</span></div><div class="comp-bar"><div class="comp-fill fill-blue" data-w="75"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">DHCP / DNS / NAT</span><span class="comp-item-pct">70%</span></div><div class="comp-bar"><div class="comp-fill fill-blue" data-w="70"></div></div></div>
+      </div>
+    </div>
+    <div class="comp-cat reveal" style="transition-delay:.07s">
+      <div class="comp-cat-header"><div class="comp-cat-icon sys">🖥️</div><h3>Systèmes</h3></div>
+      <div class="comp-items">
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Linux Debian / Ubuntu Server</span><span class="comp-item-pct">70%</span></div><div class="comp-bar"><div class="comp-fill fill-green" data-w="70"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Windows Server (AD, DNS)</span><span class="comp-item-pct">65%</span></div><div class="comp-bar"><div class="comp-fill fill-green" data-w="65"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Serveur Web Apache / LAMP</span><span class="comp-item-pct">65%</span></div><div class="comp-bar"><div class="comp-fill fill-green" data-w="65"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Scripts Bash / PowerShell</span><span class="comp-item-pct">55%</span></div><div class="comp-bar"><div class="comp-fill fill-green" data-w="55"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">SSH / FTP / Telnet</span><span class="comp-item-pct">65%</span></div><div class="comp-bar"><div class="comp-fill fill-green" data-w="65"></div></div></div>
+      </div>
+    </div>
+    <div class="comp-cat reveal" style="transition-delay:.14s">
+      <div class="comp-cat-header"><div class="comp-cat-icon sec">🔐</div><h3>Sécurité</h3></div>
+      <div class="comp-items">
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Firewall & ACL Cisco</span><span class="comp-item-pct">60%</span></div><div class="comp-bar"><div class="comp-fill fill-amber" data-w="60"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Wireshark — Analyse trafic</span><span class="comp-item-pct">65%</span></div><div class="comp-bar"><div class="comp-fill fill-amber" data-w="65"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">VPN & chiffrement</span><span class="comp-item-pct">50%</span></div><div class="comp-bar"><div class="comp-fill fill-amber" data-w="50"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Politique de sécurité</span><span class="comp-item-pct">55%</span></div><div class="comp-bar"><div class="comp-fill fill-amber" data-w="55"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">pfSense / pare-feu</span><span class="comp-item-pct">50%</span></div><div class="comp-bar"><div class="comp-fill fill-amber" data-w="50"></div></div></div>
+      </div>
+    </div>
+    <div class="comp-cat reveal" style="transition-delay:.21s">
+      <div class="comp-cat-header"><div class="comp-cat-icon virt">☁️</div><h3>Virtualisation</h3></div>
+      <div class="comp-items">
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Cisco Packet Tracer</span><span class="comp-item-pct">75%</span></div><div class="comp-bar"><div class="comp-fill fill-purple" data-w="75"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">VMware / VirtualBox</span><span class="comp-item-pct">65%</span></div><div class="comp-bar"><div class="comp-fill fill-purple" data-w="65"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">GNS3</span><span class="comp-item-pct">45%</span></div><div class="comp-bar"><div class="comp-fill fill-purple" data-w="45"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Cloud Azure (bases)</span><span class="comp-item-pct">40%</span></div><div class="comp-bar"><div class="comp-fill fill-purple" data-w="40"></div></div></div>
+      </div>
+    </div>
+    <div class="comp-cat reveal" style="transition-delay:.28s">
+      <div class="comp-cat-header"><div class="comp-cat-icon tool">🛠️</div><h3>Outils</h3></div>
+      <div class="comp-items">
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Wireshark</span><span class="comp-item-pct">65%</span></div><div class="comp-bar"><div class="comp-fill fill-indigo" data-w="65"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">GLPI / Ticketing</span><span class="comp-item-pct">55%</span></div><div class="comp-bar"><div class="comp-fill fill-indigo" data-w="55"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Git / GitHub</span><span class="comp-item-pct">50%</span></div><div class="comp-bar"><div class="comp-fill fill-indigo" data-w="50"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Suite Office / Google</span><span class="comp-item-pct">85%</span></div><div class="comp-bar"><div class="comp-fill fill-indigo" data-w="85"></div></div></div>
+      </div>
+    </div>
+    <div class="comp-cat reveal" style="transition-delay:.35s">
+      <div class="comp-cat-header"><div class="comp-cat-icon dev">⌨️</div><h3>Développement</h3></div>
+      <div class="comp-items">
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">HTML / CSS</span><span class="comp-item-pct">70%</span></div><div class="comp-bar"><div class="comp-fill fill-red" data-w="70"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Python (bases)</span><span class="comp-item-pct">50%</span></div><div class="comp-bar"><div class="comp-fill fill-red" data-w="50"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">SQL / MySQL</span><span class="comp-item-pct">55%</span></div><div class="comp-bar"><div class="comp-fill fill-red" data-w="55"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">PHP (notions)</span><span class="comp-item-pct">40%</span></div><div class="comp-bar"><div class="comp-fill fill-red" data-w="40"></div></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="cisco-block reveal" style="transition-delay:.15s">
+    <h3>🔵 Commandes Cisco — Configuration de base (switch & routeur)</h3>
+    <div class="cisco-grid">
+      <div class="cisco-item"><div class="ci">🖧</div><strong>Config. initiale</strong>hostname, enable, conf t, no shutdown</div>
+      <div class="cisco-item"><div class="ci">🔀</div><strong>VLAN</strong>vlan 10, name VLAN_LAN, switchport access</div>
+      <div class="cisco-item"><div class="ci">🌐</div><strong>Routage OSPF</strong>router ospf 1, network, area 0</div>
+      <div class="cisco-item"><div class="ci">🛡️</div><strong>ACL étendue</strong>access-list 100, permit/deny ip host</div>
+      <div class="cisco-item"><div class="ci">🔒</div><strong>Port-Security</strong>switchport port-security, mac-address sticky</div>
+      <div class="cisco-item"><div class="ci">📡</div><strong>Trunk 802.1Q</strong>switchport mode trunk, allowed vlan</div>
+      <div class="cisco-item"><div class="ci">⚙️</div><strong>Spanning Tree</strong>spanning-tree mode rapid-pvst, priority</div>
+      <div class="cisco-item"><div class="ci">💾</div><strong>Sauvegarde</strong>copy running-config startup-config</div>
+    </div>
+  </div>
+</section>
+
+<!-- STAGES -->
+<section id="stages">
+  <p class="section-label">Expériences</p>
+  <h2 class="section-title">Stages en entreprise</h2>
+  <p class="section-desc">Mes périodes d'immersion professionnelle durant ma formation BTS SIO SISR.</p>
+  <div class="stage-alert reveal">
+    <span>🔍</span>
+    <span><strong>Actuellement en recherche de stage !</strong> Je suis disponible pour un stage SISR en administration systèmes &amp; réseaux, support technique ou infrastructure. Basé à Plaisir (78), mobilité Île-de-France. N'hésitez pas à me contacter !</span>
+  </div>
+  <div class="stages-list">
+    <div class="stage-card reveal" style="transition-delay:.1s">
+      <div class="stage-year">2025<br>Stage</div>
+      <div class="stage-info">
+        <h3>À venir — En recherche active</h3>
+        <div class="company">🔎 Recherche en cours — Île-de-France (78)</div>
+        <p>Je recherche un stage de 6 à 8 semaines en environnement SISR : administration réseaux/systèmes, support technique, gestion de parc ou sécurité informatique. Motivé, rigoureux et disponible rapidement.</p>
+        <div class="stage-tags">
+          <span class="stage-tag">Administration réseau</span>
+          <span class="stage-tag">Support N1/N2</span>
+          <span class="stage-tag">Infrastructure</span>
+          <span class="stage-tag">Cisco</span>
+          <span class="stage-tag">Linux/Windows Server</span>
+          <span class="stage-tag">Cybersécurité</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROFIL -->
+<section id="profil">
+  <p class="section-label">À propos</p>
+  <h2 class="section-title">Mon profil</h2>
+  <div class="profil-grid">
+    <div>
+      <div class="profil-card reveal">
+        <div class="profil-avatar">BK</div>
+        <div class="profil-name">Bryan Krou</div>
+        <div class="profil-role">Étudiant BTS SIO · Option SISR</div>
+        <div class="profil-meta">
+          <div class="profil-meta-item"><span>📅</span>Né en 2007</div>
+          <div class="profil-meta-item"><span>📍</span>Plaisir, Île-de-France (78)</div>
+          <div class="profil-meta-item"><span>🏫</span>Lycée Jean Vilar — Plaisir</div>
+          <div class="profil-meta-item"><span>🎓</span>BTS SIO SISR — 2ème année · 2025</div>
+          <div class="profil-meta-item"><span>📧</span>bryankrou3@gmail.com</div>
+        </div>
+      </div>
+    </div>
+    <div class="profil-details reveal" style="transition-delay:.1s">
+      <div class="profil-block">
+        <h3>Compétences principales</h3>
+        <div class="skill-bars">
+          <div class="skill-row"><div class="skill-label"><span>Cisco Packet Tracer / Réseaux</span><span>75%</span></div><div class="skill-bar"><div class="skill-fill-bar fill-blue" data-w="75"></div></div></div>
+          <div class="skill-row"><div class="skill-label"><span>Administration Linux</span><span>70%</span></div><div class="skill-bar"><div class="skill-fill-bar fill-green" data-w="70"></div></div></div>
+          <div class="skill-row"><div class="skill-label"><span>Windows Server & Active Directory</span><span>65%</span></div><div class="skill-bar"><div class="skill-fill-bar fill-blue" data-w="65"></div></div></div>
+          <div class="skill-row"><div class="skill-label"><span>Sécurité réseau (Firewall, ACL)</span><span>60%</span></div><div class="skill-bar"><div class="skill-fill-bar fill-amber" data-w="60"></div></div></div>
+        </div>
+      </div>
+      <div class="profil-block">
+        <h3>Langues</h3>
+        <div class="lang-list">
+          <div class="lang-item"><strong>Français</strong>Natif</div>
+          <div class="lang-item"><strong>Anglais</strong>B1 — Technique IT</div>
+        </div>
+      </div>
+      <div class="profil-block">
+        <h3>Centres d'intérêt</h3>
+        <div class="lang-list">
+          <div class="lang-item">⚽ Sport</div>
+          <div class="lang-item">🎮 Gaming</div>
+          <div class="lang-item">🔐 Cybersécurité</div>
+          <div class="lang-item">🌐 Réseaux</div>
+          <div class="lang-item">🤖 Nouvelles technologies</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VEILLE -->
+<section id="veille">
+  <p class="section-label">Veille Technologique</p>
+  <h2 class="section-title">Suivi de l'actualité IT</h2>
+  <div class="veille-intro reveal">
+    <div class="veille-intro-text">
+      <p>La <strong style="color:var(--text)">veille technologique</strong> est une démarche incontournable pour tout professionnel de l'informatique. Elle consiste à surveiller régulièrement les évolutions du secteur afin d'anticiper les changements, maîtriser les nouvelles technologies et rester opérationnel face aux menaces.</p>
+      <p>En tant qu'étudiant BTS SIO option SISR, je réalise une veille hebdomadaire sur les nouvelles menaces de sécurité, les évolutions des protocoles réseaux, les mises à jour des systèmes d'exploitation et les tendances cloud & infrastructure.</p>
+      <p>Ma veille se concentre principalement sur : <strong style="color:var(--accent)">sécurité des réseaux, administration système, virtualisation et infrastructure cloud</strong> — les piliers de mon option SISR.</p>
+    </div>
+    <div class="veille-tools">
+      <h4>🛠️ Outils et sources utilisés</h4>
+      <div class="tool-list">
+        <div class="tool-item"><span class="ti">📰</span><div><strong>Feedly</strong> — Agrégateur RSS pour centraliser mes sources</div></div>
+        <div class="tool-item"><span class="ti">🔐</span><div><strong>ANSSI</strong> — Bulletins de sécurité officiels français</div></div>
+        <div class="tool-item"><span class="ti">🌐</span><div><strong>BleepingComputer</strong> — Actualité cybersécurité & malwares</div></div>
+        <div class="tool-item"><span class="ti">💬</span><div><strong>Reddit</strong> — r/networking, r/sysadmin, r/netsec</div></div>
+        <div class="tool-item"><span class="ti">🎓</span><div><strong>Cisco NetAcad</strong> — Formation et ressources réseaux</div></div>
+        <div class="tool-item"><span class="ti">📺</span><div><strong>YouTube Tech</strong> — Tutoriels pratiques SISR/réseau</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="veille-grid">
+    <div class="veille-card reveal"><div class="veille-cat">🔐 Cybersécurité</div><h3>Ransomwares & vulnérabilités CVE</h3><p>Suivi des nouvelles variantes de ransomwares, groupes APT actifs et vulnérabilités critiques. Lecture hebdomadaire des bulletins ANSSI et CISA.</p></div>
+    <div class="veille-card reveal" style="transition-delay:.08s"><div class="veille-cat">🌐 Réseaux</div><h3>Protocoles & nouvelles architectures</h3><p>Évolutions des protocoles réseau (IPv6, SD-WAN, Wi-Fi 7), adoption du modèle Zero Trust et déploiement professionnel de la 5G en entreprise.</p></div>
+    <div class="veille-card reveal" style="transition-delay:.16s"><div class="veille-cat">☁️ Cloud & Infrastructure</div><h3>Cloud hybride & conteneurisation</h3><p>Montée en puissance de Docker et Kubernetes, pratiques DevOps. Évolutions chez AWS, Azure et GCP avec les nouvelles certifications cloud associées.</p></div>
+    <div class="veille-card reveal" style="transition-delay:.24s"><div class="veille-cat">🤖 Intelligence Artificielle</div><h3>IA & automatisation IT</h3><p>Impact de l'IA sur l'administration système, détection d'intrusions par Machine Learning et nouveaux outils d'assistance au développement.</p></div>
+    <div class="veille-card reveal" style="transition-delay:.32s"><div class="veille-cat">🖥️ Systèmes</div><h3>Mises à jour OS & virtualisation</h3><p>Suivi des nouvelles versions de Windows Server, des distributions Linux (Debian, Ubuntu Server) et des hyperviseurs VMware / Proxmox.</p></div>
+    <div class="veille-card reveal" style="transition-delay:.4s"><div class="veille-cat">📡 Réglementation</div><h3>RGPD, NIS2 & conformité</h3><p>Actualités sur la protection des données, sanctions CNIL, directives européennes NIS2 et Cyber Resilience Act qui impactent les infrastructures d'entreprises.</p></div>
+  </div>
+</section>
+
+<!-- PROJETS -->
+<section id="projets">
+  <p class="section-label">Réalisations</p>
+  <h2 class="section-title">Mes projets</h2>
+  <p class="section-desc">Projets réalisés en TP de formation. Chaque projet dispose d'un compte rendu PDF téléchargeable — remplacez les liens par vos vrais fichiers.</p>
+  <div class="projets-grid">
+    <div class="projet-card reveal">
+      <div class="projet-img p1">🌐</div>
+      <div class="projet-body">
+        <h3>TP LAMP — Serveur Web</h3>
+        <p>Installation et configuration d'un serveur LAMP (Linux, Apache, MySQL, PHP) sous Debian. Déploiement d'un site dynamique, configuration des VirtualHosts et sécurisation de l'accès.</p>
+        <div class="projet-footer">
+          <div class="projet-tags"><span class="projet-tag">Linux Debian</span><span class="projet-tag">Apache</span><span class="projet-tag">MySQL</span><span class="projet-tag">PHP</span></div>
+          <a class="btn-pdf" href="#" onclick="alert('Remplacez ce lien par votre PDF : href=\'mon-cr-lamp.pdf\'');return false">📄 Compte rendu</a>
+        </div>
+      </div>
+    </div>
+    <div class="projet-card reveal" style="transition-delay:.09s">
+      <div class="projet-img p1">🖧</div>
+      <div class="projet-body">
+        <h3>Infrastructure réseau Cisco</h3>
+        <p>Conception et déploiement d'une infrastructure réseau simulée avec routage OSPF, VLAN, DHCP, DNS, configuration des ACL et sécurisation des ports.</p>
+        <div class="projet-footer">
+          <div class="projet-tags"><span class="projet-tag">Packet Tracer</span><span class="projet-tag">VLAN</span><span class="projet-tag">OSPF</span><span class="projet-tag">ACL</span></div>
+          <a class="btn-pdf" href="#" onclick="alert('Remplacez ce lien par votre PDF');return false">📄 Compte rendu</a>
+        </div>
+      </div>
+    </div>
+    <div class="projet-card reveal" style="transition-delay:.18s">
+      <div class="projet-img p3">🔐</div>
+      <div class="projet-body">
+        <h3>Audit de sécurité réseau</h3>
+        <p>Scan de ports, analyse des vulnérabilités, recommandations et rédaction d'un rapport conforme aux bonnes pratiques ANSSI.</p>
+        <div class="projet-footer">
+          <div class="projet-tags"><span class="projet-tag">Wireshark</span><span class="projet-tag">Nmap</span><span class="projet-tag">Kali Linux</span></div>
+          <a class="btn-pdf" href="#" onclick="alert('Remplacez ce lien par votre PDF');return false">📄 Compte rendu</a>
+        </div>
+      </div>
+    </div>
+    <div class="projet-card reveal" style="transition-delay:.27s">
+      <div class="projet-img p4">🖥️</div>
+      <div class="projet-body">
+        <h3>Déploiement Active Directory</h3>
+        <p>Installation d'un contrôleur de domaine Windows Server, structure d'UO, gestion des utilisateurs, groupes et GPO dans un environnement entreprise simulé.</p>
+        <div class="projet-footer">
+          <div class="projet-tags"><span class="projet-tag">Windows Server</span><span class="projet-tag">Active Directory</span><span class="projet-tag">GPO</span></div>
+          <a class="btn-pdf" href="#" onclick="alert('Remplacez ce lien par votre PDF');return false">📄 Compte rendu</a>
+        </div>
+      </div>
+    </div>
+    <div class="projet-card reveal" style="transition-delay:.36s">
+      <div class="projet-img p2">⚙️</div>
+      <div class="projet-body">
+        <h3>Script de supervision Bash</h3>
+        <p>Script Linux de monitoring : surveillance CPU, RAM et espace disque avec envoi d'alertes automatiques par email en cas de dépassement de seuil.</p>
+        <div class="projet-footer">
+          <div class="projet-tags"><span class="projet-tag">Bash</span><span class="projet-tag">Linux</span><span class="projet-tag">Cron</span><span class="projet-tag">SMTP</span></div>
+          <a class="btn-pdf" href="#" onclick="alert('Remplacez ce lien par votre PDF');return false">📄 Compte rendu</a>
+        </div>
+      </div>
+    </div>
+    <div class="projet-card reveal" style="transition-delay:.45s">
+      <div class="projet-img p5">🛡️</div>
+      <div class="projet-body">
+        <h3>Mise en place pare-feu pfSense</h3>
+        <p>Configuration d'un pare-feu réseau : règles de filtrage, NAT, zones DMZ, VPN site-à-site et monitoring du trafic en temps réel.</p>
+        <div class="projet-footer">
+          <div class="projet-tags"><span class="projet-tag">pfSense</span><span class="projet-tag">Firewall</span><span class="projet-tag">VPN</span><span class="projet-tag">DMZ</span></div>
+          <a class="btn-pdf" href="#" onclick="alert('Remplacez ce lien par votre PDF');return false">📄 Compte rendu</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <p class="section-label">Diplômes & Certifications</p>
+  <h2 class="section-title">Mes certifications</h2>
+  <p class="section-desc">Diplômes obtenus avec mention, certifications professionnelles et formations en cours.</p>
+  <div class="certif-grid">
+    <div class="certif-card reveal">
+      <div class="certif-icon">📚</div>
+      <h3>Brevet des Collèges</h3>
+      <div class="org">Collège Paul Verlaine — Les Mureaux</div>
+      <div class="detail">Mention Bien · 2022</div>
+      <span class="status obtained">✓ Obtenu</span>
+    </div>
+    <div class="certif-card reveal" style="transition-delay:.08s">
+      <div class="certif-icon">🏆</div>
+      <h3>Baccalauréat Pro Systèmes Numériques</h3>
+      <div class="org">Lycée Jean Moulin — Le Chesnay</div>
+      <div class="detail">Option SN · Mention Très Bien · 2024</div>
+      <span class="status obtained">✓ Obtenu</span>
+    </div>
+    <div class="certif-card reveal" style="transition-delay:.16s">
+      <div class="certif-icon">🛡️</div>
+      <h3>Certification PIX</h3>
+      <div class="org">PIX.fr — Éducation Nationale</div>
+      <div class="detail">Compétences numériques officielles</div>
+      <span class="status obtained">✓ Obtenu</span>
+    </div>
+    <div class="certif-card reveal" style="transition-delay:.24s">
+      <div class="certif-icon">🌐</div>
+      <h3>CCNA Introduction to Networks</h3>
+      <div class="org">Cisco Networking Academy</div>
+      <div class="detail">Réseaux & protocoles TCP/IP</div>
+      <span class="status progress">⏳ En cours</span>
+    </div>
+    <div class="certif-card reveal" style="transition-delay:.32s">
+      <div class="certif-icon">🐧</div>
+      <h3>Linux Essentials — LPI</h3>
+      <div class="org">Linux Professional Institute</div>
+      <div class="detail">Administration système Linux</div>
+      <span class="status planned">📅 Planifié</span>
+    </div>
+    <div class="certif-card reveal" style="transition-delay:.4s">
+      <div class="certif-icon">🎓</div>
+      <h3>BTS SIO — Diplôme National</h3>
+      <div class="org">Lycée Jean Vilar — Plaisir</div>
+      <div class="detail">Option SISR · Promotion 2025</div>
+      <span class="status progress">⏳ En cours — 2025</span>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label">Contact</p>
+  <h2 class="section-title">Travaillons ensemble</h2>
+  <p class="section-desc">Disponible pour un stage SISR, une alternance ou tout échange. Réponse rapide garantie !</p>
+  <div class="contact-grid">
+    <div class="contact-info reveal">
+      <h3>Retrouvez-moi sur</h3>
+      <div class="contact-links">
+        <a href="mailto:bryankrou3@gmail.com" class="contact-link">
+          <span class="contact-link-icon">📧</span>
+          <div><div style="font-size:.77rem;color:var(--muted)">Email</div><div>bryankrou3@gmail.com</div></div>
+        </a>
+        <a href="#" class="contact-link">
+          <span class="contact-link-icon">💼</span>
+          <div><div style="font-size:.77rem;color:var(--muted)">LinkedIn</div><div>linkedin.com/in/bryankrou</div></div>
+        </a>
+        <a href="#" class="contact-link">
+          <span class="contact-link-icon">🐱</span>
+          <div><div style="font-size:.77rem;color:var(--muted)">GitHub</div><div>github.com/bryankrou</div></div>
+        </a>
+        <a href="#" class="contact-link" id="cv-btn2" style="border-color:rgba(245,158,11,.3)">
+          <span class="contact-link-icon">📄</span>
+          <div><div style="font-size:.77rem;color:#d97706">Télécharger mon CV</div><div style="color:#f59e0b">CV_Bryan_Krou_BTS_SIO.pdf</div></div>
+        </a>
+      </div>
+    </div>
+    <div class="reveal" style="transition-delay:.1s">
+      <div class="contact-form">
+        <div class="form-row">
+          <div class="form-group"><label>Prénom</label><input type="text" placeholder="Marie"></div>
+          <div class="form-group"><label>Nom</label><input type="text" placeholder="Dupont"></div>
+        </div>
+        <div class="form-group"><label>Email</label><input type="email" placeholder="contact@entreprise.fr"></div>
+        <div class="form-group"><label>Objet</label><input type="text" placeholder="Proposition de stage SISR — 2025"></div>
+        <div class="form-group"><label>Message</label><textarea rows="5" placeholder="Bonjour Bryan, je vous contacte au sujet d'un stage..."></textarea></div>
+        <button class="submit-btn" type="button">Envoyer le message ✉️</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Conçu par <strong>Bryan Krou</strong> · BTS SIO SISR · Lycée Jean Vilar, Plaisir · 2024–2025 · Fait avec 💙</p>
+</footer>
+
+<script>
+/* CURSOR */
+const cur=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
+(function anim(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(anim)})();
+document.querySelectorAll('a,button,.projet-card,.bts-card,.comp-cat,.certif-card,.veille-card').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ring.style.width='60px';ring.style.height='60px';ring.style.borderColor='rgba(0,212,255,.7)';cur.style.opacity='0'});
+  el.addEventListener('mouseleave',()=>{ring.style.width='36px';ring.style.height='36px';ring.style.borderColor='rgba(0,212,255,.4)';cur.style.opacity='1'});
+});
+
+/* PARTICLES */
+const pc=document.getElementById('particles');
+for(let i=0;i<28;i++){const p=document.createElement('div');p.className='particle';p.style.cssText=`left:${Math.random()*100}%;animation-duration:${9+Math.random()*14}s;animation-delay:${Math.random()*12}s;width:${1+Math.random()*2}px;height:${1+Math.random()*2}px`;pc.appendChild(p)}
+
+/* NAV */
+const navbar=document.getElementById('navbar');
+const secs=document.querySelectorAll('section[id]');
+const navLinks=document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll',()=>{
+  navbar.classList.toggle('scrolled',window.scrollY>50);
+  let cur2='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-130)cur2=s.getAttribute('id')});
+  navLinks.forEach(a=>{a.classList.remove('active');if(a.getAttribute('href')==='#'+cur2)a.classList.add('active')});
+},{passive:true});
+navLinks.forEach(a=>{a.addEventListener('click',e=>{const h=a.getAttribute('href');if(h.startsWith('#')){e.preventDefault();document.querySelector(h)?.scrollIntoView({behavior:'smooth'})}})});
+
+/* REVEAL */
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
+
+/* BARS */
+const bObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){
+    e.target.querySelectorAll('[data-w]').forEach(b=>{setTimeout(()=>{b.style.width=b.dataset.w+'%'},150)});
+    bObs.unobserve(e.target);
+  }});
+},{threshold:.15});
+document.querySelectorAll('.comp-cat,.profil-details').forEach(el=>bObs.observe(el));
+
+/* COUNTER */
+const cObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){
+    e.target.querySelectorAll('[data-target]').forEach(el=>{
+      const t=+el.dataset.target;let c=0;
+      const s=()=>{c+=Math.ceil(t/18);if(c>=t){el.textContent=t}else{el.textContent=c;requestAnimationFrame(s)}};s();
+    });cObs.unobserve(e.target);
+  }});
+},{threshold:.5});
+document.querySelectorAll('.hero-stats').forEach(el=>cObs.observe(el));
+
+/* CV BUTTONS */
+document.querySelectorAll('#cv-btn,#cv-btn2').forEach(b=>{
+  b.addEventListener('click',e=>{
+    e.preventDefault();
+    alert('📄 Pour activer ce bouton, mettez votre CV en ligne et remplacez le href !\nExemple : href="CV_Bryan_Krou.pdf" ou un lien Google Drive/Dropbox.');
+  });
+});
+
+/* FORM */
+document.querySelector('.submit-btn').addEventListener('click',()=>{
+  const btn=document.querySelector('.submit-btn');
+  btn.textContent='✅ Message envoyé !';btn.style.background='#10b981';
+  setTimeout(()=>{btn.textContent='Envoyer le message ✉️';btn.style.background='var(--accent)'},3000);
+});
+</script>
+</body>
+</html>
