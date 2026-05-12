@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bryan Krou — Portfolio BTS SIO SISR</title>
+<title>Bryan Krou — Portfolio BTS SIO</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
@@ -27,12 +27,13 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-b);font-size:
 @keyframes float-p{0%{opacity:0;transform:translateY(100vh)}10%{opacity:.5}90%{opacity:.1}100%{opacity:0;transform:translateY(-5vh)}}
 
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(8,8,8,0.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);padding:0 2.5rem;display:flex;align-items:center;justify-content:space-between;height:64px;transition:box-shadow .3s}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(8,8,8,0.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);padding:0 2.5rem;display:flex;align-items:center;justify-content:center;height:64px;transition:box-shadow .3s}
 nav.scrolled{box-shadow:0 4px 40px rgba(0,212,255,.06)}
-.nav-logo{font-family:var(--font-d);font-weight:800;font-size:1.1rem;color:var(--text);text-decoration:none}
+.nav-inner{display:flex;align-items:center;justify-content:center;width:100%;max-width:1200px;gap:2rem}
+.nav-logo{font-family:var(--font-d);font-weight:800;font-size:1.1rem;color:var(--text);text-decoration:none;flex-shrink:0}
 .nav-logo span{color:var(--accent)}
-.nav-links{display:flex;gap:0;list-style:none}
-.nav-links a{display:block;padding:.4rem .75rem;color:var(--muted);text-decoration:none;font-size:.78rem;font-weight:500;border-radius:6px;transition:color .2s,background .2s}
+.nav-links{display:flex;gap:0;list-style:none;justify-content:center;flex-wrap:wrap}
+.nav-links a{display:block;padding:.4rem .65rem;color:var(--muted);text-decoration:none;font-size:.75rem;font-weight:500;border-radius:6px;transition:color .2s,background .2s}
 .nav-links a:hover,.nav-links a.active{color:var(--text);background:rgba(255,255,255,.06)}
 .nav-contact-btn{background:var(--accent)!important;color:#000!important;font-weight:700!important;border-radius:6px}
 .nav-contact-btn:hover{opacity:.85}
@@ -106,6 +107,15 @@ section+section{border-top:1px solid var(--border)}
 .bts-col-item{font-size:.84rem;color:#999}
 .bts-col-item strong{display:block;color:var(--text);font-weight:600;margin-bottom:3px}
 
+/* SLAM / SISR detail blocks */
+.bts-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:1.5rem}
+.bts-detail-block{background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:1.4rem}
+.bts-detail-block h4{font-family:var(--font-d);font-size:.85rem;font-weight:700;margin-bottom:.8rem;color:var(--text)}
+.bts-detail-block ul{list-style:none;display:flex;flex-direction:column;gap:6px}
+.bts-detail-block ul li{font-size:.82rem;color:#999;padding-left:1rem;position:relative}
+.bts-detail-block ul li::before{content:'—';position:absolute;left:0;color:var(--accent);font-size:.7rem;top:2px}
+.bts-detail-block.slam-detail ul li::before{color:#a78bfa}
+
 /* COMPETENCES */
 .comp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;margin-bottom:1.8rem}
 .comp-cat{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.4rem;transition:border-color .3s,transform .3s}
@@ -123,8 +133,7 @@ section+section{border-top:1px solid var(--border)}
 .comp-item{display:flex;flex-direction:column;gap:3px}
 .comp-item-top{display:flex;justify-content:space-between;font-size:.77rem}
 .comp-item-name{color:#ccc}
-.comp-item-pct{color:var(--accent);font-weight:600}
-.comp-bar{height:3px;background:rgba(255,255,255,.07);border-radius:100px;overflow:hidden}
+.comp-bar{height:3px;background:rgba(255,255,255,.07);border-radius:100px;overflow:hidden;margin-top:2px}
 .comp-fill{height:100%;border-radius:100px;width:0;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
 .fill-blue{background:linear-gradient(90deg,var(--accent),#0099cc)}
 .fill-green{background:linear-gradient(90deg,var(--accent3),#059669)}
@@ -163,15 +172,11 @@ section+section{border-top:1px solid var(--border)}
 .profil-meta-item span:first-child{width:18px;text-align:center;flex-shrink:0}
 .profil-details{display:flex;flex-direction:column;gap:1.8rem}
 .profil-block h3{font-family:var(--font-d);font-weight:700;font-size:.93rem;margin-bottom:.8rem}
-.skill-bars{display:flex;flex-direction:column;gap:11px}
-.skill-row{display:flex;flex-direction:column;gap:4px}
-.skill-label{display:flex;justify-content:space-between;font-size:.81rem;color:#aaa}
-.skill-label span:last-child{color:var(--accent);font-weight:600}
-.skill-bar{height:4px;background:rgba(255,255,255,.06);border-radius:100px;overflow:hidden}
-.skill-fill-bar{height:100%;border-radius:100px;width:0;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
 .lang-list{display:flex;gap:7px;flex-wrap:wrap}
 .lang-item{padding:6px 13px;border-radius:8px;font-size:.79rem;font-weight:500;background:rgba(255,255,255,.04);border:1px solid var(--border2);color:#aaa}
 .lang-item strong{color:var(--text);display:block;font-size:.84rem}
+.profil-text-block{font-size:.88rem;color:#aaa;line-height:1.85}
+.profil-text-block p+p{margin-top:.7rem}
 
 /* VEILLE */
 .veille-intro{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:3rem}
@@ -253,6 +258,7 @@ footer strong{color:var(--accent)}
   .hero-grid,.bts-intro,.profil-grid,.veille-intro,.contact-grid{grid-template-columns:1fr}
   .comp-grid,.certif-grid{grid-template-columns:repeat(2,1fr)}
   .bts-cols,.cisco-grid{grid-template-columns:repeat(2,1fr)}
+  .bts-detail-grid{grid-template-columns:1fr}
   .hero-visual{order:-1}
   .hero-img-wrap{width:100%;max-width:280px;height:240px}
   .nav-links{display:none}
@@ -272,35 +278,37 @@ footer strong{color:var(--accent)}
 
 <!-- NAV -->
 <nav id="navbar">
-  <a class="nav-logo" href="#accueil">Bryan<span>.</span>Krou</a>
-  <ul class="nav-links">
-    <li><a href="#accueil" class="active">Accueil</a></li>
-    <li><a href="#bts">BTS SIO</a></li>
-    <li><a href="#competences">Compétences</a></li>
-    <li><a href="#stages">Stages</a></li>
-    <li><a href="#profil">Profil</a></li>
-    <li><a href="#veille">Veille</a></li>
-    <li><a href="#projets">Projets</a></li>
-    <li><a href="#certifications">Certifications</a></li>
-    <li><a href="#contact" class="nav-contact-btn">Contact</a></li>
-  </ul>
+  <div class="nav-inner">
+    <a class="nav-logo" href="#accueil">Bryan<span>.</span>Krou</a>
+    <ul class="nav-links">
+      <li><a href="#accueil" class="active">Accueil</a></li>
+      <li><a href="#profil">Mon profil</a></li>
+      <li><a href="#bts">BTS SIO</a></li>
+      <li><a href="#competences">Competences</a></li>
+      <li><a href="#certifications">Certification</a></li>
+      <li><a href="#stages">Stages</a></li>
+      <li><a href="#projets">Mes projets</a></li>
+      <li><a href="#veille">Veille Technologique</a></li>
+      <li><a href="#contact" class="nav-contact-btn">Contact</a></li>
+    </ul>
+  </div>
 </nav>
 
-<!-- HERO -->
+<!-- HERO / ACCUEIL -->
 <section id="accueil">
   <div class="hero-grid">
     <div>
       <div class="hero-tag">BTS SIO · SISR — Lycée Jean Vilar, Plaisir</div>
       <h1 class="hero-title">Bryan<span class="sub">Krou</span></h1>
-      <p class="hero-school">🏫 <strong>Lycée Jean Vilar</strong> · Plaisir (78) · Promotion 2025</p>
+      <p class="hero-school"><strong>Lycée Jean Vilar</strong> · Plaisir (78) · 1ère année BTS SIO</p>
       <p class="hero-desc">Passionné par les réseaux, les systèmes et la cybersécurité. En BTS SIO option SISR, je construis mes compétences à travers des TP pratiques, des projets concrets et une veille active sur l'actualité IT.</p>
       <div class="hero-btns">
-        <a href="#projets" class="btn-primary">Voir mes projets →</a>
-        <a href="#" class="btn-cv" id="cv-btn">📄 Mon CV</a>
+        <a href="#projets" class="btn-primary">Voir mes projets</a>
+        <a href="#" class="btn-cv" id="cv-btn">Mon CV</a>
         <a href="#contact" class="btn-ghost">Me contacter</a>
       </div>
       <div class="hero-stats">
-        <div class="hero-stat"><div class="num" data-target="2">0</div><div class="lbl">Ans formation</div></div>
+        <div class="hero-stat"><div class="num" data-target="1">0</div><div class="lbl">An formation</div></div>
         <div class="hero-stat"><div class="num" data-target="6">0</div><div class="lbl">Projets</div></div>
         <div class="hero-stat"><div class="num" data-target="3">0</div><div class="lbl">Certifications</div></div>
       </div>
@@ -323,17 +331,66 @@ footer strong{color:var(--accent)}
   </div>
 </section>
 
+<!-- MON PROFIL -->
+<section id="profil">
+  <p class="section-label">A propos</p>
+  <h2 class="section-title">Mon profil</h2>
+  <div class="profil-grid">
+    <div>
+      <div class="profil-card reveal">
+        <div class="profil-avatar">BK</div>
+        <div class="profil-name">Bryan Krou</div>
+        <div class="profil-role">Etudiant BTS SIO · Option SISR</div>
+        <div class="profil-meta">
+          <div class="profil-meta-item"><span>Né en</span>2007</div>
+          <div class="profil-meta-item"><span>Ville</span>Plaisir, Île-de-France (78)</div>
+          <div class="profil-meta-item"><span>Lycée</span>Jean Vilar — Plaisir</div>
+          <div class="profil-meta-item"><span>Formation</span>BTS SIO SISR — 1ère année</div>
+          <div class="profil-meta-item"><span>Email</span>bryankrou3@gmail.com</div>
+        </div>
+      </div>
+    </div>
+    <div class="profil-details reveal" style="transition-delay:.1s">
+      <div class="profil-block">
+        <h3>Presentation</h3>
+        <div class="profil-text-block">
+          <p>Je m'appelle Bryan Krou, j'ai 17 ans et je suis actuellement en première année de BTS SIO (Services Informatiques aux Organisations) option SISR au Lycée Jean Vilar de Plaisir.</p>
+          <p>Après avoir obtenu mon Baccalauréat Professionnel Systèmes Numériques, j'ai choisi de poursuivre dans l'informatique avec une spécialisation en infrastructure réseau et systèmes, domaine qui me passionne depuis plusieurs années.</p>
+          <p>Curieux, rigoureux et motivé, je cherche à développer mes compétences à travers des projets concrets, des TP en laboratoire et une veille technologique régulière sur les évolutions du secteur IT.</p>
+        </div>
+      </div>
+      <div class="profil-block">
+        <h3>Langues</h3>
+        <div class="lang-list">
+          <div class="lang-item"><strong>Français</strong>Natif</div>
+          <div class="lang-item"><strong>Anglais</strong>B1 — Technique IT</div>
+        </div>
+      </div>
+      <div class="profil-block">
+        <h3>Centres d'intérêt</h3>
+        <div class="lang-list">
+          <div class="lang-item">Sport</div>
+          <div class="lang-item">Gaming</div>
+          <div class="lang-item">Cybersécurité</div>
+          <div class="lang-item">Réseaux</div>
+          <div class="lang-item">Nouvelles technologies</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- BTS SIO -->
 <section id="bts">
   <p class="section-label">Formation</p>
   <h2 class="section-title">BTS Services Informatiques<br>aux Organisations</h2>
-  <p class="section-desc">Le BTS SIO prépare aux métiers de l'informatique. Je suis la spécialité <strong style="color:var(--accent)">SISR</strong>, axée sur les infrastructures systèmes et réseaux, au Lycée Jean Vilar de Plaisir.</p>
+  <p class="section-desc">Le BTS SIO prépare aux métiers de l'informatique en 2 ans. Je suis la spécialité <strong style="color:var(--accent)">SISR</strong>, axée sur les infrastructures systèmes et réseaux, au Lycée Jean Vilar de Plaisir.</p>
   <div class="bts-intro">
     <div class="bts-card sisr reveal">
-      <div class="bts-card-icon">🖧</div>
-      <h3>Option SISR ★ Ma spécialité</h3>
+      <div class="bts-card-icon">Réseau</div>
+      <h3>Option SISR — Ma spécialité</h3>
       <p class="subtitle">Solutions d'Infrastructure, Systèmes et Réseaux</p>
-      <p>Formation axée sur l'administration des systèmes, la gestion des réseaux, la cybersécurité et la maintenance du parc informatique. L'objectif : devenir administrateur systèmes et réseaux capable de gérer une infrastructure complète en entreprise.</p>
+      <p>L'option SISR forme des techniciens capables d'administrer et de maintenir les infrastructures informatiques d'une organisation. Elle couvre les réseaux, les serveurs, la sécurité et la supervision des systèmes.</p>
       <div class="bts-skills">
         <span class="skill-tag">Administration Linux/Windows</span>
         <span class="skill-tag">Réseaux TCP/IP</span>
@@ -342,12 +399,36 @@ footer strong{color:var(--accent)}
         <span class="skill-tag">Virtualisation</span>
         <span class="skill-tag">Active Directory</span>
       </div>
+      <div class="bts-detail-grid">
+        <div class="bts-detail-block">
+          <h4>Compétences techniques</h4>
+          <ul>
+            <li>Installer et configurer des équipements réseau (switch, routeur, pare-feu)</li>
+            <li>Administrer des serveurs Linux et Windows Server</li>
+            <li>Mettre en place et gérer un Active Directory</li>
+            <li>Déployer des solutions de virtualisation (VMware, Proxmox)</li>
+            <li>Sécuriser un réseau : ACL, VPN, firewall pfSense</li>
+            <li>Superviser un parc informatique avec des outils de ticketing</li>
+          </ul>
+        </div>
+        <div class="bts-detail-block">
+          <h4>Débouchés professionnels</h4>
+          <ul>
+            <li>Administrateur systèmes et réseaux</li>
+            <li>Technicien support N1 / N2 / N3</li>
+            <li>Gestionnaire de parc informatique</li>
+            <li>Technicien infrastructure</li>
+            <li>Ingénieur réseau (après licence/bachelor)</li>
+            <li>Analyste cybersécurité</li>
+          </ul>
+        </div>
+      </div>
     </div>
     <div class="bts-card slam reveal" style="transition-delay:.12s">
-      <div class="bts-card-icon">💻</div>
+      <div class="bts-card-icon">Dev</div>
       <h3>Option SLAM</h3>
       <p class="subtitle">Solutions Logicielles et Applications Métiers</p>
-      <p>Formation orientée vers la conception, le développement et la maintenance d'applications web, mobile et desktop. L'étudiant SLAM maîtrise la programmation orientée objet et les bases de données relationnelles.</p>
+      <p>L'option SLAM forme des développeurs capables de concevoir, réaliser et maintenir des applications logicielles adaptées aux besoins des entreprises, du développement web aux applications métiers.</p>
       <div class="bts-skills">
         <span class="skill-tag">Développement Web</span>
         <span class="skill-tag">POO</span>
@@ -356,97 +437,158 @@ footer strong{color:var(--accent)}
         <span class="skill-tag">API REST</span>
         <span class="skill-tag">Frameworks</span>
       </div>
+      <div class="bts-detail-grid">
+        <div class="bts-detail-block slam-detail">
+          <h4>Compétences techniques</h4>
+          <ul>
+            <li>Développer des applications web en HTML, CSS, JavaScript</li>
+            <li>Concevoir des applications en PHP, Python ou Java (POO)</li>
+            <li>Créer et gérer des bases de données relationnelles (MySQL, PostgreSQL)</li>
+            <li>Développer et consommer des API REST</li>
+            <li>Utiliser des frameworks : Symfony, Laravel, Django</li>
+            <li>Versionner le code avec Git et GitHub</li>
+          </ul>
+        </div>
+        <div class="bts-detail-block slam-detail">
+          <h4>Débouchés professionnels</h4>
+          <ul>
+            <li>Développeur web front-end / back-end</li>
+            <li>Développeur d'applications mobile</li>
+            <li>Analyste programmeur</li>
+            <li>Chef de projet informatique (après licence)</li>
+            <li>Intégrateur web</li>
+            <li>Développeur full-stack</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
   <div class="bts-global reveal" style="transition-delay:.2s">
-    <h3>🎓 Informations générales</h3>
+    <h3>Informations générales</h3>
     <p style="color:#999;font-size:.88rem">Le BTS SIO se prépare en 2 ans et comprend des matières générales et des blocs de compétences professionnels validés par des épreuves E4, E5 et E6.</p>
     <div class="bts-cols">
-      <div class="bts-col-item"><strong>📅 Durée</strong>2 ans post-baccalauréat</div>
-      <div class="bts-col-item"><strong>🏢 Stages</strong>Min. 10 semaines en entreprise</div>
-      <div class="bts-col-item"><strong>📋 Épreuves</strong>E4 (BCI), E5 (SI), E6 (prof.)</div>
-      <div class="bts-col-item"><strong>💼 Débouchés</strong>Admin sys/réseau, tech. infra, support N2/N3</div>
-      <div class="bts-col-item"><strong>📈 Poursuites</strong>Bachelor, Licence Pro, BUT Informatique</div>
-      <div class="bts-col-item"><strong>📍 Lycée</strong>Jean Vilar — Plaisir (78370)</div>
+      <div class="bts-col-item"><strong>Durée</strong>2 ans post-baccalauréat</div>
+      <div class="bts-col-item"><strong>Stages</strong>Min. 10 semaines en entreprise</div>
+      <div class="bts-col-item"><strong>Epreuves</strong>E4 (BCI), E5 (SI), E6 (prof.)</div>
+      <div class="bts-col-item"><strong>Débouchés</strong>Admin sys/réseau, tech. infra, support N2/N3</div>
+      <div class="bts-col-item"><strong>Poursuites</strong>Bachelor, Licence Pro, BUT Informatique</div>
+      <div class="bts-col-item"><strong>Lycée</strong>Jean Vilar — Plaisir (78370)</div>
     </div>
   </div>
 </section>
 
-<!-- COMPÉTENCES -->
+<!-- COMPETENCES -->
 <section id="competences">
   <p class="section-label">Savoir-faire</p>
   <h2 class="section-title">Mes compétences</h2>
   <p class="section-desc">Compétences acquises en formation, en TP et en projets. Axées sur l'option SISR : réseaux Cisco, administration système, sécurité et infrastructure.</p>
   <div class="comp-grid">
     <div class="comp-cat reveal">
-      <div class="comp-cat-header"><div class="comp-cat-icon net">🌐</div><h3>Réseaux Cisco</h3></div>
+      <div class="comp-cat-header"><div class="comp-cat-icon net">Réseau</div><h3>Réseaux Cisco</h3></div>
       <div class="comp-items">
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Config. switch / routeur Cisco</span><span class="comp-item-pct">70%</span></div><div class="comp-bar"><div class="comp-fill fill-blue" data-w="70"></div></div></div>
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">VLAN & Trunking 802.1Q</span><span class="comp-item-pct">65%</span></div><div class="comp-bar"><div class="comp-fill fill-blue" data-w="65"></div></div></div>
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Protocoles OSPF / RIP / STP</span><span class="comp-item-pct">60%</span></div><div class="comp-bar"><div class="comp-fill fill-blue" data-w="60"></div></div></div>
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">TCP/IP — IPv4 / IPv6</span><span class="comp-item-pct">75%</span></div><div class="comp-bar"><div class="comp-fill fill-blue" data-w="75"></div></div></div>
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">DHCP / DNS / NAT</span><span class="comp-item-pct">70%</span></div><div class="comp-bar"><div class="comp-fill fill-blue" data-w="70"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Config. switch / routeur Cisco</span></div><div class="comp-bar"><div class="comp-fill fill-blue" data-w="70"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">VLAN &amp; Trunking 802.1Q</span></div><div class="comp-bar"><div class="comp-fill fill-blue" data-w="65"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Protocoles OSPF / RIP / STP</span></div><div class="comp-bar"><div class="comp-fill fill-blue" data-w="60"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">TCP/IP — IPv4 / IPv6</span></div><div class="comp-bar"><div class="comp-fill fill-blue" data-w="75"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">DHCP / DNS / NAT</span></div><div class="comp-bar"><div class="comp-fill fill-blue" data-w="70"></div></div></div>
       </div>
     </div>
     <div class="comp-cat reveal" style="transition-delay:.07s">
-      <div class="comp-cat-header"><div class="comp-cat-icon sys">🖥️</div><h3>Systèmes</h3></div>
+      <div class="comp-cat-header"><div class="comp-cat-icon sys">Sys</div><h3>Systèmes</h3></div>
       <div class="comp-items">
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Linux Debian / Ubuntu Server</span><span class="comp-item-pct">70%</span></div><div class="comp-bar"><div class="comp-fill fill-green" data-w="70"></div></div></div>
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Windows Server (AD, DNS)</span><span class="comp-item-pct">65%</span></div><div class="comp-bar"><div class="comp-fill fill-green" data-w="65"></div></div></div>
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Serveur Web Apache / LAMP</span><span class="comp-item-pct">65%</span></div><div class="comp-bar"><div class="comp-fill fill-green" data-w="65"></div></div></div>
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Scripts Bash / PowerShell</span><span class="comp-item-pct">55%</span></div><div class="comp-bar"><div class="comp-fill fill-green" data-w="55"></div></div></div>
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">SSH / FTP / Telnet</span><span class="comp-item-pct">65%</span></div><div class="comp-bar"><div class="comp-fill fill-green" data-w="65"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Linux Debian / Ubuntu Server</span></div><div class="comp-bar"><div class="comp-fill fill-green" data-w="70"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Windows Server (AD, DNS)</span></div><div class="comp-bar"><div class="comp-fill fill-green" data-w="65"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Serveur Web Apache / LAMP</span></div><div class="comp-bar"><div class="comp-fill fill-green" data-w="65"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Scripts Bash / PowerShell</span></div><div class="comp-bar"><div class="comp-fill fill-green" data-w="55"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">SSH / FTP / Telnet</span></div><div class="comp-bar"><div class="comp-fill fill-green" data-w="65"></div></div></div>
       </div>
     </div>
     <div class="comp-cat reveal" style="transition-delay:.14s">
-      <div class="comp-cat-header"><div class="comp-cat-icon sec">🔐</div><h3>Sécurité</h3></div>
+      <div class="comp-cat-header"><div class="comp-cat-icon sec">Sec</div><h3>Sécurité</h3></div>
       <div class="comp-items">
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Firewall & ACL Cisco</span><span class="comp-item-pct">60%</span></div><div class="comp-bar"><div class="comp-fill fill-amber" data-w="60"></div></div></div>
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Wireshark — Analyse trafic</span><span class="comp-item-pct">65%</span></div><div class="comp-bar"><div class="comp-fill fill-amber" data-w="65"></div></div></div>
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">VPN & chiffrement</span><span class="comp-item-pct">50%</span></div><div class="comp-bar"><div class="comp-fill fill-amber" data-w="50"></div></div></div>
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Politique de sécurité</span><span class="comp-item-pct">55%</span></div><div class="comp-bar"><div class="comp-fill fill-amber" data-w="55"></div></div></div>
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">pfSense / pare-feu</span><span class="comp-item-pct">50%</span></div><div class="comp-bar"><div class="comp-fill fill-amber" data-w="50"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Firewall &amp; ACL Cisco</span></div><div class="comp-bar"><div class="comp-fill fill-amber" data-w="60"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Wireshark — Analyse trafic</span></div><div class="comp-bar"><div class="comp-fill fill-amber" data-w="65"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">VPN &amp; chiffrement</span></div><div class="comp-bar"><div class="comp-fill fill-amber" data-w="50"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Politique de sécurité</span></div><div class="comp-bar"><div class="comp-fill fill-amber" data-w="55"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">pfSense / pare-feu</span></div><div class="comp-bar"><div class="comp-fill fill-amber" data-w="50"></div></div></div>
       </div>
     </div>
     <div class="comp-cat reveal" style="transition-delay:.21s">
-      <div class="comp-cat-header"><div class="comp-cat-icon virt">☁️</div><h3>Virtualisation</h3></div>
+      <div class="comp-cat-header"><div class="comp-cat-icon virt">Virt</div><h3>Virtualisation</h3></div>
       <div class="comp-items">
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Cisco Packet Tracer</span><span class="comp-item-pct">75%</span></div><div class="comp-bar"><div class="comp-fill fill-purple" data-w="75"></div></div></div>
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">VMware / VirtualBox</span><span class="comp-item-pct">65%</span></div><div class="comp-bar"><div class="comp-fill fill-purple" data-w="65"></div></div></div>
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">GNS3</span><span class="comp-item-pct">45%</span></div><div class="comp-bar"><div class="comp-fill fill-purple" data-w="45"></div></div></div>
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Cloud Azure (bases)</span><span class="comp-item-pct">40%</span></div><div class="comp-bar"><div class="comp-fill fill-purple" data-w="40"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Cisco Packet Tracer</span></div><div class="comp-bar"><div class="comp-fill fill-purple" data-w="75"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">VMware / VirtualBox</span></div><div class="comp-bar"><div class="comp-fill fill-purple" data-w="65"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">GNS3</span></div><div class="comp-bar"><div class="comp-fill fill-purple" data-w="45"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Cloud Azure (bases)</span></div><div class="comp-bar"><div class="comp-fill fill-purple" data-w="40"></div></div></div>
       </div>
     </div>
     <div class="comp-cat reveal" style="transition-delay:.28s">
-      <div class="comp-cat-header"><div class="comp-cat-icon tool">🛠️</div><h3>Outils</h3></div>
+      <div class="comp-cat-header"><div class="comp-cat-icon tool">Tools</div><h3>Outils</h3></div>
       <div class="comp-items">
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Wireshark</span><span class="comp-item-pct">65%</span></div><div class="comp-bar"><div class="comp-fill fill-indigo" data-w="65"></div></div></div>
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">GLPI / Ticketing</span><span class="comp-item-pct">55%</span></div><div class="comp-bar"><div class="comp-fill fill-indigo" data-w="55"></div></div></div>
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Git / GitHub</span><span class="comp-item-pct">50%</span></div><div class="comp-bar"><div class="comp-fill fill-indigo" data-w="50"></div></div></div>
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Suite Office / Google</span><span class="comp-item-pct">85%</span></div><div class="comp-bar"><div class="comp-fill fill-indigo" data-w="85"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Wireshark</span></div><div class="comp-bar"><div class="comp-fill fill-indigo" data-w="65"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">GLPI / Ticketing</span></div><div class="comp-bar"><div class="comp-fill fill-indigo" data-w="55"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Git / GitHub</span></div><div class="comp-bar"><div class="comp-fill fill-indigo" data-w="50"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Suite Office / Google</span></div><div class="comp-bar"><div class="comp-fill fill-indigo" data-w="85"></div></div></div>
       </div>
     </div>
     <div class="comp-cat reveal" style="transition-delay:.35s">
-      <div class="comp-cat-header"><div class="comp-cat-icon dev">⌨️</div><h3>Développement</h3></div>
+      <div class="comp-cat-header"><div class="comp-cat-icon dev">Dev</div><h3>Développement</h3></div>
       <div class="comp-items">
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">HTML / CSS</span><span class="comp-item-pct">70%</span></div><div class="comp-bar"><div class="comp-fill fill-red" data-w="70"></div></div></div>
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Python (bases)</span><span class="comp-item-pct">50%</span></div><div class="comp-bar"><div class="comp-fill fill-red" data-w="50"></div></div></div>
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">SQL / MySQL</span><span class="comp-item-pct">55%</span></div><div class="comp-bar"><div class="comp-fill fill-red" data-w="55"></div></div></div>
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">PHP (notions)</span><span class="comp-item-pct">40%</span></div><div class="comp-bar"><div class="comp-fill fill-red" data-w="40"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">HTML / CSS</span></div><div class="comp-bar"><div class="comp-fill fill-red" data-w="70"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Python (bases)</span></div><div class="comp-bar"><div class="comp-fill fill-red" data-w="50"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">SQL / MySQL</span></div><div class="comp-bar"><div class="comp-fill fill-red" data-w="55"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">PHP (notions)</span></div><div class="comp-bar"><div class="comp-fill fill-red" data-w="40"></div></div></div>
       </div>
     </div>
   </div>
   <div class="cisco-block reveal" style="transition-delay:.15s">
-    <h3>🔵 Commandes Cisco — Configuration de base (switch & routeur)</h3>
+    <h3>Commandes Cisco — Configuration de base (switch et routeur)</h3>
     <div class="cisco-grid">
-      <div class="cisco-item"><div class="ci">🖧</div><strong>Config. initiale</strong>hostname, enable, conf t, no shutdown</div>
-      <div class="cisco-item"><div class="ci">🔀</div><strong>VLAN</strong>vlan 10, name VLAN_LAN, switchport access</div>
-      <div class="cisco-item"><div class="ci">🌐</div><strong>Routage OSPF</strong>router ospf 1, network, area 0</div>
-      <div class="cisco-item"><div class="ci">🛡️</div><strong>ACL étendue</strong>access-list 100, permit/deny ip host</div>
-      <div class="cisco-item"><div class="ci">🔒</div><strong>Port-Security</strong>switchport port-security, mac-address sticky</div>
-      <div class="cisco-item"><div class="ci">📡</div><strong>Trunk 802.1Q</strong>switchport mode trunk, allowed vlan</div>
-      <div class="cisco-item"><div class="ci">⚙️</div><strong>Spanning Tree</strong>spanning-tree mode rapid-pvst, priority</div>
-      <div class="cisco-item"><div class="ci">💾</div><strong>Sauvegarde</strong>copy running-config startup-config</div>
+      <div class="cisco-item"><div class="ci">Réseau</div><strong>Config. initiale</strong>hostname, enable, conf t, no shutdown</div>
+      <div class="cisco-item"><div class="ci">VLAN</div><strong>VLAN</strong>vlan 10, name VLAN_LAN, switchport access</div>
+      <div class="cisco-item"><div class="ci">Route</div><strong>Routage OSPF</strong>router ospf 1, network, area 0</div>
+      <div class="cisco-item"><div class="ci">ACL</div><strong>ACL étendue</strong>access-list 100, permit/deny ip host</div>
+      <div class="cisco-item"><div class="ci">Sec</div><strong>Port-Security</strong>switchport port-security, mac-address sticky</div>
+      <div class="cisco-item"><div class="ci">Trunk</div><strong>Trunk 802.1Q</strong>switchport mode trunk, allowed vlan</div>
+      <div class="cisco-item"><div class="ci">STP</div><strong>Spanning Tree</strong>spanning-tree mode rapid-pvst, priority</div>
+      <div class="cisco-item"><div class="ci">Save</div><strong>Sauvegarde</strong>copy running-config startup-config</div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <p class="section-label">Diplômes et Certifications</p>
+  <h2 class="section-title">Mes certifications</h2>
+  <p class="section-desc">Diplômes obtenus avec mention, certifications professionnelles et formations en cours.</p>
+  <div class="certif-grid">
+    <div class="certif-card reveal">
+      <div class="certif-icon">Brevet</div>
+      <h3>Brevet des Collèges</h3>
+      <div class="org">Collège Paul Verlaine — Les Mureaux</div>
+      <div class="detail">Mention Bien · 2022</div>
+      <span class="status obtained">Obtenu</span>
+    </div>
+    <div class="certif-card reveal" style="transition-delay:.08s">
+      <div class="certif-icon">Bac</div>
+      <h3>Baccalauréat Pro Systèmes Numériques</h3>
+      <div class="org">Lycée Jean Moulin — Le Chesnay</div>
+      <div class="detail">Option SN · Mention Très Bien · 2024</div>
+      <span class="status obtained">Obtenu</span>
+    </div>
+    <div class="certif-card reveal" style="transition-delay:.16s">
+      <div class="certif-icon">PIX</div>
+      <h3>Certification PIX</h3>
+      <div class="org">PIX.fr — Education Nationale</div>
+      <div class="detail">Compétences numériques officielles</div>
+      <span class="status obtained">Obtenu</span>
+    </div>
+    <div class="certif-card reveal" style="transition-delay:.24s">
+      <div class="certif-icon">BTS</div>
+      <h3>BTS SIO — Diplôme National</h3>
+      <div class="org">Lycée Jean Vilar — Plaisir</div>
+      <div class="detail">Option SISR · Promotion 2026</div>
+      <span class="status progress">En cours — 2026</span>
     </div>
   </div>
 </section>
@@ -457,15 +599,15 @@ footer strong{color:var(--accent)}
   <h2 class="section-title">Stages en entreprise</h2>
   <p class="section-desc">Mes périodes d'immersion professionnelle durant ma formation BTS SIO SISR.</p>
   <div class="stage-alert reveal">
-    <span>🔍</span>
+    <span>Recherche</span>
     <span><strong>Actuellement en recherche de stage !</strong> Je suis disponible pour un stage SISR en administration systèmes &amp; réseaux, support technique ou infrastructure. Basé à Plaisir (78), mobilité Île-de-France. N'hésitez pas à me contacter !</span>
   </div>
   <div class="stages-list">
     <div class="stage-card reveal" style="transition-delay:.1s">
       <div class="stage-year">2025<br>Stage</div>
       <div class="stage-info">
-        <h3>À venir — En recherche active</h3>
-        <div class="company">🔎 Recherche en cours — Île-de-France (78)</div>
+        <h3>A venir — En recherche active</h3>
+        <div class="company">Recherche en cours — Île-de-France (78)</div>
         <p>Je recherche un stage de 6 à 8 semaines en environnement SISR : administration réseaux/systèmes, support technique, gestion de parc ou sécurité informatique. Motivé, rigoureux et disponible rapidement.</p>
         <div class="stage-tags">
           <span class="stage-tag">Administration réseau</span>
@@ -480,88 +622,6 @@ footer strong{color:var(--accent)}
   </div>
 </section>
 
-<!-- PROFIL -->
-<section id="profil">
-  <p class="section-label">À propos</p>
-  <h2 class="section-title">Mon profil</h2>
-  <div class="profil-grid">
-    <div>
-      <div class="profil-card reveal">
-        <div class="profil-avatar">BK</div>
-        <div class="profil-name">Bryan Krou</div>
-        <div class="profil-role">Étudiant BTS SIO · Option SISR</div>
-        <div class="profil-meta">
-          <div class="profil-meta-item"><span>📅</span>Né en 2007</div>
-          <div class="profil-meta-item"><span>📍</span>Plaisir, Île-de-France (78)</div>
-          <div class="profil-meta-item"><span>🏫</span>Lycée Jean Vilar — Plaisir</div>
-          <div class="profil-meta-item"><span>🎓</span>BTS SIO SISR — 2ème année · 2025</div>
-          <div class="profil-meta-item"><span>📧</span>bryankrou3@gmail.com</div>
-        </div>
-      </div>
-    </div>
-    <div class="profil-details reveal" style="transition-delay:.1s">
-      <div class="profil-block">
-        <h3>Compétences principales</h3>
-        <div class="skill-bars">
-          <div class="skill-row"><div class="skill-label"><span>Cisco Packet Tracer / Réseaux</span><span>75%</span></div><div class="skill-bar"><div class="skill-fill-bar fill-blue" data-w="75"></div></div></div>
-          <div class="skill-row"><div class="skill-label"><span>Administration Linux</span><span>70%</span></div><div class="skill-bar"><div class="skill-fill-bar fill-green" data-w="70"></div></div></div>
-          <div class="skill-row"><div class="skill-label"><span>Windows Server & Active Directory</span><span>65%</span></div><div class="skill-bar"><div class="skill-fill-bar fill-blue" data-w="65"></div></div></div>
-          <div class="skill-row"><div class="skill-label"><span>Sécurité réseau (Firewall, ACL)</span><span>60%</span></div><div class="skill-bar"><div class="skill-fill-bar fill-amber" data-w="60"></div></div></div>
-        </div>
-      </div>
-      <div class="profil-block">
-        <h3>Langues</h3>
-        <div class="lang-list">
-          <div class="lang-item"><strong>Français</strong>Natif</div>
-          <div class="lang-item"><strong>Anglais</strong>B1 — Technique IT</div>
-        </div>
-      </div>
-      <div class="profil-block">
-        <h3>Centres d'intérêt</h3>
-        <div class="lang-list">
-          <div class="lang-item">⚽ Sport</div>
-          <div class="lang-item">🎮 Gaming</div>
-          <div class="lang-item">🔐 Cybersécurité</div>
-          <div class="lang-item">🌐 Réseaux</div>
-          <div class="lang-item">🤖 Nouvelles technologies</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- VEILLE -->
-<section id="veille">
-  <p class="section-label">Veille Technologique</p>
-  <h2 class="section-title">Suivi de l'actualité IT</h2>
-  <div class="veille-intro reveal">
-    <div class="veille-intro-text">
-      <p>La <strong style="color:var(--text)">veille technologique</strong> est une démarche incontournable pour tout professionnel de l'informatique. Elle consiste à surveiller régulièrement les évolutions du secteur afin d'anticiper les changements, maîtriser les nouvelles technologies et rester opérationnel face aux menaces.</p>
-      <p>En tant qu'étudiant BTS SIO option SISR, je réalise une veille hebdomadaire sur les nouvelles menaces de sécurité, les évolutions des protocoles réseaux, les mises à jour des systèmes d'exploitation et les tendances cloud & infrastructure.</p>
-      <p>Ma veille se concentre principalement sur : <strong style="color:var(--accent)">sécurité des réseaux, administration système, virtualisation et infrastructure cloud</strong> — les piliers de mon option SISR.</p>
-    </div>
-    <div class="veille-tools">
-      <h4>🛠️ Outils et sources utilisés</h4>
-      <div class="tool-list">
-        <div class="tool-item"><span class="ti">📰</span><div><strong>Feedly</strong> — Agrégateur RSS pour centraliser mes sources</div></div>
-        <div class="tool-item"><span class="ti">🔐</span><div><strong>ANSSI</strong> — Bulletins de sécurité officiels français</div></div>
-        <div class="tool-item"><span class="ti">🌐</span><div><strong>BleepingComputer</strong> — Actualité cybersécurité & malwares</div></div>
-        <div class="tool-item"><span class="ti">💬</span><div><strong>Reddit</strong> — r/networking, r/sysadmin, r/netsec</div></div>
-        <div class="tool-item"><span class="ti">🎓</span><div><strong>Cisco NetAcad</strong> — Formation et ressources réseaux</div></div>
-        <div class="tool-item"><span class="ti">📺</span><div><strong>YouTube Tech</strong> — Tutoriels pratiques SISR/réseau</div></div>
-      </div>
-    </div>
-  </div>
-  <div class="veille-grid">
-    <div class="veille-card reveal"><div class="veille-cat">🔐 Cybersécurité</div><h3>Ransomwares & vulnérabilités CVE</h3><p>Suivi des nouvelles variantes de ransomwares, groupes APT actifs et vulnérabilités critiques. Lecture hebdomadaire des bulletins ANSSI et CISA.</p></div>
-    <div class="veille-card reveal" style="transition-delay:.08s"><div class="veille-cat">🌐 Réseaux</div><h3>Protocoles & nouvelles architectures</h3><p>Évolutions des protocoles réseau (IPv6, SD-WAN, Wi-Fi 7), adoption du modèle Zero Trust et déploiement professionnel de la 5G en entreprise.</p></div>
-    <div class="veille-card reveal" style="transition-delay:.16s"><div class="veille-cat">☁️ Cloud & Infrastructure</div><h3>Cloud hybride & conteneurisation</h3><p>Montée en puissance de Docker et Kubernetes, pratiques DevOps. Évolutions chez AWS, Azure et GCP avec les nouvelles certifications cloud associées.</p></div>
-    <div class="veille-card reveal" style="transition-delay:.24s"><div class="veille-cat">🤖 Intelligence Artificielle</div><h3>IA & automatisation IT</h3><p>Impact de l'IA sur l'administration système, détection d'intrusions par Machine Learning et nouveaux outils d'assistance au développement.</p></div>
-    <div class="veille-card reveal" style="transition-delay:.32s"><div class="veille-cat">🖥️ Systèmes</div><h3>Mises à jour OS & virtualisation</h3><p>Suivi des nouvelles versions de Windows Server, des distributions Linux (Debian, Ubuntu Server) et des hyperviseurs VMware / Proxmox.</p></div>
-    <div class="veille-card reveal" style="transition-delay:.4s"><div class="veille-cat">📡 Réglementation</div><h3>RGPD, NIS2 & conformité</h3><p>Actualités sur la protection des données, sanctions CNIL, directives européennes NIS2 et Cyber Resilience Act qui impactent les infrastructures d'entreprises.</p></div>
-  </div>
-</section>
-
 <!-- PROJETS -->
 <section id="projets">
   <p class="section-label">Réalisations</p>
@@ -569,121 +629,126 @@ footer strong{color:var(--accent)}
   <p class="section-desc">Projets réalisés en TP de formation. Chaque projet dispose d'un compte rendu PDF téléchargeable — remplacez les liens par vos vrais fichiers.</p>
   <div class="projets-grid">
     <div class="projet-card reveal">
-      <div class="projet-img p1">🌐</div>
+      <div class="projet-img p1">Serveur</div>
       <div class="projet-body">
         <h3>TP LAMP — Serveur Web</h3>
         <p>Installation et configuration d'un serveur LAMP (Linux, Apache, MySQL, PHP) sous Debian. Déploiement d'un site dynamique, configuration des VirtualHosts et sécurisation de l'accès.</p>
         <div class="projet-footer">
           <div class="projet-tags"><span class="projet-tag">Linux Debian</span><span class="projet-tag">Apache</span><span class="projet-tag">MySQL</span><span class="projet-tag">PHP</span></div>
-          <a class="btn-pdf" href="#" onclick="alert('Remplacez ce lien par votre PDF : href=\'mon-cr-lamp.pdf\'');return false">📄 Compte rendu</a>
+          <a class="btn-pdf" href="#" onclick="alert('Remplacez ce lien par votre PDF : href=\'mon-cr-lamp.pdf\'');return false">Compte rendu</a>
         </div>
       </div>
     </div>
     <div class="projet-card reveal" style="transition-delay:.09s">
-      <div class="projet-img p1">🖧</div>
+      <div class="projet-img p1">Réseau</div>
       <div class="projet-body">
         <h3>Infrastructure réseau Cisco</h3>
         <p>Conception et déploiement d'une infrastructure réseau simulée avec routage OSPF, VLAN, DHCP, DNS, configuration des ACL et sécurisation des ports.</p>
         <div class="projet-footer">
           <div class="projet-tags"><span class="projet-tag">Packet Tracer</span><span class="projet-tag">VLAN</span><span class="projet-tag">OSPF</span><span class="projet-tag">ACL</span></div>
-          <a class="btn-pdf" href="#" onclick="alert('Remplacez ce lien par votre PDF');return false">📄 Compte rendu</a>
+          <a class="btn-pdf" href="#" onclick="alert('Remplacez ce lien par votre PDF');return false">Compte rendu</a>
         </div>
       </div>
     </div>
     <div class="projet-card reveal" style="transition-delay:.18s">
-      <div class="projet-img p3">🔐</div>
+      <div class="projet-img p3">Audit</div>
       <div class="projet-body">
         <h3>Audit de sécurité réseau</h3>
         <p>Scan de ports, analyse des vulnérabilités, recommandations et rédaction d'un rapport conforme aux bonnes pratiques ANSSI.</p>
         <div class="projet-footer">
           <div class="projet-tags"><span class="projet-tag">Wireshark</span><span class="projet-tag">Nmap</span><span class="projet-tag">Kali Linux</span></div>
-          <a class="btn-pdf" href="#" onclick="alert('Remplacez ce lien par votre PDF');return false">📄 Compte rendu</a>
+          <a class="btn-pdf" href="#" onclick="alert('Remplacez ce lien par votre PDF');return false">Compte rendu</a>
         </div>
       </div>
     </div>
     <div class="projet-card reveal" style="transition-delay:.27s">
-      <div class="projet-img p4">🖥️</div>
+      <div class="projet-img p4">AD</div>
       <div class="projet-body">
         <h3>Déploiement Active Directory</h3>
         <p>Installation d'un contrôleur de domaine Windows Server, structure d'UO, gestion des utilisateurs, groupes et GPO dans un environnement entreprise simulé.</p>
         <div class="projet-footer">
           <div class="projet-tags"><span class="projet-tag">Windows Server</span><span class="projet-tag">Active Directory</span><span class="projet-tag">GPO</span></div>
-          <a class="btn-pdf" href="#" onclick="alert('Remplacez ce lien par votre PDF');return false">📄 Compte rendu</a>
+          <a class="btn-pdf" href="#" onclick="alert('Remplacez ce lien par votre PDF');return false">Compte rendu</a>
         </div>
       </div>
     </div>
     <div class="projet-card reveal" style="transition-delay:.36s">
-      <div class="projet-img p2">⚙️</div>
+      <div class="projet-img p2">Script</div>
       <div class="projet-body">
         <h3>Script de supervision Bash</h3>
         <p>Script Linux de monitoring : surveillance CPU, RAM et espace disque avec envoi d'alertes automatiques par email en cas de dépassement de seuil.</p>
         <div class="projet-footer">
           <div class="projet-tags"><span class="projet-tag">Bash</span><span class="projet-tag">Linux</span><span class="projet-tag">Cron</span><span class="projet-tag">SMTP</span></div>
-          <a class="btn-pdf" href="#" onclick="alert('Remplacez ce lien par votre PDF');return false">📄 Compte rendu</a>
+          <a class="btn-pdf" href="#" onclick="alert('Remplacez ce lien par votre PDF');return false">Compte rendu</a>
         </div>
       </div>
     </div>
     <div class="projet-card reveal" style="transition-delay:.45s">
-      <div class="projet-img p5">🛡️</div>
+      <div class="projet-img p5">Firewall</div>
       <div class="projet-body">
         <h3>Mise en place pare-feu pfSense</h3>
         <p>Configuration d'un pare-feu réseau : règles de filtrage, NAT, zones DMZ, VPN site-à-site et monitoring du trafic en temps réel.</p>
         <div class="projet-footer">
           <div class="projet-tags"><span class="projet-tag">pfSense</span><span class="projet-tag">Firewall</span><span class="projet-tag">VPN</span><span class="projet-tag">DMZ</span></div>
-          <a class="btn-pdf" href="#" onclick="alert('Remplacez ce lien par votre PDF');return false">📄 Compte rendu</a>
+          <a class="btn-pdf" href="#" onclick="alert('Remplacez ce lien par votre PDF');return false">Compte rendu</a>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CERTIFICATIONS -->
-<section id="certifications">
-  <p class="section-label">Diplômes & Certifications</p>
-  <h2 class="section-title">Mes certifications</h2>
-  <p class="section-desc">Diplômes obtenus avec mention, certifications professionnelles et formations en cours.</p>
-  <div class="certif-grid">
-    <div class="certif-card reveal">
-      <div class="certif-icon">📚</div>
-      <h3>Brevet des Collèges</h3>
-      <div class="org">Collège Paul Verlaine — Les Mureaux</div>
-      <div class="detail">Mention Bien · 2022</div>
-      <span class="status obtained">✓ Obtenu</span>
+<!-- VEILLE TECHNOLOGIQUE -->
+<section id="veille">
+  <p class="section-label">Veille Technologique</p>
+  <h2 class="section-title">L'IA dans les Réseaux</h2>
+  <div class="veille-intro reveal">
+    <div class="veille-intro-text">
+      <p>La <strong style="color:var(--text)">veille technologique</strong> est une démarche incontournable pour tout professionnel de l'informatique. Elle consiste à surveiller régulièrement les évolutions du secteur afin d'anticiper les changements et maîtriser les nouvelles technologies.</p>
+      <p>Cette année, j'ai choisi de centrer ma veille sur un sujet en pleine expansion : <strong style="color:var(--accent)">l'intégration de l'Intelligence Artificielle dans les infrastructures réseaux</strong>. L'IA révolutionne la façon dont les réseaux sont gérés, sécurisés et optimisés.</p>
+      <p>Ce sujet est particulièrement pertinent pour l'option SISR, car il touche directement à l'administration réseau, la cybersécurité et la supervision d'infrastructure — les piliers de notre formation.</p>
     </div>
-    <div class="certif-card reveal" style="transition-delay:.08s">
-      <div class="certif-icon">🏆</div>
-      <h3>Baccalauréat Pro Systèmes Numériques</h3>
-      <div class="org">Lycée Jean Moulin — Le Chesnay</div>
-      <div class="detail">Option SN · Mention Très Bien · 2024</div>
-      <span class="status obtained">✓ Obtenu</span>
+    <div class="veille-tools">
+      <h4>Sources et outils utilisés</h4>
+      <div class="tool-list">
+        <div class="tool-item"><span class="ti">Flux</span><div><strong>Feedly</strong> — Agrégateur RSS pour centraliser mes sources</div></div>
+        <div class="tool-item"><span class="ti">ANSSI</span><div><strong>ANSSI</strong> — Bulletins de sécurité et rapports officiels</div></div>
+        <div class="tool-item"><span class="ti">Cisco</span><div><strong>Cisco Blogs</strong> — Actualités sur les réseaux et l'IA réseau</div></div>
+        <div class="tool-item"><span class="ti">Reddit</span><div><strong>Reddit</strong> — r/networking, r/MachineLearning, r/netsec</div></div>
+        <div class="tool-item"><span class="ti">IEEE</span><div><strong>IEEE Xplore</strong> — Articles de recherche sur l'IA appliquée aux réseaux</div></div>
+        <div class="tool-item"><span class="ti">YT</span><div><strong>YouTube Tech</strong> — Conférences et tutoriels sur l'IA réseau</div></div>
+      </div>
     </div>
-    <div class="certif-card reveal" style="transition-delay:.16s">
-      <div class="certif-icon">🛡️</div>
-      <h3>Certification PIX</h3>
-      <div class="org">PIX.fr — Éducation Nationale</div>
-      <div class="detail">Compétences numériques officielles</div>
-      <span class="status obtained">✓ Obtenu</span>
+  </div>
+  <div class="veille-grid">
+    <div class="veille-card reveal">
+      <div class="veille-cat">IA et détection d'intrusions</div>
+      <h3>IDPS basés sur le Machine Learning</h3>
+      <p>Les systèmes de détection d'intrusions (IDS/IPS) intègrent désormais des algorithmes de machine learning pour identifier des comportements anormaux en temps réel, bien au-delà des simples signatures de menaces connues.</p>
     </div>
-    <div class="certif-card reveal" style="transition-delay:.24s">
-      <div class="certif-icon">🌐</div>
-      <h3>CCNA Introduction to Networks</h3>
-      <div class="org">Cisco Networking Academy</div>
-      <div class="detail">Réseaux & protocoles TCP/IP</div>
-      <span class="status progress">⏳ En cours</span>
+    <div class="veille-card reveal" style="transition-delay:.08s">
+      <div class="veille-cat">Gestion intelligente du réseau</div>
+      <h3>SD-WAN et l'optimisation par IA</h3>
+      <p>Les solutions SD-WAN modernes utilisent l'IA pour analyser le trafic réseau en permanence et choisir automatiquement le meilleur chemin de routage selon la qualité de service, réduisant la latence et optimisant la bande passante.</p>
     </div>
-    <div class="certif-card reveal" style="transition-delay:.32s">
-      <div class="certif-icon">🐧</div>
-      <h3>Linux Essentials — LPI</h3>
-      <div class="org">Linux Professional Institute</div>
-      <div class="detail">Administration système Linux</div>
-      <span class="status planned">📅 Planifié</span>
+    <div class="veille-card reveal" style="transition-delay:.16s">
+      <div class="veille-cat">Cybersécurité et IA</div>
+      <h3>Détection des menaces avancées (APT)</h3>
+      <p>L'IA permet d'analyser des millions d'événements réseau par seconde pour détecter les attaques persistantes avancées (APT). Des outils comme Darktrace utilisent des modèles comportementaux pour identifier des menaces inconnues.</p>
     </div>
-    <div class="certif-card reveal" style="transition-delay:.4s">
-      <div class="certif-icon">🎓</div>
-      <h3>BTS SIO — Diplôme National</h3>
-      <div class="org">Lycée Jean Vilar — Plaisir</div>
-      <div class="detail">Option SISR · Promotion 2025</div>
-      <span class="status progress">⏳ En cours — 2025</span>
+    <div class="veille-card reveal" style="transition-delay:.24s">
+      <div class="veille-cat">Automatisation réseau</div>
+      <h3>AIOps : IA pour l'exploitation IT</h3>
+      <p>L'AIOps (Artificial Intelligence for IT Operations) automatise la gestion des incidents réseau, prédit les pannes avant qu'elles surviennent et réduit le temps de résolution grâce à la corrélation intelligente des alertes.</p>
+    </div>
+    <div class="veille-card reveal" style="transition-delay:.32s">
+      <div class="veille-cat">Réseaux cognitifs</div>
+      <h3>Self-healing networks</h3>
+      <p>Les réseaux auto-adaptatifs (self-healing) utilisent l'IA pour se reconfigurer automatiquement en cas de panne, rediriger le trafic sans intervention humaine et maintenir la continuité de service de manière autonome.</p>
+    </div>
+    <div class="veille-card reveal" style="transition-delay:.4s">
+      <div class="veille-cat">Enjeux et limites</div>
+      <h3>Risques et dépendances à l'IA réseau</h3>
+      <p>L'intégration de l'IA soulève des questions importantes : opacité des algorithmes (boîte noire), risque d'attaques adversariales ciblant les modèles, dépendance technologique et protection des données collectées par les systèmes intelligents.</p>
     </div>
   </div>
 </section>
@@ -698,19 +763,19 @@ footer strong{color:var(--accent)}
       <h3>Retrouvez-moi sur</h3>
       <div class="contact-links">
         <a href="mailto:bryankrou3@gmail.com" class="contact-link">
-          <span class="contact-link-icon">📧</span>
+          <span class="contact-link-icon">Email</span>
           <div><div style="font-size:.77rem;color:var(--muted)">Email</div><div>bryankrou3@gmail.com</div></div>
         </a>
         <a href="#" class="contact-link">
-          <span class="contact-link-icon">💼</span>
+          <span class="contact-link-icon">LI</span>
           <div><div style="font-size:.77rem;color:var(--muted)">LinkedIn</div><div>linkedin.com/in/bryankrou</div></div>
         </a>
         <a href="#" class="contact-link">
-          <span class="contact-link-icon">🐱</span>
+          <span class="contact-link-icon">GH</span>
           <div><div style="font-size:.77rem;color:var(--muted)">GitHub</div><div>github.com/bryankrou</div></div>
         </a>
         <a href="#" class="contact-link" id="cv-btn2" style="border-color:rgba(245,158,11,.3)">
-          <span class="contact-link-icon">📄</span>
+          <span class="contact-link-icon">CV</span>
           <div><div style="font-size:.77rem;color:#d97706">Télécharger mon CV</div><div style="color:#f59e0b">CV_Bryan_Krou_BTS_SIO.pdf</div></div>
         </a>
       </div>
@@ -724,14 +789,14 @@ footer strong{color:var(--accent)}
         <div class="form-group"><label>Email</label><input type="email" placeholder="contact@entreprise.fr"></div>
         <div class="form-group"><label>Objet</label><input type="text" placeholder="Proposition de stage SISR — 2025"></div>
         <div class="form-group"><label>Message</label><textarea rows="5" placeholder="Bonjour Bryan, je vous contacte au sujet d'un stage..."></textarea></div>
-        <button class="submit-btn" type="button">Envoyer le message ✉️</button>
+        <button class="submit-btn" type="button">Envoyer le message</button>
       </div>
     </div>
   </div>
 </section>
 
 <footer>
-  <p>Conçu par <strong>Bryan Krou</strong> · BTS SIO SISR · Lycée Jean Vilar, Plaisir · 2024–2025 · Fait avec 💙</p>
+  <p>Conçu par <strong>Bryan Krou</strong> · BTS SIO SISR · Lycée Jean Vilar, Plaisir · 2024–2025</p>
 </footer>
 
 <script>
@@ -788,15 +853,15 @@ document.querySelectorAll('.hero-stats').forEach(el=>cObs.observe(el));
 document.querySelectorAll('#cv-btn,#cv-btn2').forEach(b=>{
   b.addEventListener('click',e=>{
     e.preventDefault();
-    alert('📄 Pour activer ce bouton, mettez votre CV en ligne et remplacez le href !\nExemple : href="CV_Bryan_Krou.pdf" ou un lien Google Drive/Dropbox.');
+    alert('Pour activer ce bouton, mettez votre CV en ligne et remplacez le href !\nExemple : href="CV_Bryan_Krou.pdf" ou un lien Google Drive/Dropbox.');
   });
 });
 
 /* FORM */
 document.querySelector('.submit-btn').addEventListener('click',()=>{
   const btn=document.querySelector('.submit-btn');
-  btn.textContent='✅ Message envoyé !';btn.style.background='#10b981';
-  setTimeout(()=>{btn.textContent='Envoyer le message ✉️';btn.style.background='var(--accent)'},3000);
+  btn.textContent='Message envoyé !';btn.style.background='#10b981';
+  setTimeout(()=>{btn.textContent='Envoyer le message';btn.style.background='var(--accent)'},3000);
 });
 </script>
 </body>
