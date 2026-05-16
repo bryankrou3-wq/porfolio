@@ -129,12 +129,12 @@ section+section{border-top:1px solid var(--border)}
 .comp-cat-icon.dev{background:rgba(239,68,68,.1)}
 .comp-cat-icon.tool{background:rgba(99,102,241,.1)}
 .comp-cat h3{font-family:var(--font-d);font-size:.88rem;font-weight:700}
-.comp-items{display:flex;flex-direction:column;gap:9px}
-.comp-item{display:flex;flex-direction:column;gap:3px}
+.comp-bar{display:none}
 .comp-item-top{display:flex;justify-content:space-between;font-size:.77rem}
-.comp-item-name{color:#ccc}
-.comp-bar{height:3px;background:rgba(255,255,255,.07);border-radius:100px;overflow:hidden;margin-top:2px}
-.comp-fill{height:100%;border-radius:100px;width:0;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
+.comp-item{display:flex;flex-direction:column;gap:3px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.comp-item:last-child{border-bottom:none}
+.comp-item-name{color:#ccc;font-size:.84rem}
+.comp-items{display:flex;flex-direction:column;gap:0}
 .fill-blue{background:linear-gradient(90deg,var(--accent),#0099cc)}
 .fill-green{background:linear-gradient(90deg,var(--accent3),#059669)}
 .fill-amber{background:linear-gradient(90deg,#f59e0b,#d97706)}
@@ -152,7 +152,13 @@ section+section{border-top:1px solid var(--border)}
 /* STAGES */
 .stage-alert{background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.22);border-radius:12px;padding:1rem 1.4rem;display:flex;align-items:flex-start;gap:12px;margin-bottom:2rem;font-size:.88rem;color:#fbbf24;line-height:1.6}
 .stages-list{display:flex;flex-direction:column;gap:1.5rem}
-.stage-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.8rem;display:grid;grid-template-columns:auto 1fr;gap:1.5rem;align-items:start;transition:border-color .3s,transform .3s}
+.stage-sub{margin-top:1.2rem;display:flex;flex-direction:column;gap:1rem}
+.stage-sub-block{background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:10px;padding:1rem 1.2rem}
+.stage-sub-block h4{font-family:var(--font-d);font-size:.8rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem;display:flex;align-items:center;gap:7px}
+.stage-sub-block h4::before{content:'';width:12px;height:1px;background:var(--accent)}
+.stage-sub-block p,.stage-sub-block .placeholder{font-size:.82rem;color:var(--muted);font-style:italic}
+.stage-year-label{font-family:var(--font-d);font-size:.65rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+.stage-year-num{font-size:.95rem;font-weight:800;color:var(--accent)}
 .stage-card:hover{border-color:var(--border2);transform:translateX(6px)}
 .stage-year{font-family:var(--font-d);font-size:.7rem;font-weight:700;color:var(--accent);background:rgba(0,212,255,.07);border:1px solid rgba(0,212,255,.14);padding:6px 12px;border-radius:8px;white-space:nowrap;text-align:center}
 .stage-info h3{font-family:var(--font-d);font-size:1rem;font-weight:700;margin-bottom:4px}
@@ -168,8 +174,10 @@ section+section{border-top:1px solid var(--border)}
 .profil-name{font-family:var(--font-d);font-weight:700;font-size:1.15rem;margin-bottom:3px}
 .profil-role{color:var(--muted);font-size:.83rem;margin-bottom:1.2rem}
 .profil-meta{display:flex;flex-direction:column;gap:7px;text-align:left;margin-top:1.2rem}
-.profil-meta-item{display:flex;gap:10px;align-items:flex-start;font-size:.82rem;color:#aaa}
-.profil-meta-item span:first-child{width:18px;text-align:center;flex-shrink:0}
+.profil-meta-item{display:flex;flex-direction:column;gap:2px;font-size:.82rem;color:#aaa;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.profil-meta-item:last-child{border-bottom:none}
+.profil-meta-label{font-size:.72rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.profil-meta-value{color:#ccc}
 .profil-details{display:flex;flex-direction:column;gap:1.8rem}
 .profil-block h3{font-family:var(--font-d);font-weight:700;font-size:.93rem;margin-bottom:.8rem}
 .lang-list{display:flex;gap:7px;flex-wrap:wrap}
@@ -342,11 +350,11 @@ footer strong{color:var(--accent)}
         <div class="profil-name">Bryan Krou</div>
         <div class="profil-role">Etudiant BTS SIO · Option SISR</div>
         <div class="profil-meta">
-          <div class="profil-meta-item"><span>Né en</span>2007</div>
-          <div class="profil-meta-item"><span>Ville</span>Plaisir, Île-de-France (78)</div>
-          <div class="profil-meta-item"><span>Lycée</span>Jean Vilar — Plaisir</div>
-          <div class="profil-meta-item"><span>Formation</span>BTS SIO SISR — 1ère année</div>
-          <div class="profil-meta-item"><span>Email</span> bryankrou3@gmail.com</div>
+          <div class="profil-meta-item"><span class="profil-meta-label">Né en</span><span class="profil-meta-value">2007</span></div>
+          <div class="profil-meta-item"><span class="profil-meta-label">Ville</span><span class="profil-meta-value">Plaisir, Île-de-France (78)</span></div>
+          <div class="profil-meta-item"><span class="profil-meta-label">Lycée</span><span class="profil-meta-value">Jean Vilar — Plaisir</span></div>
+          <div class="profil-meta-item"><span class="profil-meta-label">Formation</span><span class="profil-meta-value">BTS SIO SISR — 1ère année</span></div>
+          <div class="profil-meta-item"><span class="profil-meta-label">Email</span><span class="profil-meta-value">bryankrou3@gmail.com</span></div>
         </div>
       </div>
     </div>
@@ -362,8 +370,8 @@ footer strong{color:var(--accent)}
       <div class="profil-block">
         <h3>Langues</h3>
         <div class="lang-list">
-          <div class="lang-item"><strong>Français</strong>Natif</div>
-          <div class="lang-item"><strong>Anglais</strong>B1 — Technique IT</div>
+          <div class="lang-item"><strong>Français</strong></div>
+          <div class="lang-item"><strong>Anglais</strong></div>
         </div>
       </div>
       <div class="profil-block">
@@ -468,7 +476,7 @@ footer strong{color:var(--accent)}
     <p style="color:#999;font-size:.88rem">Le BTS SIO se prépare en 2 ans et comprend des matières générales et des blocs de compétences professionnels validés par des épreuves E4, E5 et E6.</p>
     <div class="bts-cols">
       <div class="bts-col-item"><strong>Durée</strong>2 ans post-baccalauréat</div>
-      <div class="bts-col-item"><strong>Stages</strong>Min. 10 semaines en entreprise</div>
+      <div class="bts-col-item"><strong>Stages</strong>6 semaines en entreprise</div>
       <div class="bts-col-item"><strong>Epreuves</strong>E4 (BCI), E5 (SI), E6 (prof.)</div>
       <div class="bts-col-item"><strong>Débouchés</strong>Admin sys/réseau, tech. infra, support N2/N3</div>
       <div class="bts-col-item"><strong>Poursuites</strong>Bachelor, Licence Pro, BUT Informatique</div>
@@ -486,58 +494,55 @@ footer strong{color:var(--accent)}
     <div class="comp-cat reveal">
       <div class="comp-cat-header"><div class="comp-cat-icon net">Réseau</div><h3>Réseaux Cisco</h3></div>
       <div class="comp-items">
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Config. switch / routeur Cisco</span></div><div class="comp-bar"><div class="comp-fill fill-blue" data-w="70"></div></div></div>
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">VLAN &amp; Trunking 802.1Q</span></div><div class="comp-bar"><div class="comp-fill fill-blue" data-w="65"></div></div></div>
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Protocoles OSPF / RIP / STP</span></div><div class="comp-bar"><div class="comp-fill fill-blue" data-w="60"></div></div></div>
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">TCP/IP — IPv4 / IPv6</span></div><div class="comp-bar"><div class="comp-fill fill-blue" data-w="75"></div></div></div>
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">DHCP / DNS / NAT</span></div><div class="comp-bar"><div class="comp-fill fill-blue" data-w="70"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Config. switch / routeur Cisco</span></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">VLAN &amp; Trunking 802.1Q</span></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Protocoles OSPF / RIP / STP</span></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">TCP/IP — IPv4 / IPv6</span></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">DHCP / DNS / NAT</span></div></div>
       </div>
     </div>
     <div class="comp-cat reveal" style="transition-delay:.07s">
       <div class="comp-cat-header"><div class="comp-cat-icon sys">Sys</div><h3>Systèmes</h3></div>
       <div class="comp-items">
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Linux Debian / Ubuntu Server</span></div><div class="comp-bar"><div class="comp-fill fill-green" data-w="70"></div></div></div>
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Windows Server (AD, DNS)</span></div><div class="comp-bar"><div class="comp-fill fill-green" data-w="65"></div></div></div>
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Serveur Web Apache / LAMP</span></div><div class="comp-bar"><div class="comp-fill fill-green" data-w="65"></div></div></div>
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Scripts Bash / PowerShell</span></div><div class="comp-bar"><div class="comp-fill fill-green" data-w="55"></div></div></div>
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">SSH / FTP / Telnet</span></div><div class="comp-bar"><div class="comp-fill fill-green" data-w="65"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Linux Debian / Ubuntu Server</span></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Windows Server (AD, DNS)</span></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Serveur Web Apache / LAMP</span></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Scripts Bash / PowerShell</span></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">SSH / FTP / Telnet</span></div></div>
       </div>
     </div>
     <div class="comp-cat reveal" style="transition-delay:.14s">
       <div class="comp-cat-header"><div class="comp-cat-icon sec">Sec</div><h3>Sécurité</h3></div>
       <div class="comp-items">
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Firewall &amp; ACL Cisco</span></div><div class="comp-bar"><div class="comp-fill fill-amber" data-w="60"></div></div></div>
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Wireshark — Analyse trafic</span></div><div class="comp-bar"><div class="comp-fill fill-amber" data-w="65"></div></div></div>
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">VPN &amp; chiffrement</span></div><div class="comp-bar"><div class="comp-fill fill-amber" data-w="50"></div></div></div>
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Politique de sécurité</span></div><div class="comp-bar"><div class="comp-fill fill-amber" data-w="55"></div></div></div>
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">pfSense / pare-feu</span></div><div class="comp-bar"><div class="comp-fill fill-amber" data-w="50"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Firewall &amp; ACL Cisco</span></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Wireshark — Analyse trafic</span></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Politique de sécurité</span></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">pfSense / pare-feu</span></div></div>
       </div>
     </div>
     <div class="comp-cat reveal" style="transition-delay:.21s">
       <div class="comp-cat-header"><div class="comp-cat-icon virt">Virt</div><h3>Virtualisation</h3></div>
       <div class="comp-items">
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Cisco Packet Tracer</span></div><div class="comp-bar"><div class="comp-fill fill-purple" data-w="75"></div></div></div>
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">VMware / VirtualBox</span></div><div class="comp-bar"><div class="comp-fill fill-purple" data-w="65"></div></div></div>
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">GNS3</span></div><div class="comp-bar"><div class="comp-fill fill-purple" data-w="45"></div></div></div>
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Cloud Azure (bases)</span></div><div class="comp-bar"><div class="comp-fill fill-purple" data-w="40"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Cisco Packet Tracer</span></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">VMware / VirtualBox</span></div></div>
       </div>
     </div>
     <div class="comp-cat reveal" style="transition-delay:.28s">
       <div class="comp-cat-header"><div class="comp-cat-icon tool">Tools</div><h3>Outils</h3></div>
       <div class="comp-items">
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Wireshark</span></div><div class="comp-bar"><div class="comp-fill fill-indigo" data-w="65"></div></div></div>
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">GLPI / Ticketing</span></div><div class="comp-bar"><div class="comp-fill fill-indigo" data-w="55"></div></div></div>
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Git / GitHub</span></div><div class="comp-bar"><div class="comp-fill fill-indigo" data-w="50"></div></div></div>
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Suite Office / Google</span></div><div class="comp-bar"><div class="comp-fill fill-indigo" data-w="85"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Wireshark</span></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">GLPI / Ticketing</span></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Git / GitHub</span></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Suite Office / Google</span></div></div>
       </div>
     </div>
     <div class="comp-cat reveal" style="transition-delay:.35s">
       <div class="comp-cat-header"><div class="comp-cat-icon dev">Dev</div><h3>Développement</h3></div>
       <div class="comp-items">
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">HTML / CSS</span></div><div class="comp-bar"><div class="comp-fill fill-red" data-w="70"></div></div></div>
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Python (bases)</span></div><div class="comp-bar"><div class="comp-fill fill-red" data-w="50"></div></div></div>
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">SQL / MySQL</span></div><div class="comp-bar"><div class="comp-fill fill-red" data-w="55"></div></div></div>
-        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">PHP (notions)</span></div><div class="comp-bar"><div class="comp-fill fill-red" data-w="40"></div></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">HTML / CSS</span></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">Python (bases)</span></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">SQL / MySQL</span></div></div>
+        <div class="comp-item"><div class="comp-item-top"><span class="comp-item-name">PHP (notions)</span></div></div>
       </div>
     </div>
   </div>
@@ -604,18 +609,59 @@ footer strong{color:var(--accent)}
   </div>
   <div class="stages-list">
     <div class="stage-card reveal" style="transition-delay:.1s">
-      <div class="stage-year">2025<br>Stage</div>
+      <div class="stage-year"><div class="stage-year-label">Année</div><div class="stage-year-num">1</div><div style="font-size:.65rem;color:var(--muted);margin-top:2px">Stage</div></div>
       <div class="stage-info">
-        <h3>A venir — En recherche active</h3>
+        <h3>Stage — 1ère année BTS SIO</h3>
         <div class="company">Recherche en cours — Île-de-France (78)</div>
-        <p>Je recherche un stage de 6 à 8 semaines en environnement SISR : administration réseaux/systèmes, support technique, gestion de parc ou sécurité informatique. Motivé, rigoureux et disponible rapidement.</p>
+        <p>Je recherche un stage de 6 semaines en environnement SISR : administration réseaux/systèmes, support technique, gestion de parc ou sécurité informatique.</p>
         <div class="stage-tags">
           <span class="stage-tag">Administration réseau</span>
           <span class="stage-tag">Support N1/N2</span>
           <span class="stage-tag">Infrastructure</span>
           <span class="stage-tag">Cisco</span>
           <span class="stage-tag">Linux/Windows Server</span>
+        </div>
+        <div class="stage-sub">
+          <div class="stage-sub-block">
+            <h4>Description entreprise &amp; contexte</h4>
+            <p class="placeholder">À compléter</p>
+          </div>
+          <div class="stage-sub-block">
+            <h4>Missions confiées</h4>
+            <p class="placeholder">À compléter</p>
+          </div>
+          <div class="stage-sub-block">
+            <h4>Réalisations &amp; documents</h4>
+            <p class="placeholder">À compléter</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="stage-card reveal" style="transition-delay:.2s">
+      <div class="stage-year"><div class="stage-year-label">Année</div><div class="stage-year-num">2</div><div style="font-size:.65rem;color:var(--muted);margin-top:2px">Stage</div></div>
+      <div class="stage-info">
+        <h3>Stage — 2ème année BTS SIO</h3>
+        <div class="company">À venir — Île-de-France (78)</div>
+        <p>Stage prévu en deuxième année de BTS SIO SISR, d'une durée de 6 semaines, dans le cadre de la validation des compétences professionnelles de la formation.</p>
+        <div class="stage-tags">
+          <span class="stage-tag">Administration réseau</span>
           <span class="stage-tag">Cybersécurité</span>
+          <span class="stage-tag">Infrastructure</span>
+          <span class="stage-tag">Linux/Windows Server</span>
+        </div>
+        <div class="stage-sub">
+          <div class="stage-sub-block">
+            <h4>Description entreprise &amp; contexte</h4>
+            <p class="placeholder">À compléter</p>
+          </div>
+          <div class="stage-sub-block">
+            <h4>Missions confiées</h4>
+            <p class="placeholder">À compléter</p>
+          </div>
+          <div class="stage-sub-block">
+            <h4>Réalisations &amp; documents</h4>
+            <p class="placeholder">À compléter</p>
+          </div>
         </div>
       </div>
     </div>
