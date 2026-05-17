@@ -312,7 +312,7 @@ footer strong{color:var(--accent)}
       <p class="hero-desc">Passionné par les réseaux, les systèmes et la cybersécurité. En BTS SIO option SISR, je construis mes compétences à travers des TP pratiques, des projets concrets et une veille active sur l'actualité IT.</p>
       <div class="hero-btns">
         <a href="#projets" class="btn-primary">Voir mes projets</a>
-        <a href="./CV_Bryan_Krou.pdf" class="btn-cv" id="cv-btn">Mon CV</a>
+        <a href="https://raw.githubusercontent.com/bryankrou3-wq/porfolio/main/CV_Bryan_Krou.pdf" download="CV_Bryan_Krou.pdf" class="btn-cv" id="cv-btn">Mon CV</a>
         <a href="#contact" class="btn-ghost">Me contacter</a>
       </div>
       <div class="hero-stats">
@@ -681,7 +681,7 @@ footer strong{color:var(--accent)}
         <p>Installation et configuration d'un serveur LAMP (Linux, Apache, MySQL, PHP) sous Debian. Déploiement d'un site dynamique, configuration des VirtualHosts et sécurisation de l'accès.</p>
         <div class="projet-footer">
           <div class="projet-tags"><span class="projet-tag">Linux Debian</span><span class="projet-tag">Apache</span><span class="projet-tag">MySQL</span><span class="projet-tag">PHP</span></div>
-          <a class="btn-pdf" href="SERVEUR_LAMP_bryan_krou.pdf" target="_blank">Compte rendu</a>
+          <a class="btn-pdf" href="https://raw.githubusercontent.com/bryankrou3-wq/porfolio/main/SERVEUR%20LAMP%20bryan%20krou%20.pdf.pdf" download="SERVEUR_LAMP_Bryan_Krou.pdf" target="_blank">Compte rendu</a>
         </div>
       </div>
     </div>
@@ -809,7 +809,7 @@ footer strong{color:var(--accent)}
           <span class="contact-link-icon">GH</span>
           <div><div style="font-size:.77rem;color:var(--muted)">GitHub</div><div>github.com/bryankrou</div></div>
         </a>
-        <a href="#" class="contact-link" id="cv-btn2" style="border-color:rgba(245,158,11,.3)">
+        <a href="https://raw.githubusercontent.com/bryankrou3-wq/porfolio/main/CV_Bryan_Krou.pdf" download="CV_Bryan_Krou.pdf" class="contact-link" id="cv-btn2" style="border-color:rgba(245,158,11,.3)">
           <span class="contact-link-icon">CV</span>
           <div><div style="font-size:.77rem;color:#d97706">Télécharger mon CV</div><div style="color:#f59e0b">CV_Bryan_Krou_BTS_SIO.pdf</div></div>
         </a>
@@ -884,13 +884,7 @@ const cObs=new IntersectionObserver(entries=>{
 },{threshold:.5});
 document.querySelectorAll('.hero-stats').forEach(el=>cObs.observe(el));
 
-/* CV BUTTONS */
-document.querySelectorAll('#cv-btn,#cv-btn2').forEach(b=>{
-  b.addEventListener('click',e=>{
-    e.preventDefault();
-    alert('Pour activer ce bouton, mettez votre CV en ligne et remplacez le href !\nExemple : href="CV_Bryan_Krou.pdf" ou un lien Google Drive/Dropbox.');
-  });
-});
+/* CV BUTTONS — liens actifs */
 
 /* FORM */
 document.querySelector('.submit-btn').addEventListener('click',()=>{
