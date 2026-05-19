@@ -10,7 +10,7 @@
 :root{
   --bg:#080808;--card:#111111;--card2:#161616;
   --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);
-  --accent:#00d4ff;--accent2:#7c3aed;--accent3:#10b981;--accent4:#f59e0b;
+  --accent:#a855f7;--accent2:#7c3aed;--accent3:#10b981;--accent4:#f59e0b;
   --text:#f0f0f0;--muted:#777;--muted2:#444;
   --font-d:'Syne',sans-serif;--font-b:'DM Sans',sans-serif;
 }
@@ -18,8 +18,7 @@ html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:var(--font-b);font-size:16px;line-height:1.7;overflow-x:hidden}
 
 /* CURSOR */
-.cursor{position:fixed;width:10px;height:10px;border-radius:50%;background:var(--accent);pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:screen}
-.cursor-ring{position:fixed;width:36px;height:36px;border-radius:50%;border:1px solid rgba(0,212,255,0.4);pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .2s,height .2s,border-color .2s}
+/* curseur normal du navigateur */
 
 /* PARTICLES */
 #particles{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
@@ -44,9 +43,10 @@ section+section{border-top:1px solid var(--border)}
 
 /* HERO */
 #accueil{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding-top:80px;max-width:100%;padding-left:6vw;padding-right:6vw;overflow:hidden}
-#accueil::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(0,212,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,.025) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0}
+#accueil::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(168,85,247,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(168,85,247,.025) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0}
 #accueil::after{content:'';position:absolute;bottom:0;left:0;right:0;height:200px;background:linear-gradient(transparent,var(--bg));pointer-events:none;z-index:1}
-.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;max-width:1100px;margin:0 auto;position:relative;z-index:2}
+.hero-grid{display:grid;grid-template-columns:1fr;gap:2rem;align-items:center;max-width:1100px;margin:0 auto;position:relative;z-index:2;text-align:center}
+.hero-center{display:flex;flex-direction:column;align-items:center}
 .hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(0,212,255,.07);border:1px solid rgba(0,212,255,.2);padding:6px 14px;border-radius:100px;font-size:.75rem;color:var(--accent);font-weight:600;letter-spacing:.07em;text-transform:uppercase;margin-bottom:1.4rem}
 .hero-tag::before{content:'';width:6px;height:6px;background:var(--accent);border-radius:50%;animation:blink 1.5s infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.1}}
@@ -54,8 +54,8 @@ section+section{border-top:1px solid var(--border)}
 .hero-title .sub{font-size:clamp(1.5rem,3vw,2.4rem);color:var(--accent);display:block;font-weight:700;letter-spacing:-.02em;margin-top:.2rem}
 .hero-school{font-size:.85rem;color:var(--muted);margin-bottom:1.5rem}
 .hero-school strong{color:#aaa}
-.hero-desc{color:var(--muted);font-size:.97rem;max-width:460px;margin-bottom:2rem;line-height:1.8}
-.hero-btns{display:flex;gap:9px;flex-wrap:wrap}
+.hero-desc{color:var(--muted);font-size:.97rem;max-width:560px;margin-bottom:2rem;line-height:1.8;text-align:center}
+.hero-btns{display:flex;gap:9px;flex-wrap:wrap;justify-content:center}
 .btn-primary{display:inline-flex;align-items:center;gap:7px;background:var(--accent);color:#000;padding:11px 20px;border-radius:8px;font-weight:700;font-size:.86rem;text-decoration:none;transition:opacity .2s,transform .2s,box-shadow .2s}
 .btn-primary:hover{opacity:.85;transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,212,255,.25)}
 .btn-ghost{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--border2);color:var(--text);padding:11px 20px;border-radius:8px;font-weight:500;font-size:.86rem;text-decoration:none;transition:background .2s,transform .2s}
@@ -74,7 +74,7 @@ section+section{border-top:1px solid var(--border)}
 .badge-dot{width:8px;height:8px;background:#f59e0b;border-radius:50%;flex-shrink:0;animation:blink 1.8s infinite}
 .badge-text strong{display:block;font-weight:600;color:var(--text);font-size:.82rem}
 .badge-text span{color:var(--muted)}
-.hero-stats{display:flex;gap:2.5rem;margin-top:2.5rem}
+.hero-stats{display:flex;gap:2.5rem;margin-top:2.5rem;justify-content:center}
 .hero-stat .num{font-family:var(--font-d);font-size:2rem;font-weight:800;color:var(--accent);line-height:1}
 .hero-stat .lbl{font-size:.7rem;color:var(--muted);margin-top:2px;letter-spacing:.04em;text-transform:uppercase}
 
@@ -99,7 +99,7 @@ section+section{border-top:1px solid var(--border)}
 .bts-card p{font-size:.88rem;color:#aaa;line-height:1.75}
 .bts-skills{display:flex;flex-wrap:wrap;gap:5px;margin-top:1.1rem}
 .skill-tag{font-size:.72rem;padding:3px 9px;border-radius:100px;font-weight:500}
-.sisr .skill-tag{background:rgba(0,212,255,.07);color:var(--accent);border:1px solid rgba(0,212,255,.17)}
+.sisr .skill-tag{background:rgba(168,85,247,.07);color:var(--accent);border:1px solid rgba(168,85,247,.17)}
 .slam .skill-tag{background:rgba(124,58,237,.08);color:#a78bfa;border:1px solid rgba(124,58,237,.2)}
 .bts-global{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2rem}
 .bts-global h3{font-family:var(--font-d);font-size:.95rem;font-weight:700;margin-bottom:.8rem}
@@ -135,10 +135,10 @@ section+section{border-top:1px solid var(--border)}
 .comp-item:last-child{border-bottom:none}
 .comp-item-name{color:#ccc;font-size:.84rem}
 .comp-items{display:flex;flex-direction:column;gap:0}
-.fill-blue{background:linear-gradient(90deg,var(--accent),#0099cc)}
+.fill-blue{background:linear-gradient(90deg,var(--accent),#7c3aed)}
 .fill-green{background:linear-gradient(90deg,var(--accent3),#059669)}
 .fill-amber{background:linear-gradient(90deg,#f59e0b,#d97706)}
-.fill-purple{background:linear-gradient(90deg,#a78bfa,#7c3aed)}
+.fill-purple{background:linear-gradient(90deg,#c084fc,#a855f7)}
 .fill-red{background:linear-gradient(90deg,#f87171,#ef4444)}
 .fill-indigo{background:linear-gradient(90deg,#818cf8,#6366f1)}
 .cisco-block{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.8rem}
@@ -149,7 +149,25 @@ section+section{border-top:1px solid var(--border)}
 .cisco-item .ci{font-size:1.3rem;margin-bottom:5px}
 .cisco-item strong{display:block;color:var(--text);font-size:.78rem;margin-bottom:2px}
 
-/* STAGES */
+/* TABLEAU E5 */
+.e5-container{background:var(--card);border:1px solid rgba(168,85,247,.25);border-radius:16px;padding:2rem;margin-top:1.5rem;position:relative;overflow:hidden}
+.e5-container::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),#7c3aed)}
+.e5-header{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1rem;flex-wrap:wrap}
+.e5-header-left{display:flex;align-items:center;gap:1rem}
+.e5-icon{width:48px;height:48px;border-radius:12px;background:rgba(168,85,247,.12);border:1px solid rgba(168,85,247,.3);display:flex;align-items:center;justify-content:center;font-family:var(--font-d);font-weight:800;font-size:.9rem;color:var(--accent);flex-shrink:0}
+.e5-title{font-family:var(--font-d);font-weight:700;font-size:1.05rem;color:var(--text)}
+.e5-subtitle{font-size:.78rem;color:var(--muted);margin-top:2px}
+.e5-badge{font-size:.68rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;background:rgba(168,85,247,.1);border:1px solid rgba(168,85,247,.25);color:var(--accent);padding:5px 12px;border-radius:100px;white-space:nowrap}
+.e5-desc{font-size:.86rem;color:#999;line-height:1.75;margin-bottom:1.5rem}
+.e5-pdf-block{display:flex;align-items:center;gap:1rem;background:var(--card2);border:1px solid var(--border2);border-radius:12px;padding:1rem 1.2rem;flex-wrap:wrap}
+.e5-pdf-icon{width:40px;height:40px;border-radius:10px;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.22);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;color:#f87171;flex-shrink:0}
+.e5-pdf-info{flex:1;min-width:0}
+.e5-pdf-name{font-size:.87rem;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.e5-pdf-meta{font-size:.74rem;color:var(--muted);margin-top:2px}
+.e5-pdf-btn{display:inline-flex;align-items:center;gap:6px;background:rgba(168,85,247,.1);border:1px solid rgba(168,85,247,.3);color:var(--accent);padding:8px 16px;border-radius:8px;font-size:.8rem;font-weight:700;text-decoration:none;transition:background .2s,transform .2s;white-space:nowrap}
+.e5-pdf-btn:hover{background:rgba(168,85,247,.2);transform:translateY(-1px)}
+
+/* TABLEAU DE SYNTHESE */
 .stage-alert{background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.22);border-radius:12px;padding:1rem 1.4rem;display:flex;align-items:flex-start;gap:12px;margin-bottom:2rem;font-size:.88rem;color:#fbbf24;line-height:1.6}
 .stages-list{display:flex;flex-direction:column;gap:1.5rem}
 .stage-sub{margin-top:1.2rem;display:flex;flex-direction:column;gap:1rem}
@@ -219,7 +237,7 @@ section+section{border-top:1px solid var(--border)}
 .projet-body p{font-size:.82rem;color:#888;margin-bottom:1rem;line-height:1.65}
 .projet-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:7px}
 .projet-tags{display:flex;flex-wrap:wrap;gap:4px}
-.projet-tag{font-size:.7rem;padding:3px 9px;border-radius:100px;background:rgba(0,212,255,.07);border:1px solid rgba(0,212,255,.15);color:var(--accent)}
+.projet-tag{font-size:.7rem;padding:3px 9px;border-radius:100px;background:rgba(168,85,247,.07);border:1px solid rgba(168,85,247,.15);color:var(--accent)}
 .btn-pdf{display:inline-flex;align-items:center;gap:5px;font-size:.74rem;padding:5px 11px;border-radius:8px;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.22);color:#f87171;font-weight:600;text-decoration:none;transition:background .2s,transform .2s;cursor:pointer}
 .btn-pdf:hover{background:rgba(239,68,68,.15);transform:translateY(-1px)}
 
@@ -281,8 +299,6 @@ footer strong{color:var(--accent)}
 <body>
 
 <div id="particles"></div>
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
 
 <!-- NAV -->
 <nav id="navbar">
@@ -305,7 +321,7 @@ footer strong{color:var(--accent)}
 <!-- HERO / ACCUEIL -->
 <section id="accueil">
   <div class="hero-grid">
-    <div>
+    <div class="hero-center">
       <div class="hero-tag">BTS SIO · SISR — Lycée Jean Vilar, Plaisir</div>
       <h1 class="hero-title">Bryan<span class="sub">Krou</span></h1>
       <p class="hero-school"><strong>Lycée Jean Vilar</strong> · Plaisir (78) · 1ère année BTS SIO</p>
@@ -319,21 +335,6 @@ footer strong{color:var(--accent)}
         <div class="hero-stat"><div class="num" data-target="1">0</div><div class="lbl">An formation</div></div>
         <div class="hero-stat"><div class="num" data-target="6">0</div><div class="lbl">Projets</div></div>
         <div class="hero-stat"><div class="num" data-target="3">0</div><div class="lbl">Certifications</div></div>
-      </div>
-    </div>
-    <div class="hero-visual">
-      <div class="hero-img-wrap">
-        <div class="hero-img-placeholder">
-          <div class="avatar-circle">BK</div>
-          <span class="avatar-label">Votre photo ici</span>
-        </div>
-      </div>
-      <div class="hero-badge">
-        <div class="badge-dot"></div>
-        <div class="badge-text">
-          <strong>En recherche</strong>
-          <span>Stage SISR 2025</span>
-        </div>
       </div>
     </div>
   </div>
@@ -481,6 +482,31 @@ footer strong{color:var(--accent)}
       <div class="bts-col-item"><strong>Débouchés</strong>Admin sys/réseau, tech. infra, support N2/N3</div>
       <div class="bts-col-item"><strong>Poursuites</strong>Bachelor, Licence Pro, BUT Informatique</div>
       <div class="bts-col-item"><strong>Lycée</strong>Jean Vilar — Plaisir (78370)</div>
+    </div>
+  </div>
+
+  <!-- TABLEAU DE SYNTHÈSE E5 -->
+  <div class="e5-container reveal" style="transition-delay:.3s">
+    <div class="e5-header">
+      <div class="e5-header-left">
+        <div class="e5-icon">E5</div>
+        <div>
+          <div class="e5-title">Tableau de synthèse E5</div>
+          <div class="e5-subtitle">Épreuve de Support et Mise à Disposition de Services Informatiques</div>
+        </div>
+      </div>
+      <span class="e5-badge">BTS SIO · SISR</span>
+    </div>
+    <p class="e5-desc">Ce tableau recense l'ensemble des situations professionnelles et compétences mobilisées dans le cadre de l'épreuve E5, en lien avec mes activités en formation et en stage.</p>
+    <div class="e5-pdf-block">
+      <div class="e5-pdf-icon">PDF</div>
+      <div class="e5-pdf-info">
+        <div class="e5-pdf-name">Tableau_Synthese_E5_Bryan_Krou.pdf</div>
+        <div class="e5-pdf-meta">Document officiel · BTS SIO SISR · 2025–2026</div>
+      </div>
+      <a class="e5-pdf-btn" href="https://raw.githubusercontent.com/bryankrou3-wq/porfolio/main/Tableau_Synthese_E5_Bryan_Krou.pdf" download target="_blank">
+        ↓ Télécharger
+      </a>
     </div>
   </div>
 </section>
@@ -672,7 +698,7 @@ footer strong{color:var(--accent)}
 <section id="projets">
   <p class="section-label">Réalisations</p>
   <h2 class="section-title">Mes projets</h2>
-  <p class="section-desc">Projets réalisés en TP de formation. Chaque projet dispose d'un compte rendu PDF téléchargeable — remplacez les liens par vos vrais fichiers.</p>
+  <p class="section-desc">Projets réalisés en TP de formation. Le premier projet dispose d'un compte rendu PDF téléchargeable — les comptes rendus des autres projets sont à venir.</p>
   <div class="projets-grid">
     <div class="projet-card reveal">
       <div class="projet-img p1">Serveur</div>
@@ -692,7 +718,7 @@ footer strong{color:var(--accent)}
         <p>Conception et déploiement d'une infrastructure réseau simulée avec routage OSPF, VLAN, DHCP, DNS, configuration des ACL et sécurisation des ports.</p>
         <div class="projet-footer">
           <div class="projet-tags"><span class="projet-tag">Packet Tracer</span><span class="projet-tag">VLAN</span><span class="projet-tag">OSPF</span><span class="projet-tag">ACL</span></div>
-          <a class="btn-pdf" href="#" onclick="alert('Remplacez ce lien par votre PDF');return false">Compte rendu</a>
+          <span class="btn-pdf" style="opacity:.55;cursor:default">Compte rendu à venir</span>
         </div>
       </div>
     </div>
@@ -703,7 +729,7 @@ footer strong{color:var(--accent)}
         <p>Installation d'un contrôleur de domaine Windows Server, structure d'UO, gestion des utilisateurs, groupes et GPO dans un environnement entreprise simulé.</p>
         <div class="projet-footer">
           <div class="projet-tags"><span class="projet-tag">Windows Server</span><span class="projet-tag">Active Directory</span><span class="projet-tag">GPO</span></div>
-          <a class="btn-pdf" href="#" onclick="alert('Remplacez ce lien par votre PDF');return false">Compte rendu</a>
+          <span class="btn-pdf" style="opacity:.55;cursor:default">Compte rendu à venir</span>
         </div>
       </div>
     </div>
@@ -714,7 +740,7 @@ footer strong{color:var(--accent)}
         <p>Script Linux de monitoring : surveillance CPU, RAM et espace disque avec envoi d'alertes automatiques par email en cas de dépassement de seuil.</p>
         <div class="projet-footer">
           <div class="projet-tags"><span class="projet-tag">Bash</span><span class="projet-tag">Linux</span><span class="projet-tag">Cron</span><span class="projet-tag">SMTP</span></div>
-          <a class="btn-pdf" href="#" onclick="alert('Remplacez ce lien par votre PDF');return false">Compte rendu</a>
+          <span class="btn-pdf" style="opacity:.55;cursor:default">Compte rendu à venir</span>
         </div>
       </div>
     </div>
@@ -725,7 +751,7 @@ footer strong{color:var(--accent)}
         <p>Configuration d'un pare-feu réseau : règles de filtrage, NAT, zones DMZ, VPN site-à-site et monitoring du trafic en temps réel.</p>
         <div class="projet-footer">
           <div class="projet-tags"><span class="projet-tag">pfSense</span><span class="projet-tag">Firewall</span><span class="projet-tag">VPN</span><span class="projet-tag">DMZ</span></div>
-          <a class="btn-pdf" href="#" onclick="alert('Remplacez ce lien par votre PDF');return false">Compte rendu</a>
+          <span class="btn-pdf" style="opacity:.55;cursor:default">Compte rendu à venir</span>
         </div>
       </div>
     </div>
@@ -843,16 +869,6 @@ footer strong{color:var(--accent)}
 </footer>
 
 <script>
-/* CURSOR */
-const cur=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
-(function anim(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(anim)})();
-document.querySelectorAll('a,button,.projet-card,.bts-card,.comp-cat,.certif-card,.veille-card').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{ring.style.width='60px';ring.style.height='60px';ring.style.borderColor='rgba(0,212,255,.7)';cur.style.opacity='0'});
-  el.addEventListener('mouseleave',()=>{ring.style.width='36px';ring.style.height='36px';ring.style.borderColor='rgba(0,212,255,.4)';cur.style.opacity='1'});
-});
-
 /* PARTICLES */
 const pc=document.getElementById('particles');
 for(let i=0;i<28;i++){const p=document.createElement('div');p.className='particle';p.style.cssText=`left:${Math.random()*100}%;animation-duration:${9+Math.random()*14}s;animation-delay:${Math.random()*12}s;width:${1+Math.random()*2}px;height:${1+Math.random()*2}px`;pc.appendChild(p)}
