@@ -185,6 +185,22 @@ section+section{border-top:1px solid var(--border)}
 .stage-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:.7rem}
 .stage-tag{font-size:.72rem;padding:3px 9px;border-radius:100px;background:rgba(255,255,255,.04);border:1px solid var(--border2);color:var(--muted)}
 
+/* GALERIE REALISATIONS STAGE */
+.stage-gallery-intro{font-size:.85rem;color:#aaa;font-style:normal;margin-bottom:1rem;line-height:1.6}
+.stage-gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:1.4rem}
+.stage-gallery-item{position:relative;border-radius:10px;overflow:hidden;border:1px solid var(--border2);background:var(--card2);cursor:zoom-in;transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
+.stage-gallery-item:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:0 10px 30px rgba(168,85,247,.15)}
+.stage-gallery-item img{width:100%;height:130px;object-fit:cover;display:block;background:#000}
+.stage-gallery-caption{padding:.55rem .7rem;font-size:.72rem;color:#ccc;font-style:normal;line-height:1.4}
+.stage-doc-list{display:flex;flex-direction:column;gap:.7rem}
+
+/* LIGHTBOX */
+.lightbox-overlay{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:1000;display:none;align-items:center;justify-content:center;padding:3rem 2rem;cursor:zoom-out}
+.lightbox-overlay.active{display:flex}
+.lightbox-overlay img{max-width:90vw;max-height:78vh;border-radius:10px;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+.lightbox-caption{position:absolute;bottom:2.2rem;left:0;right:0;text-align:center;color:#eee;font-size:.9rem;padding:0 2rem}
+.lightbox-close{position:absolute;top:1.4rem;right:2rem;color:#fff;font-size:2.2rem;line-height:1;cursor:pointer;font-family:var(--font-d)}
+
 /* PROFIL */
 .profil-grid{display:grid;grid-template-columns:1fr 2fr;gap:3rem;align-items:start}
 .profil-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2rem;text-align:center}
@@ -660,7 +676,55 @@ footer strong{color:var(--accent)}
           </div>
           <div class="stage-sub-block">
             <h4>Réalisations &amp; documents</h4>
-            <p class="placeholder">À compléter — rapport de stage et documents à venir.</p>
+            <p class="stage-gallery-intro">Un aperçu concret des missions menées chez OSTRA : supervision et cybersécurité avec Wazuh et Graylog, schémas d'infrastructure réseau, tests de segmentation et interventions terrain. Cliquez sur une capture pour l'agrandir.</p>
+            <div class="stage-gallery">
+              <div class="stage-gallery-item reveal" onclick="openLightbox(this)">
+                <img src="https://raw.githubusercontent.com/bryankrou3-wq/porfolio/main/Capture%20d'%C3%A9cran%202026-06-04%20144818.png" alt="Tableau de bord Wazuh SIEM" loading="lazy">
+                <div class="stage-gallery-caption">🛡️ Mise en place du SIEM : premiers pas sur le tableau de bord Wazuh pour la supervision de sécurité.</div>
+              </div>
+              <div class="stage-gallery-item reveal" onclick="openLightbox(this)">
+                <img src="https://raw.githubusercontent.com/bryankrou3-wq/porfolio/main/Capture%20d'%C3%A9cran%202026-06-05%20135230.png" alt="Gestion des agents Wazuh" loading="lazy">
+                <div class="stage-gallery-caption">🖥️ Suivi des agents Wazuh déployés : état des postes surveillés et création des comptes utilisateurs.</div>
+              </div>
+              <div class="stage-gallery-item reveal" onclick="openLightbox(this)">
+                <img src="https://raw.githubusercontent.com/bryankrou3-wq/porfolio/main/Capture%20d'%C3%A9cran%202026-06-16%20120229.png" alt="Schéma d'infrastructure réseau" loading="lazy">
+                <div class="stage-gallery-caption">🗺️ Documentation de l'architecture existante : réalisation d'un schéma d'infrastructure réseau.</div>
+              </div>
+              <div class="stage-gallery-item reveal" onclick="openLightbox(this)">
+                <img src="https://raw.githubusercontent.com/bryankrou3-wq/porfolio/main/Capture%20d'%C3%A9cran%202026-06-19%20094247.png" alt="Paramétrage du script Graylog" loading="lazy">
+                <div class="stage-gallery-caption">📊 Centralisation des logs : configuration et fonctionnement du script Graylog.</div>
+              </div>
+              <div class="stage-gallery-item reveal" onclick="openLightbox(this)">
+                <img src="https://raw.githubusercontent.com/bryankrou3-wq/porfolio/main/Capture%20d'%C3%A9cran%202026-06-25%20145432.png" alt="Test de segmentation réseau avec Nmap" loading="lazy">
+                <div class="stage-gallery-caption">🔍 Vérification du cloisonnement réseau : test de segmentation réalisé avec Nmap.</div>
+              </div>
+              <div class="stage-gallery-item reveal" onclick="openLightbox(this)">
+                <img src="https://raw.githubusercontent.com/bryankrou3-wq/porfolio/main/Capture%20d'%C3%A9cran%202026-06-30%20100126.png" alt="Intervention et suivi technique" loading="lazy">
+                <div class="stage-gallery-caption">🎫 Gestion des demandes : suivi des tickets d'incidents et des interventions techniques.</div>
+              </div>
+              <div class="stage-gallery-item reveal" onclick="openLightbox(this)">
+                <img src="https://raw.githubusercontent.com/bryankrou3-wq/porfolio/main/Capture%20d'%C3%A9cran%202026-06-30%20100150.png" alt="Configuration matériel sur site" loading="lazy">
+                <div class="stage-gallery-caption">🔧 Dépannage et configuration sur site : intervention terrain auprès des équipes d'OSTRA.</div>
+              </div>
+            </div>
+            <div class="stage-doc-list">
+              <div class="e5-pdf-block">
+                <div class="e5-pdf-icon">PDF</div>
+                <div class="e5-pdf-info">
+                  <div class="e5-pdf-name">Protocole de Teste.pdf</div>
+                  <div class="e5-pdf-meta">Protocole de test réseau rédigé durant le stage · OSTRA</div>
+                </div>
+                <a class="e5-pdf-btn" href="https://raw.githubusercontent.com/bryankrou3-wq/porfolio/main/Protocole%20de%20Teste.pdf" download target="_blank">⬇ Télécharger</a>
+              </div>
+              <div class="e5-pdf-block">
+                <div class="e5-pdf-icon" style="background:rgba(16,185,129,.08);border-color:rgba(16,185,129,.22);color:#10b981">SH</div>
+                <div class="e5-pdf-info">
+                  <div class="e5-pdf-name">install_graylogdock_v3.sh</div>
+                  <div class="e5-pdf-meta">Script d'installation Graylog (Docker) configuré et documenté en stage</div>
+                </div>
+                <a class="e5-pdf-btn" href="https://raw.githubusercontent.com/bryankrou3-wq/porfolio/main/install_graylogdock_v3%20(1).sh" download target="_blank">⬇ Télécharger</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -870,6 +934,28 @@ footer strong{color:var(--accent)}
   <p>Conçu par <strong>Bryan Krou</strong> · BTS SIO SISR · Lycée Jean Vilar, Plaisir · 2025–2026</p>
 </footer>
 
+<div class="lightbox-overlay" id="lightbox" onclick="closeLightbox(event)">
+  <span class="lightbox-close" onclick="closeLightbox(event)">×</span>
+  <img id="lightbox-img" src="" alt="">
+  <div class="lightbox-caption" id="lightbox-caption"></div>
+</div>
+
+<script>
+function openLightbox(el){
+  const img=el.querySelector('img');
+  const caption=el.querySelector('.stage-gallery-caption');
+  document.getElementById('lightbox-img').src=img.src;
+  document.getElementById('lightbox-img').alt=img.alt;
+  document.getElementById('lightbox-caption').textContent=caption?caption.textContent:img.alt;
+  document.getElementById('lightbox').classList.add('active');
+}
+function closeLightbox(e){
+  if(e.target.id==='lightbox'||e.target.classList.contains('lightbox-close')){
+    document.getElementById('lightbox').classList.remove('active');
+  }
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')document.getElementById('lightbox').classList.remove('active')});
+</script>
 <script>
 /* PARTICLES */
 const pc=document.getElementById('particles');
