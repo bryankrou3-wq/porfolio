@@ -117,7 +117,7 @@ def main():
         cards.append(f"""
         <article class="veille-card">
           <div class="veille-cat">IA · Supervision réseau</div>
-          <h3><a href="{link}" target="_blank" rel="noopener noreferrer" style="color:var(--text);text-decoration:none">{title}</a></h3>
+          <h3><a href="{link}" target="_blank" rel="noopener noreferrer" style="color:#f3f7ff;text-decoration:none">{title}</a></h3>
           <p class="veille-source">Source : {source_link} · {date}</p>
           <p class="veille-summary">{summary}</p>
           <p class="veille-actions"><a href="{link}" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;font-weight:700">Lire l’article complet ↗</a></p>
@@ -151,10 +151,10 @@ def main():
 h1{{font-size:clamp(1.4rem,3vw,2.2rem);line-height:1.2;margin:10px 0}}.intro{{color:#b8c6da;line-height:1.6;margin:0}}
 .status{{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}}.pill{{font-size:.78rem;padding:6px 10px;border-radius:999px;background:#24344c;color:#dbeafe}}
 .grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:14px}}
-.article{{padding:18px;border:1px solid #25344a;border-radius:16px;background:#111c2d;display:flex;flex-direction:column;min-height:180px}}
+.veille-card{{padding:20px;border:1px solid #25344a;border-radius:16px;background:#111c2d;display:flex;flex-direction:column;min-height:250px}}
 .meta{{display:flex;justify-content:space-between;gap:8px;color:#91a5c0;font-size:.75rem}}.meta span{{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}}
 h3{{font-size:1rem;line-height:1.5;margin:14px 0}}h3 a{{color:#f3f7ff;text-decoration:none}}h3 a:hover{{color:#8ec5ff}}
-.read{{margin-top:auto;color:#80b7ff;text-decoration:none;font-size:.85rem;font-weight:650}}
+.veille-cat{{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:#80b7ff;font-weight:750}}\n.veille-source{{font-size:.76rem;color:#91a5c0;line-height:1.5;margin:0 0 10px}}.veille-source a{{color:#a7caff}}\n.veille-summary{{font-size:.9rem;line-height:1.65;color:#c5d2e3;margin:0 0 16px}}\n.veille-actions{{margin-top:auto}}.veille-actions a{{display:inline-block;color:#80b7ff;text-decoration:none;font-size:.86rem;font-weight:750;border:1px solid #304966;padding:8px 12px;border-radius:9px}}
 .footer{{color:#8192a9;font-size:.75rem;text-align:center;margin:18px 0 4px}}.empty{{padding:24px;border:1px dashed #465770;border-radius:14px;color:#c8d5e7}}
 </style>
 </head>
