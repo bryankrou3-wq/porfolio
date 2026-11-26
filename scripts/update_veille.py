@@ -10,10 +10,10 @@ import xml.etree.ElementTree as ET
 
 # Recherches en français uniquement : Google Actualités RSS configuré sur France/français.
 QUERIES = [
-    '"intelligence artificielle" détection anomalies réseau',
-    '"supervision réseau" IA détection anomalies',
-    '"AIOps" supervision réseau français',
-    '"analyse du trafic réseau" apprentissage automatique',
+    '"intelligence artificielle" supervision réseau when:30d',
+    '"IA" détection anomalies réseau when:30d',
+    '"AIOps" réseau observabilité when:30d',
+    '"intelligence artificielle" trafic réseau automatisation when:30d',
 ]
 MAX_ITEMS = 6
 RSS_BASE = "https://news.google.com/rss/search?q={query}&hl=fr&gl=FR&ceid=FR:fr"
