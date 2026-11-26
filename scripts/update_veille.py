@@ -88,11 +88,21 @@ def main():
         source = escape(item["source"] or "Source de l’article")
         date = escape(item["date"] or "Date non précisée")
         cards.append(f"""
-        <article class="article">
+        <article class="article veille-card">
           <div class="meta"><span>{source}</span><time>{date}</time></div>
           <h3><a href="{link}" target="_blank" rel="noopener noreferrer">{title}</a></h3>
           <a class="read" href="{link}" target="_blank" rel="noopener noreferrer">Lire l’article <span aria-hidden="true">↗</span></a>
         </article>""")
+
+    # Publie aussi les cartes seules : le portfolio les charge dans sa rubrique sans iframe.
+    fragment_content = "\\n".join(cards) if cards else """
+      <article class="veille-card">
+        <div class="veille-cat">Veille automatisée</div>
+        <h3>Aucun article français pertinent pour le moment</h3>
+        <p>La veille sera actualisée automatiquement lors du prochain passage.</p>
+      </article>"""
+    with open("veille-fragment.html", "w", encoding="utf-8") as fragment_file:
+        fragment_file.write(fragment_content)
 
     content = "\n".join(cards) if cards else """
       <div class="empty"><strong>Aucun article français pertinent n’a été récupéré.</strong>
