@@ -1,0 +1,37 @@
+name: Mise à jour automatique de la veille IA réseau
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 6 * * *"
+  push:
+    paths:
+      - "scripts/update_veille.py"
+      - ".github/workflows/veille-ia.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  update-watch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupérer le portfolio
+        uses: actions/checkout@v4
+      - name: Installer Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - name: Générer la veille depuis les flux RSS
+        run: python scripts/update_veille.py
+      - name: Enregistrer la mise à jour
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add veille.html
+          if git diff --cached --quiet; then
+            echo "Aucun changement d'article."
+          else
+            git commit -m "Mise à jour automatique de la veille IA réseau"
+            git push
+          fi
