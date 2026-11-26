@@ -101,6 +101,21 @@ def main():
     generated = datetime.now(timezone.utc).strftime("%d/%m/%Y à %H:%M UTC")
 
     cards = []
+    fragment_cards = []
+    categories = {
+        "Supervision": ("supervision", "monitoring", "observabilité", "observabilite", "zabbix", "nagios", "prometheus"),
+        "AIOps": ("aiops", "automatisation", "automatisé", "automatisée", "agent ia", "agents ia"),
+        "Cybersécurité": ("cyber", "sécurité", "securite", "attaque", "vulnérabilité", "vulnerabilite", "détection", "detection"),
+        "Réseau": ("réseau", "reseau", "trafic", "routeur", "infrastructure", "nginx", "dns", "tcp", "ip"),
+    }
+
+    def classify(item):
+        text_value = (item.get("title", "") + " " + item.get("summary", "")).lower()
+        for category, keywords in categories.items():
+            if any(keyword in text_value for keyword in keywords):
+                return category
+        return "IA"
+
     for item in items:
         title = escape(item["title"])
         link = escape(item["link"], quote=True)
@@ -110,65 +125,112 @@ def main():
             f"<a href=\"{escape(source_url, quote=True)}\" target=\"_blank\" rel=\"noopener noreferrer\">{source}</a>"
             if source_url.startswith(("https://", "http://")) else source
         )
-        date = escape(item["date"] or "Date non précisée")\n        summary = escape(item.get("summary") or "Article lié à la supervision réseau et à l’intelligence artificielle.")
-        source_action = (
-            f"<a href=\"{escape(source_url, quote=True)}\" target=\"_blank\" rel=\"noopener noreferrer\">Voir le site de la source ↗</a>"
-            if source_url.startswith(("https://", "http://")) else ""
-        )
-        cards.append(f"""
-        <article class="veille-card">
-          <div class="veille-cat">IA · Supervision réseau</div>
-          <h3><a href="{link}" target="_blank" rel="noopener noreferrer" style="color:#f3f7ff;text-decoration:none">{title}</a></h3>
-          <p class="veille-source">Source : {source_link} · {date}</p>
+        date = escape(item["date"] or "Date non précisée")
+        summary = escape(item.get("summary") or "Article lié à la supervision réseau et à l’intelligence artificielle.")
+        topic = classify(item)
+        card = f"""
+        <article class="veille-card" data-topic="{escape(topic, quote=True)}" data-search="{escape((item['title']+' '+item.get('source','')+' '+item.get('summary','')).lower(), quote=True)}" data-date="{escape(item.get('date',''), quote=True)}">
+          <div class="card-meta"><span class="veille-cat">{escape(topic)} · IA réseau</span><time>{date}</time></div>
+          <h3><a href="{link}" target="_blank" rel="noopener noreferrer">{title}</a></h3>
+          <p class="veille-source">Source : {source_link}</p>
           <p class="veille-summary">{summary}</p>
-          <p class="veille-actions"><a href="{link}" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;font-weight:700">Lire l’article complet ↗</a></p>
-        </article>""")
-    # Publie aussi les cartes seules : le portfolio les charge dans sa rubrique sans iframe.
-    fragment_content = "\n".join(cards) if cards else """
-      <article class="veille-card">
-        <div class="veille-cat">Veille automatisée</div>
+          <p class="veille-actions"><a href="{link}" target="_blank" rel="noopener noreferrer">Lire l’article complet ↗</a></p>
+        </article>"""
+        cards.append(card)
+        fragment_cards.append(card)
+
+    fragment_content = "\n".join(fragment_cards) if fragment_cards else """
+      <article class="veille-card empty">
         <h3>Aucun article français pertinent pour le moment</h3>
-        <p>La veille sera actualisée automatiquement lors du prochain passage.</p>
+        <p>La prochaine mise à jour réessaiera automatiquement.</p>
       </article>"""
     with open("veille-fragment.html", "w", encoding="utf-8") as fragment_file:
         fragment_file.write(fragment_content)
 
     content = "\n".join(cards) if cards else """
-      <div class="empty"><strong>Aucun article français pertinent n’a été récupéré.</strong>
-      <p>La prochaine mise à jour réessaiera automatiquement.</p></div>"""
-
+      <article class="veille-card empty"><h3>Aucun article français pertinent n’a été récupéré.</h3>
+      <p>La prochaine mise à jour réessaiera automatiquement.</p></article>"""
+    generated = datetime.now(timezone.utc).strftime("%d/%m/%Y à %H:%M UTC")
     page = f"""<!doctype html>
 <html lang="fr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light dark">
-<title>Veille IA — Supervision réseau</title>
+<meta name="color-scheme" content="dark">
+<title>Veille interactive — IA et réseau</title>
 <style>
-:root{{font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#e8eef8;background:#0b1220}}
-*{{box-sizing:border-box}}body{{margin:0;padding:20px;background:transparent}}
-.wrap{{max-width:1100px;margin:auto}}.top{{padding:24px;border:1px solid #26344a;border-radius:20px;background:linear-gradient(135deg,#172943,#101827);margin-bottom:18px}}
-.eyebrow{{color:#80b7ff;text-transform:uppercase;letter-spacing:.12em;font-size:.75rem;font-weight:700}}
-h1{{font-size:clamp(1.4rem,3vw,2.2rem);line-height:1.2;margin:10px 0}}.intro{{color:#b8c6da;line-height:1.6;margin:0}}
-.status{{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}}.pill{{font-size:.78rem;padding:6px 10px;border-radius:999px;background:#24344c;color:#dbeafe}}
-.grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:14px}}
-.veille-card{{padding:20px;border:1px solid #25344a;border-radius:16px;background:#111c2d;display:flex;flex-direction:column;min-height:250px}}
-.meta{{display:flex;justify-content:space-between;gap:8px;color:#91a5c0;font-size:.75rem}}.meta span{{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}}
-h3{{font-size:1rem;line-height:1.5;margin:14px 0}}h3 a{{color:#f3f7ff;text-decoration:none}}h3 a:hover{{color:#8ec5ff}}
-.veille-cat{{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:#80b7ff;font-weight:750}}\n.veille-source{{font-size:.76rem;color:#91a5c0;line-height:1.5;margin:0 0 10px}}.veille-source a{{color:#a7caff}}\n.veille-summary{{font-size:.9rem;line-height:1.65;color:#c5d2e3;margin:0 0 16px}}\n.veille-actions{{margin-top:auto}}.veille-actions a{{display:inline-block;color:#80b7ff;text-decoration:none;font-size:.86rem;font-weight:750;border:1px solid #304966;padding:8px 12px;border-radius:9px}}
-.footer{{color:#8192a9;font-size:.75rem;text-align:center;margin:18px 0 4px}}.empty{{padding:24px;border:1px dashed #465770;border-radius:14px;color:#c8d5e7}}
+:root{{font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#e8eef8;background:#080b12}}
+*{{box-sizing:border-box}}body{{margin:0;padding:18px;background:transparent}}
+.wrap{{max-width:1250px;margin:auto}}
+.hero{{padding:22px;border:1px solid #302347;border-radius:18px;background:linear-gradient(135deg,#1c1630,#10121b);margin-bottom:16px}}
+.eyebrow{{color:#bb7cff;text-transform:uppercase;letter-spacing:.13em;font-size:.72rem;font-weight:850}}
+h1{{font-size:clamp(1.35rem,2.8vw,2rem);line-height:1.25;margin:10px 0}}
+.lead{{color:#bcb8c9;line-height:1.7;margin:0;max-width:1000px}}
+.pills{{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}}.pill{{font-size:.75rem;padding:6px 10px;border-radius:999px;background:#292039;color:#e9d9ff;border:1px solid #3c2d56}}
+.toolbar{{display:grid;grid-template-columns:minmax(0,1fr) minmax(150px,220px) auto;gap:10px;margin:14px 0}}
+.toolbar input,.toolbar select{{width:100%;min-height:44px;border:1px solid #393044;border-radius:10px;background:#111018;color:#f1eaff;padding:10px 12px;font:inherit}}
+.toolbar button,.more{{border:1px solid #69439a;background:#2b1b42;color:#e9d9ff;border-radius:10px;padding:10px 15px;font:inherit;font-weight:800;cursor:pointer}}
+.toolbar button:hover,.more:hover{{background:#3b2457}}
+.grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,310px),1fr));gap:14px}}
+.veille-card{{padding:19px;border:1px solid #2b2733;border-radius:16px;background:#111014;display:flex;flex-direction:column;min-height:280px}}
+.card-meta{{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}}
+.veille-cat{{font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:#bb7cff;font-weight:850}}
+time{{font-size:.73rem;color:#91899f}}
+h3{{font-size:1rem;line-height:1.5;margin:13px 0 9px}}h3 a{{color:#f5f1fa;text-decoration:none}}h3 a:hover{{color:#c994ff}}
+.veille-source{{font-size:.75rem;color:#938ba0;line-height:1.5;margin:0 0 10px}}.veille-source a{{color:#c18bff;text-underline-offset:3px}}
+.veille-summary{{font-size:.87rem;line-height:1.7;color:#c8c1d2;margin:0 0 15px}}
+.veille-actions{{margin-top:auto}}.veille-actions a{{display:inline-block;color:#c18bff;text-decoration:none;font-size:.83rem;font-weight:850;border:1px solid #453153;padding:8px 11px;border-radius:9px}}
+.veille-actions a:hover{{background:#20162c}}
+.empty{{color:#c8c1d2;min-height:auto}}.bottom{{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:16px 0}}
+#result-count{{font-size:.8rem;color:#9d95aa}}.footer{{font-size:.72rem;color:#80788e;text-align:center;margin:16px 0 4px}}
+@media(max-width:650px){{body{{padding:10px}}.toolbar{{grid-template-columns:1fr}}.hero{{padding:17px}}.veille-card{{padding:16px}}}}
 </style>
 </head>
 <body><main class="wrap">
-<header class="top"><div class="eyebrow">Veille technologique · BTS SIO SISR</div>
+<header class="hero">
+<div class="eyebrow">Veille technologique · BTS SIO SISR</div>
 <h1>L’intelligence artificielle au service de la supervision et de la détection des anomalies réseau</h1>
-<p class="intro">Une sélection courte d’articles en français sur la supervision intelligente, l’analyse du trafic, la détection d’anomalies et l’AIOps.</p>
-<div class="status"><span class="pill">{len(items)} articles (maximum {MAX_ITEMS})</span><span class="pill">Mise à jour : {generated}</span><span class="pill">Flux RSS en français</span></div>
+<p class="lead">Articles récents en français sur la supervision intelligente, l’analyse du trafic, la détection d’anomalies, l’observabilité, l’AIOps et la cybersécurité. Recherche, filtres thématiques et accès direct aux sources.</p>
+<div class="pills"><span class="pill">{len(items)} articles</span><span class="pill">Dernière mise à jour : {generated}</span><span class="pill">RSS français · Google Actualités</span></div>
 </header>
-<section class="grid" aria-label="Articles de veille">{content}
-</section>
-<p class="footer">Articles issus de Google Actualités RSS · Sélection en français · Ouvre un titre pour lire la source.</p>
-</main></body></html>"""
+<div class="toolbar" role="search" aria-label="Recherche dans la veille">
+<input id="search" type="search" placeholder="Rechercher un article, une source, un mot-clé…" aria-label="Rechercher">
+<select id="category" aria-label="Filtrer par thème"><option value="all">Tous les thèmes</option><option>Supervision</option><option>AIOps</option><option>Cybersécurité</option><option>Réseau</option><option>IA</option></select>
+<button id="reset" type="button">Réinitialiser</button>
+</div>
+<section id="article-grid" class="grid" aria-label="Articles de veille">{content}</section>
+<div class="bottom"><span id="result-count" aria-live="polite">Articles affichés</span><button id="more" class="more" type="button">Afficher plus</button></div>
+<p class="footer">Chaque carte contient un résumé et un lien vers l’article original. Les nouvelles publications sont récupérées par GitHub Actions selon son calendrier.</p>
+</main>
+<script>
+(function() {{
+ const cards = Array.from(document.querySelectorAll(".veille-card"));
+ const search = document.getElementById("search");
+ const category = document.getElementById("category");
+ const reset = document.getElementById("reset");
+ const more = document.getElementById("more");
+ const count = document.getElementById("result-count");
+ let visibleLimit = 6;
+ function update() {{
+   const term = search.value.trim().toLowerCase();
+   const selected = category.value;
+   const filtered = cards.filter(card => {{
+     const text = (card.dataset.search || card.innerText).toLowerCase();
+     return (!term || text.includes(term)) && (selected === "all" || card.dataset.topic === selected);
+   }});
+   cards.forEach(card => card.hidden = true);
+   filtered.slice(0, visibleLimit).forEach(card => card.hidden = false);
+   count.textContent = filtered.length + " article(s) trouvé(s) · " + Math.min(filtered.length, visibleLimit) + " affiché(s)";
+   more.hidden = filtered.length <= visibleLimit;
+ }}
+ search.addEventListener("input", () => {{visibleLimit=6;update();}});
+ category.addEventListener("change", () => {{visibleLimit=6;update();}});
+ reset.addEventListener("click", () => {{search.value="";category.value="all";visibleLimit=6;update();search.focus();}});
+ more.addEventListener("click", () => {{visibleLimit += 6;update();}});
+ update();
+}})();
+</script>
+</body></html>"""
     with open("veille.html", "w", encoding="utf-8") as file:
         file.write(page)
     print(f"veille.html généré : {len(items)} articles français (maximum {MAX_ITEMS})")
