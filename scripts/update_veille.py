@@ -1,21 +1,34 @@
 #!/usr/bin/env python3
-"""Build a small, accessible French AI/network-monitoring RSS watch page."""
+"""Génère une veille courte en français sur l'IA et la supervision réseau."""
 from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
-from html import escape
+from html import escape, unescape
 from urllib.parse import quote
 from urllib.request import Request, urlopen
+import re
 import xml.etree.ElementTree as ET
 
+# Recherches en français uniquement : Google Actualités RSS configuré sur France/français.
 QUERIES = [
-    '"AI" "network monitoring" anomaly detection',
-    '"machine learning" network anomaly detection',
-    '"AI" network observability monitoring',
-    '"intelligence artificielle" supervision réseau anomalies',
-    'AIOps network monitoring',
+    '"intelligence artificielle" détection anomalies réseau',
+    '"supervision réseau" IA détection anomalies',
+    '"AIOps" supervision réseau français',
+    '"analyse du trafic réseau" apprentissage automatique',
 ]
-MAX_ITEMS = 30
+MAX_ITEMS = 6
 RSS_BASE = "https://news.google.com/rss/search?q={query}&hl=fr&gl=FR&ceid=FR:fr"
+
+FRENCH_WORDS = {
+    "le", "la", "les", "des", "une", "un", "dans", "pour", "sur", "avec",
+    "et", "est", "sont", "du", "de", "au", "aux", "par", "qui", "que",
+    "réseau", "réseaux", "détection", "supervision", "intelligence", "artificielle",
+    "analyse", "sécurité", "cybersécurité", "trafic", "anomalies", "l'ia", "l’intelligence"
+}
+ENGLISH_WORDS = {
+    "the", "and", "for", "with", "from", "how", "what", "when", "new",
+    "network", "networks", "monitoring", "detection", "artificial", "intelligence",
+    "machine", "learning", "security", "traffic", "anomaly", "anomalies"
+}
 
 def fetch_feed(query):
     url = RSS_BASE.format(query=quote(query))
@@ -36,6 +49,14 @@ def parse_date(value):
     except Exception:
         return ""
 
+def is_french(title, description):
+    plain = re.sub(r"<[^>]+>", " ", unescape(title + " " + description)).lower()
+    words = set(re.findall(r"[a-zà-ÿ’']+", plain))
+    french_hits = len(words & FRENCH_WORDS)
+    english_hits = len(words & ENGLISH_WORDS)
+    # Reject clear English titles; allow short French titles and technical acronyms.
+    return english_hits < 2 and (french_hits >= 2 or any(c in plain for c in "àâçéèêëîïôùûüÿœ"))
+
 def main():
     items, seen = [], set()
     for query in QUERIES:
@@ -43,7 +64,8 @@ def main():
             for item in fetch_feed(query):
                 link = text(item, "link")
                 title = text(item, "title")
-                if not link or not title or link in seen:
+                description = text(item, "description")
+                if not link or not title or link in seen or not is_french(title, description):
                     continue
                 seen.add(link)
                 items.append({
@@ -51,10 +73,9 @@ def main():
                     "link": link,
                     "source": text(item, "source"),
                     "date": parse_date(text(item, "pubDate")),
-                    "description": text(item, "description"),
                 })
         except Exception as exc:
-            print(f"Feed unavailable for query {query!r}: {exc}")
+            print(f"Flux indisponible pour {query!r}: {exc}")
 
     items.sort(key=lambda item: item["date"], reverse=True)
     items = items[:MAX_ITEMS]
@@ -74,8 +95,8 @@ def main():
         </article>""")
 
     content = "\n".join(cards) if cards else """
-      <div class="empty"><strong>Aucun article n’a été récupéré.</strong>
-      <p>La prochaine mise à jour automatique réessaiera. Tu peux aussi lancer le workflow manuellement dans GitHub Actions.</p></div>"""
+      <div class="empty"><strong>Aucun article français pertinent n’a été récupéré.</strong>
+      <p>La prochaine mise à jour réessaiera automatiquement.</p></div>"""
 
     page = f"""<!doctype html>
 <html lang="fr">
@@ -102,16 +123,16 @@ h3{{font-size:1rem;line-height:1.5;margin:14px 0}}h3 a{{color:#f3f7ff;text-decor
 <body><main class="wrap">
 <header class="top"><div class="eyebrow">Veille technologique · BTS SIO SISR</div>
 <h1>L’intelligence artificielle au service de la supervision et de la détection des anomalies réseau</h1>
-<p class="intro">Actualités sur la supervision intelligente, l’analyse du trafic, la détection d’anomalies et l’AIOps.</p>
-<div class="status"><span class="pill">{len(items)} articles sélectionnés</span><span class="pill">Mise à jour : {generated}</span><span class="pill">Flux RSS automatisés</span></div>
+<p class="intro">Une sélection courte d’articles en français sur la supervision intelligente, l’analyse du trafic, la détection d’anomalies et l’AIOps.</p>
+<div class="status"><span class="pill">{len(items)} articles (maximum {MAX_ITEMS})</span><span class="pill">Mise à jour : {generated}</span><span class="pill">Flux RSS en français</span></div>
 </header>
 <section class="grid" aria-label="Articles de veille">{content}
 </section>
-<p class="footer">Articles provenant de Google Actualités RSS · Ouvre chaque titre pour consulter la source originale.</p>
+<p class="footer">Articles issus de Google Actualités RSS · Sélection en français · Ouvre un titre pour lire la source.</p>
 </main></body></html>"""
     with open("veille.html", "w", encoding="utf-8") as file:
         file.write(page)
-    print(f"Generated veille.html with {len(items)} articles")
+    print(f"veille.html généré : {len(items)} articles français (maximum {MAX_ITEMS})")
 
 if __name__ == "__main__":
     main()
