@@ -855,43 +855,34 @@ footer strong{color:var(--accent)}
   <h2 class="section-title">L’intelligence artificielle au service de la supervision et de la détection des anomalies réseau</h2>
   <div class="veille-intro reveal">
     <div class="veille-intro-text">
-      <p>La <strong style="color:var(--text)">veille technologique</strong> est une démarche incontournable pour tout professionnel de l’informatique. Elle consiste à surveiller régulièrement les évolutions du secteur afin d’anticiper les changements et de maîtriser les nouvelles technologies.</p>
-      <p>Cette année, j’ai choisi de centrer ma veille sur <strong style="color:var(--accent)">l’intelligence artificielle au service de la supervision et de la détection des anomalies réseau</strong>. Je m’intéresse à la façon dont l’IA analyse le trafic, repère les comportements inhabituels et aide les administrateurs à anticiper les incidents.</p>
-      <p>Ce sujet est particulièrement pertinent pour l’option SISR : il relie la supervision des infrastructures, l’analyse du trafic, la disponibilité des services et la cybersécurité.</p>
+      <p>La <strong style="color:var(--text)">veille technologique</strong> consiste à suivre les évolutions du secteur informatique pour comprendre les nouvelles pratiques, anticiper les changements et améliorer ses compétences.</p>
+      <p>J’ai choisi d’étudier <strong style="color:var(--accent)">l’intelligence artificielle au service de la supervision et de la détection des anomalies réseau</strong>. Cette veille porte sur l’utilisation de l’IA pour analyser les métriques et le trafic, repérer les comportements inhabituels, corréler les alertes et aider les administrateurs à identifier plus rapidement les causes d’incidents.</p>
+      <p>Le sujet est directement lié au BTS SIO option SISR : supervision des équipements, disponibilité des services, analyse des journaux, cybersécurité et maintien en condition opérationnelle. L’objectif est de comprendre les apports de l’IA, mais aussi ses limites : faux positifs, qualité des données, explicabilité et validation humaine des actions sensibles.</p>
     </div>
     <div class="veille-tools">
       <h4>Sources et outils utilisés</h4>
       <div class="tool-list">
-        <div class="tool-item"><span class="ti">📰</span><div><strong><a href="https://news.google.com/" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none">Google Actualités RSS</a></strong> — Recherche automatisée d’articles français sur le sujet choisi</div></div>
-        <div class="tool-item"><span class="ti">🔎</span><div><strong>Requêtes thématiques</strong> — IA, supervision réseau, analyse du trafic et détection d’anomalies</div></div>
-        <div class="tool-item"><span class="ti">⚙️</span><div><strong><a href="https://github.com/bryankrou3-wq/porfolio/actions" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none">GitHub Actions</a></strong> — Récupération et publication automatique des articles chaque jour</div></div>
-        <div class="tool-item"><span class="ti">🇫🇷</span><div><strong>Filtre de langue</strong> — Sélection en français, avec 6 articles maximum</div></div>
+        <div class="tool-item"><span class="ti">📰</span><div><strong><a href="https://news.google.com/" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none">Google Actualités RSS</a></strong> — Flux d’articles francophones filtrés par thème et date de publication</div></div>
+        <div class="tool-item"><span class="ti">🔎</span><div><strong>Requêtes de veille</strong> — IA, AIOps, supervision, observabilité, trafic réseau et détection d’anomalies</div></div>
+        <div class="tool-item"><span class="ti">⚙️</span><div><strong><a href="https://github.com/bryankrou3-wq/porfolio/actions" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none">GitHub Actions</a></strong> — Récupération, filtrage et publication automatique quotidienne</div></div>
+        <div class="tool-item"><span class="ti">🇫🇷</span><div><strong>Filtre linguistique</strong> — Sélection de titres en français et affichage limité à 8 articles récents</div></div>
       </div>
     </div>
   </div>
 
   <div class="veille-live reveal" style="margin-top:2rem;width:100%">
-    <div id="veille-articles" class="veille-grid" aria-live="polite">
-      <p class="veille-loading">Chargement des articles de veille…</p>
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px">
+      <p style="margin:0;color:var(--muted);font-size:.85rem">Articles récents · actualisés automatiquement</p>
+      <a href="./veille.html" target="_blank" rel="noopener noreferrer" style="color:var(--accent);font-size:.82rem;text-decoration:none">Ouvrir la veille dans un nouvel onglet ↗</a>
     </div>
+    <iframe
+      src="./veille.html"
+      title="Veille dynamique : IA, supervision et détection des anomalies réseau"
+      loading="lazy"
+      style="display:block;width:100%;height:1050px;min-height:800px;border:1px solid var(--border);border-radius:18px;background:var(--card);"
+    ></iframe>
+    <p style="margin-top:10px;color:var(--muted);font-size:.78rem">Si l’affichage intégré est bloqué par le navigateur, utilise le lien « Ouvrir la veille dans un nouvel onglet » ci-dessus.</p>
   </div>
-  <script>
-    (function () {
-      const container = document.getElementById("veille-articles");
-      if (!container) return;
-      fetch("./veille-fragment.html?refresh=" + Date.now(), { cache: "no-store" })
-        .then(function (response) {
-          if (!response.ok) throw new Error("Fichier de veille indisponible");
-          return response.text();
-        })
-        .then(function (fragment) {
-          container.innerHTML = fragment;
-        })
-        .catch(function () {
-          container.innerHTML = '<p class="veille-loading">Les articles de veille ne sont pas disponibles pour le moment. Réessaie un peu plus tard.</p>';
-        });
-    })();
-  </script>
 </section>
 
 <!-- CONTACT -->
