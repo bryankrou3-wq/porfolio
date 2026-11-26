@@ -68,10 +68,13 @@ def main():
                 if not link or not title or link in seen or not is_french(title, description):
                     continue
                 seen.add(link)
+                source_node = item.find("source")
+                source_url = source_node.attrib.get("url", "").strip() if source_node is not None else ""
                 items.append({
                     "title": title,
                     "link": link,
                     "source": text(item, "source"),
+                    "source_url": source_url,
                     "date": parse_date(text(item, "pubDate")),
                 })
         except Exception as exc:
@@ -86,16 +89,25 @@ def main():
         title = escape(item["title"])
         link = escape(item["link"], quote=True)
         source = escape(item["source"] or "Source de l’article")
+        source_url = item.get("source_url", "")
+        source_link = (
+            f"<a href=\"{escape(source_url, quote=True)}\" target=\"_blank\" rel=\"noopener noreferrer\">{source}</a>"
+            if source_url.startswith(("https://", "http://")) else source
+        )
         date = escape(item["date"] or "Date non précisée")
+        source_action = (
+            f"<a href=\"{escape(source_url, quote=True)}\" target=\"_blank\" rel=\"noopener noreferrer\">Voir le site de la source ↗</a>"
+            if source_url.startswith(("https://", "http://")) else ""
+        )
         cards.append(f"""
-        <article class="article veille-card">
-          <div class="meta"><span>{source}</span><time>{date}</time></div>
+        <article class="veille-card">
+          <div class="veille-cat">IA · Supervision réseau</div>
           <h3><a href="{link}" target="_blank" rel="noopener noreferrer">{title}</a></h3>
-          <a class="read" href="{link}" target="_blank" rel="noopener noreferrer">Lire l’article <span aria-hidden="true">↗</span></a>
+          <p class="veille-source">{source_link} · {date}</p>
+          <p class="veille-actions"><a href="{link}" target="_blank" rel="noopener noreferrer">Lire l’article ↗</a> · {source_action}</p>
         </article>""")
-
     # Publie aussi les cartes seules : le portfolio les charge dans sa rubrique sans iframe.
-    fragment_content = "\\n".join(cards) if cards else """
+    fragment_content = "\n".join(cards) if cards else """
       <article class="veille-card">
         <div class="veille-cat">Veille automatisée</div>
         <h3>Aucun article français pertinent pour le moment</h3>
