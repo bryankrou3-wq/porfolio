@@ -50,12 +50,19 @@ def parse_date(value):
         return ""
 
 def is_french(title, description):
-    plain = re.sub(r"<[^>]+>", " ", unescape(title + " " + description)).lower()
-    words = set(re.findall(r"[a-zà-ÿ’']+", plain))
-    french_hits = len(words & FRENCH_WORDS)
-    english_hits = len(words & ENGLISH_WORDS)
-    # Reject clear English titles; allow short French titles and technical acronyms.
-    return english_hits < 2 and (french_hits >= 2 or any(c in plain for c in "àâçéèêëîïôùûüÿœ"))
+    # La langue du titre est prioritaire : une description traduite ne doit pas
+    # faire passer un titre anglais dans la sélection.
+    title_plain = re.sub(r"<[^>]+>", " ", unescape(title)).lower()
+    combined = re.sub(r"<[^>]+>", " ", unescape(title + " " + description)).lower()
+    title_words = set(re.findall(r"[a-zà-ÿ’']+", title_plain))
+    combined_words = set(re.findall(r"[a-zà-ÿ’']+", combined))
+    title_fr = len(title_words & FRENCH_WORDS)
+    combined_fr = len(combined_words & FRENCH_WORDS)
+    title_en = len(title_words & ENGLISH_WORDS)
+    # Un titre doit présenter des marqueurs français, ou être clairement
+    # français par ses accents et sa description. On rejette les titres anglais.
+    title_has_accent = any(c in title_plain for c in "àâçéèêëîïôùûüÿœ")
+    return title_en == 0 and (title_fr >= 2 or (title_has_accent and combined_fr >= 2))
 
 def main():
     items, seen = [], set()
@@ -102,9 +109,9 @@ def main():
         cards.append(f"""
         <article class="veille-card">
           <div class="veille-cat">IA · Supervision réseau</div>
-          <h3><a href="{link}" target="_blank" rel="noopener noreferrer">{title}</a></h3>
-          <p class="veille-source">{source_link} · {date}</p>
-          <p class="veille-actions"><a href="{link}" target="_blank" rel="noopener noreferrer">Lire l’article ↗</a> · {source_action}</p>
+          <h3><a href="{link}" target="_blank" rel="noopener noreferrer" style="color:var(--text);text-decoration:none">{title}</a></h3>
+          <p class="veille-source">Source : {source_link} · {date}</p>
+          <p class="veille-actions"><a href="{link}" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;font-weight:700">Lire l’article sélectionné ↗</a></p>
         </article>""")
     # Publie aussi les cartes seules : le portfolio les charge dans sa rubrique sans iframe.
     fragment_content = "\n".join(cards) if cards else """
