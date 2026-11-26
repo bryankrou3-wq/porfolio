@@ -15,7 +15,7 @@ QUERIES = [
     '"AIOps" réseau observabilité when:30d',
     '"intelligence artificielle" trafic réseau automatisation when:30d',
 ]
-MAX_ITEMS = 6
+MAX_ITEMS = 8
 RSS_BASE = "https://news.google.com/rss/search?q={query}&hl=fr&gl=FR&ceid=FR:fr"
 
 FRENCH_WORDS = {
