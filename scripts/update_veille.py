@@ -90,7 +90,8 @@ def main():
                     "link": link,
                     "source": text(item, "source"),
                     "source_url": source_url,
-                    "date": parse_date(text(item, "pubDate")),\n                    "summary": clean_summary(description),
+                    "date": parse_date(text(item, "pubDate")),
+                    "summary": clean_summary(description),
                 })
         except Exception as exc:
             print(f"Flux indisponible pour {query!r}: {exc}")
