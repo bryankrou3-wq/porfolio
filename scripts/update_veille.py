@@ -49,6 +49,14 @@ def parse_date(value):
     except Exception:
         return ""
 
+def clean_summary(value, limit=360):
+    value = unescape(value or "")
+    value = re.sub(r"<[^>]+>", " ", value)
+    value = re.sub(r"\\s+", " ", value).strip()
+    if len(value) > limit:
+        value = value[:limit].rsplit(" ", 1)[0].rstrip(" ,;:") + "…"
+    return value
+
 def is_french(title, description):
     # La langue du titre est prioritaire : une description traduite ne doit pas
     # faire passer un titre anglais dans la sélection.
@@ -82,7 +90,7 @@ def main():
                     "link": link,
                     "source": text(item, "source"),
                     "source_url": source_url,
-                    "date": parse_date(text(item, "pubDate")),
+                    "date": parse_date(text(item, "pubDate")),\n                    "summary": clean_summary(description),
                 })
         except Exception as exc:
             print(f"Flux indisponible pour {query!r}: {exc}")
@@ -101,7 +109,7 @@ def main():
             f"<a href=\"{escape(source_url, quote=True)}\" target=\"_blank\" rel=\"noopener noreferrer\">{source}</a>"
             if source_url.startswith(("https://", "http://")) else source
         )
-        date = escape(item["date"] or "Date non précisée")
+        date = escape(item["date"] or "Date non précisée")\n        summary = escape(item.get("summary") or "Article lié à la supervision réseau et à l’intelligence artificielle.")
         source_action = (
             f"<a href=\"{escape(source_url, quote=True)}\" target=\"_blank\" rel=\"noopener noreferrer\">Voir le site de la source ↗</a>"
             if source_url.startswith(("https://", "http://")) else ""
@@ -111,7 +119,8 @@ def main():
           <div class="veille-cat">IA · Supervision réseau</div>
           <h3><a href="{link}" target="_blank" rel="noopener noreferrer" style="color:var(--text);text-decoration:none">{title}</a></h3>
           <p class="veille-source">Source : {source_link} · {date}</p>
-          <p class="veille-actions"><a href="{link}" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;font-weight:700">Lire l’article sélectionné ↗</a></p>
+          <p class="veille-summary">{summary}</p>
+          <p class="veille-actions"><a href="{link}" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;font-weight:700">Lire l’article complet ↗</a></p>
         </article>""")
     # Publie aussi les cartes seules : le portfolio les charge dans sa rubrique sans iframe.
     fragment_content = "\n".join(cards) if cards else """
