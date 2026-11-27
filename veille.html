@@ -1,134 +1,142 @@
-<!DOCTYPE html>
-
+<!doctype html>
 <html lang="fr">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="dark" name="color-scheme"/>
-<title>Veille IA — Supervision et anomalies réseau</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Veille interactive — IA et réseau</title>
 <style>
-:root{font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#e8eef8;background:#080d16}
+:root{font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#e8eef8;background:#080b12}
 *{box-sizing:border-box}body{margin:0;padding:18px;background:transparent}
 .wrap{max-width:1250px;margin:auto}
-.header{padding:22px;border:1px solid #29384f;border-radius:18px;background:linear-gradient(135deg,#172943,#101827);margin-bottom:18px}
-.eyebrow{color:#8ec5ff;text-transform:uppercase;letter-spacing:.13em;font-size:.72rem;font-weight:800}
+.hero{padding:22px;border:1px solid #302347;border-radius:18px;background:linear-gradient(135deg,#1c1630,#10121b);margin-bottom:16px}
+.eyebrow{color:#bb7cff;text-transform:uppercase;letter-spacing:.13em;font-size:.72rem;font-weight:850}
 h1{font-size:clamp(1.35rem,2.8vw,2rem);line-height:1.25;margin:10px 0}
-.lead{color:#bac8db;line-height:1.7;margin:0;max-width:950px}
-.pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.pill{font-size:.75rem;padding:6px 10px;border-radius:999px;background:#24344c;color:#dbeafe}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,330px),1fr));gap:15px}
-.card{padding:20px;border:1px solid #25344a;border-radius:16px;background:#111c2d;display:flex;flex-direction:column;min-height:320px}
-.topline{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
-.topic{font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:#80b7ff;font-weight:800}
-time{font-size:.74rem;color:#91a5c0}
-h2{font-size:1.04rem;line-height:1.5;margin:14px 0 10px}
-h2 a{color:#f3f7ff;text-decoration:none}h2 a:hover{color:#8ec5ff}
-.source{font-size:.76rem;color:#91a5c0;line-height:1.5;margin:0 0 10px}
-.source a{color:#a7caff;text-decoration:underline;text-underline-offset:3px}
-.summary{font-size:.88rem;line-height:1.7;color:#c5d2e3;margin:0 0 16px}
-.read{margin-top:auto;display:inline-block;align-self:flex-start;color:#80b7ff;text-decoration:none;font-size:.84rem;font-weight:800;border:1px solid #304966;padding:8px 12px;border-radius:9px}
-.read:hover{background:#1c2e45}
-.footer{font-size:.73rem;color:#8192a9;text-align:center;margin:18px 0 5px}
-@media(max-width:520px){body{padding:10px}.card{padding:16px}}
-
-.toolbar{display:grid;grid-template-columns:minmax(180px,1fr) minmax(170px,240px) auto;gap:10px;margin:16px 0}
-.toolbar input,.toolbar select,.toolbar button{font:inherit;border:1px solid #29384f;border-radius:10px;background:#111c2d;color:#e8eef8;padding:11px 13px}
-.toolbar button,.more{cursor:pointer;font-weight:800;background:#20344d}
-.toolbar button:hover,.more:hover{background:#2a4565}
-.more{font:inherit;border:1px solid #29384f;border-radius:10px;color:#e8eef8;padding:10px 15px}
-.bottom{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:16px 0}
-#result-count{font-size:.8rem;color:#91a5c0}
-.card[hidden]{display:none!important}
-@media(max-width:650px){.toolbar{grid-template-columns:1fr}}
-
+.lead{color:#bcb8c9;line-height:1.7;margin:0;max-width:1000px}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.pill{font-size:.75rem;padding:6px 10px;border-radius:999px;background:#292039;color:#e9d9ff;border:1px solid #3c2d56}
+.toolbar{display:grid;grid-template-columns:minmax(0,1fr) minmax(150px,220px) auto;gap:10px;margin:14px 0}
+.toolbar input,.toolbar select{width:100%;min-height:44px;border:1px solid #393044;border-radius:10px;background:#111018;color:#f1eaff;padding:10px 12px;font:inherit}
+.toolbar button,.more{border:1px solid #69439a;background:#2b1b42;color:#e9d9ff;border-radius:10px;padding:10px 15px;font:inherit;font-weight:800;cursor:pointer}
+.toolbar button:hover,.more:hover{background:#3b2457}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,310px),1fr));gap:14px}
+.veille-card{padding:19px;border:1px solid #2b2733;border-radius:16px;background:#111014;display:flex;flex-direction:column;min-height:280px}
+.card-meta{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.veille-cat{font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:#bb7cff;font-weight:850}
+time{font-size:.73rem;color:#91899f}
+h3{font-size:1rem;line-height:1.5;margin:13px 0 9px}h3 a{color:#f5f1fa;text-decoration:none}h3 a:hover{color:#c994ff}
+.veille-source{font-size:.75rem;color:#938ba0;line-height:1.5;margin:0 0 10px}.veille-source a{color:#c18bff;text-underline-offset:3px}
+.veille-summary{font-size:.87rem;line-height:1.7;color:#c8c1d2;margin:0 0 15px}
+.veille-actions{margin-top:auto}.veille-actions a{display:inline-block;color:#c18bff;text-decoration:none;font-size:.83rem;font-weight:850;border:1px solid #453153;padding:8px 11px;border-radius:9px}
+.veille-actions a:hover{background:#20162c}
+.empty{color:#c8c1d2;min-height:auto}.bottom{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:16px 0}
+#result-count{font-size:.8rem;color:#9d95aa}.footer{font-size:.72rem;color:#80788e;text-align:center;margin:16px 0 4px}
+@media(max-width:650px){body{padding:10px}.toolbar{grid-template-columns:1fr}.hero{padding:17px}.veille-card{padding:16px}}
 </style>
 </head>
 <body><main class="wrap">
-<header class="header">
+<header class="hero">
 <div class="eyebrow">Veille technologique · BTS SIO SISR</div>
 <h1>L’intelligence artificielle au service de la supervision et de la détection des anomalies réseau</h1>
-<p class="lead">Cette sélection présente des actualités récentes sur l’observabilité, l’AIOps, la détection des incidents et la cybersécurité des infrastructures. Chaque carte comporte un résumé, une date et un lien vers la source pour consulter l’article complet.</p>
-<div class="pills"><span class="pill">6 articles sélectionnés</span><span class="pill">Sources en français</span><span class="pill">Mis à jour le 26/11/2026</span><span class="pill">Veille automatisée par GitHub Actions</span></div>
+<p class="lead">Articles récents en français sur la supervision intelligente, l’analyse du trafic, la détection d’anomalies, l’observabilité, l’AIOps et la cybersécurité. Recherche, filtres thématiques et accès direct aux sources.</p>
+<div class="pills"><span class="pill">8 articles</span><span class="pill">Dernière mise à jour : 27/11/2026 à 16:47 UTC</span><span class="pill">RSS français · Google Actualités</span></div>
 </header>
-<div aria-label="Recherche et filtres de la veille" class="toolbar" role="search">
-<input aria-label="Rechercher dans les articles" id="search" placeholder="Rechercher un article, une source ou un mot-clé…" type="search"/>
-<select aria-label="Filtrer par thème" id="category">
-<option value="all">Tous les thèmes</option><option value="Supervision">Supervision</option><option value="AIOps">AIOps</option><option value="Cybersécurité">Cybersécurité</option><option value="Réseau">Réseau</option><option value="IA">IA</option>
-</select>
+<div class="toolbar" role="search" aria-label="Recherche dans la veille">
+<input id="search" type="search" placeholder="Rechercher un article, une source, un mot-clé…" aria-label="Rechercher">
+<select id="category" aria-label="Filtrer par thème"><option value="all">Tous les thèmes</option><option>Supervision</option><option>AIOps</option><option>Cybersécurité</option><option>Réseau</option><option>IA</option></select>
 <button id="reset" type="button">Réinitialiser</button>
 </div>
-<section aria-label="Articles récents" class="grid" id="article-grid">
-<article class="card" data-topics="Supervision AIOps Cybersécurité Réseau IA">
-<div class="topline"><span class="topic">Cybersécurité · Infrastructures</span><time>26 novembre 2026</time></div>
-<h2><a href="https://www.actuia.com/veille/2026-11-26/" rel="noopener noreferrer" target="_blank">Des cyberattaques utilisant des agents IA touchent des entreprises et des infrastructures critiques</a></h2>
-<p class="source">Source : <a href="https://www.actuia.com/veille/2026-11-26/" rel="noopener noreferrer" target="_blank">ActuIA — Veille du 26 novembre</a></p>
-<p class="summary">L’Office fédéral suisse de cybersécurité rapporte des attaques confirmées contre des entreprises, dont des exploitants d’infrastructures critiques. Les attaques s’appuient notamment sur des mots de passe faibles ou par défaut et des vulnérabilités connues. Cette actualité rappelle l’importance de la supervision, de la gestion des correctifs et de la détection des comportements anormaux.</p>
-<a class="read" href="https://www.actuia.com/veille/2026-11-26/" rel="noopener noreferrer" target="_blank">Lire l’article / la source ↗</a>
-</article>
-<article class="card" data-topics="Supervision AIOps IA">
-<div class="topline"><span class="topic">Observabilité · AIOps</span><time>20 novembre 2026</time></div>
-<h2><a href="https://www.itforbusiness.fr/luis-miguel-porem-dynatrace-nous-attendons-de-nos-partenaires-quils-soient-de-veritables-createurs-de-valeur-partagee-110151" rel="noopener noreferrer" target="_blank">Dynatrace veut faire de l’observabilité un levier d’automatisation</a></h2>
-<p class="source">Source : <a href="https://www.itforbusiness.fr/luis-miguel-porem-dynatrace-nous-attendons-de-nos-partenaires-quils-soient-de-veritables-createurs-de-valeur-partagee-110151" rel="noopener noreferrer" target="_blank">IT for Business</a></p>
-<p class="summary">L’article explique comment l’observabilité s’appuie sur les données de télémétrie et la cartographie des dépendances pour identifier la cause racine d’un incident. Il décrit l’évolution vers une supervision plus prédictive, associant AIOps, sécurité et automatisation des opérations.</p>
-<a class="read" href="https://www.itforbusiness.fr/luis-miguel-porem-dynatrace-nous-attendons-de-nos-partenaires-quils-soient-de-veritables-createurs-de-valeur-partagee-110151" rel="noopener noreferrer" target="_blank">Lire l’article / la source ↗</a>
-</article>
-<article class="card" data-topics="Supervision AIOps Cybersécurité Réseau IA">
-<div class="topline"><span class="topic">Supervision · OpenTelemetry</span><time>19 novembre 2026</time></div>
-<h2><a href="https://www.servicepilot.com/fr/blog/atelier-aiops-crip-servicepilot/" rel="noopener noreferrer" target="_blank">AIOps et observabilité sans silos : de la détection à l’action</a></h2>
-<p class="source">Source : <a href="https://www.servicepilot.com/fr/blog/atelier-aiops-crip-servicepilot/" rel="noopener noreferrer" target="_blank">ServicePilot — CRiP</a></p>
-<p class="summary">Le retour sur l’atelier CRiP présente l’intérêt de centraliser la supervision réseau, l’observabilité applicative et les dépendances entre composants. OpenTelemetry est présenté comme un socle de collecte des métriques, logs et traces. L’IA aide à contextualiser les alertes et à accélérer le diagnostic, tout en gardant l’expertise humaine dans la décision.</p>
-<a class="read" href="https://www.servicepilot.com/fr/blog/atelier-aiops-crip-servicepilot/" rel="noopener noreferrer" target="_blank">Lire l’article / la source ↗</a>
-</article>
-<article class="card" data-topics="Cybersécurité IA">
-<div class="topline"><span class="topic">Cyberdéfense · Détection</span><time>19 novembre 2026</time></div>
-<h2><a href="https://www.lemonde.fr/pixels/article/2026/11/19/l-ia-redessine-les-regles-du-jeu-a-une-vitesse-que-nous-n-avions-jamais-connue-des-responsables-de-la-cybersecurite-de-l-etat-sonnent-l-alarme_6813298_4408996.html" rel="noopener noreferrer" target="_blank">Les responsables français de la cybersécurité alertent sur l’accélération des capacités de l’IA</a></h2>
-<p class="source">Source : <a href="https://www.lemonde.fr/pixels/article/2026/11/19/l-ia-redessine-les-regles-du-jeu-a-une-vitesse-que-nous-n-avions-jamais-connue-des-responsables-de-la-cybersecurite-de-l-etat-sonnent-l-alarme_6813298_4408996.html" rel="noopener noreferrer" target="_blank">Le Monde — Pixels</a></p>
-<p class="summary">Lors de l’European Cyber Week à Rennes, des responsables de la cybersécurité française ont évoqué la rapidité avec laquelle l’IA peut aider à découvrir et exploiter des vulnérabilités. L’article souligne aussi que l’IA peut assister les défenseurs dans la détection et la correction des failles : les systèmes non corrigés restent un risque majeur.</p>
-<a class="read" href="https://www.lemonde.fr/pixels/article/2026/11/19/l-ia-redessine-les-regles-du-jeu-a-une-vitesse-que-nous-n-avions-jamais-connue-des-responsables-de-la-cybersecurite-de-l-etat-sonnent-l-alarme_6813298_4408996.html" rel="noopener noreferrer" target="_blank">Lire l’article / la source ↗</a>
-</article>
-<article class="card" data-topics="Cybersécurité Réseau IA" hidden="True">
-<div class="topline"><span class="topic">Vulnérabilités · Réseau</span><time>19 novembre 2026</time></div>
-<h2><a href="https://www.actuia.com/veille/2026-11-19/" rel="noopener noreferrer" target="_blank">Une IA aurait aidé à découvrir plusieurs vulnérabilités dans NGINX</a></h2>
-<p class="source">Source : <a href="https://www.actuia.com/veille/2026-11-19/" rel="noopener noreferrer" target="_blank">ActuIA — Veille du 19 novembre</a></p>
-<p class="summary">La veille rapporte que l’outil d’IA de Xint aurait découvert quatre des cinq vulnérabilités signalées dans NGINX, ensuite corrigées par F5. Cet exemple illustre comment l’IA peut accélérer l’analyse de code et la recherche de failles, mais aussi pourquoi une surveillance des versions et une application rapide des correctifs sont essentielles.</p>
-<a class="read" href="https://www.actuia.com/veille/2026-11-19/" rel="noopener noreferrer" target="_blank">Lire l’article / la source ↗</a>
-</article>
-<article class="card" data-topics="Supervision AIOps IA" hidden="True">
-<div class="topline"><span class="topic">AIOps · Gestion des incidents</span><time>29 octobre 2026</time></div>
-<h2><a href="https://www.actuia.com/veille/2026-11-02/" rel="noopener noreferrer" target="_blank">NTT DATA teste des agents IA pour diagnostiquer et traiter des incidents IT</a></h2>
-<p class="source">Source : <a href="https://www.actuia.com/veille/2026-11-02/" rel="noopener noreferrer" target="_blank">ActuIA — Veille du 2 novembre</a></p>
-<p class="summary">NTT DATA Intellilink expérimente des agents IA dans Hinemos : collecte des données d’exploitation, analyse de la cause, proposition ou exécution d’une correction, vérification du rétablissement et compte rendu. Les actions à fort impact restent soumises à une validation humaine. C’est un exemple concret d’AIOps appliqué à la gestion des incidents.</p>
-<a class="read" href="https://www.actuia.com/veille/2026-11-02/" rel="noopener noreferrer" target="_blank">Lire l’article / la source ↗</a>
-</article></section><div class="bottom"><span aria-live="polite" id="result-count">Articles affichés</span><button class="more" id="more" type="button">Afficher les articles suivants</button></div>
-<p class="footer">Sélection de veille en français. Les articles sont présentés avec leur source d’origine ; les liens ouvrent les pages des éditeurs.</p>
+<section id="article-grid" class="grid" aria-label="Articles de veille">
+        <article class="veille-card" data-topic="IA" data-search="la plateforme x introduit des fonctionnalités de contrôle parental pour les adolescents âgés de 13 à 17 ans - informat.ro informat.ro la plateforme x introduit des fonctionnalités de contrôle parental pour les adolescents âgés de 13 à 17 ans    informat.ro" data-date="2026-11-27">
+          <div class="card-meta"><span class="veille-cat">IA · IA réseau</span><time>2026-11-27</time></div>
+          <h3><a href="https://news.google.com/rss/articles/CBMisAFBVV95cUxQSlRMQjl3amlwYVNvQkZldzc2cXVhYVBNYUY2bUJYWlZMRE02TmNOVGhla19BSlhXYmhST2ZGSWM0WDZ5SmpGOTgwVm5Yc0lUTWNzVkpsWW5MalpmRGRnV1prN2dqSmR0a25RZGFkUnVXQ0tUYnJhcDRSc3Fxd3BuRHRYSi10ektsNk0xRWNDYmRZSU5nM3Z4Umc3QjhkbVhtWmpTV3NhcHFKZjUyb3p3cw?oc=5" target="_blank" rel="noopener noreferrer">La plateforme X introduit des fonctionnalités de contrôle parental pour les adolescents âgés de 13 à 17 ans - Informat.ro</a></h3>
+          <p class="veille-source">Source : <a href="https://informat.ro" target="_blank" rel="noopener noreferrer">Informat.ro</a></p>
+          <p class="veille-summary">La plateforme X introduit des fonctionnalités de contrôle parental pour les adolescents âgés de 13 à 17 ans    Informat.ro</p>
+          <p class="veille-actions"><a href="https://news.google.com/rss/articles/CBMisAFBVV95cUxQSlRMQjl3amlwYVNvQkZldzc2cXVhYVBNYUY2bUJYWlZMRE02TmNOVGhla19BSlhXYmhST2ZGSWM0WDZ5SmpGOTgwVm5Yc0lUTWNzVkpsWW5MalpmRGRnV1prN2dqSmR0a25RZGFkUnVXQ0tUYnJhcDRSc3Fxd3BuRHRYSi10ektsNk0xRWNDYmRZSU5nM3Z4Umc3QjhkbVhtWmpTV3NhcHFKZjUyb3p3cw?oc=5" target="_blank" rel="noopener noreferrer">Lire l’article complet ↗</a></p>
+        </article>
+
+        <article class="veille-card" data-topic="Réseau" data-search="démantèlement de réseaux criminels spécialisés dans l&#x27;escroquerie électronique - وكالة الأنباء الجزائرية وكالة الأنباء الجزائرية démantèlement de réseaux criminels spécialisés dans l&#x27;escroquerie électronique    وكالة الأنباء الجزائرية" data-date="2026-11-27">
+          <div class="card-meta"><span class="veille-cat">Réseau · IA réseau</span><time>2026-11-27</time></div>
+          <h3><a href="https://news.google.com/rss/articles/CBMiwwFBVV95cUxPTzNFX2pUcXdlbDQ1a0FzSFBrSVBaQV9sRGZIU2JMQkVJYUZhVXM2bnBaMkgwbGt0RkRJNkRqTFYzVmI1ZWxBU2g5VXdONUl3MHJxTHNtcHpxV3VXd3g3OHlyY3RXQjh6bWlNODFvVW5kZnVwc0F2Ymo5UDhFV3Vuc0ZVcl9GNEhGOU41MjlEdHF4WjQ1MEFkTWFOR2czNkhhS19vOVhMcm9PWHd4aVZydWFBMTlMbjZvYmRJaDI3cDZMYzA?oc=5" target="_blank" rel="noopener noreferrer">Démantèlement de réseaux criminels spécialisés dans l&#x27;escroquerie électronique - وكالة الأنباء الجزائرية</a></h3>
+          <p class="veille-source">Source : <a href="https://www.aps.dz" target="_blank" rel="noopener noreferrer">وكالة الأنباء الجزائرية</a></p>
+          <p class="veille-summary">Démantèlement de réseaux criminels spécialisés dans l&#x27;escroquerie électronique    وكالة الأنباء الجزائرية</p>
+          <p class="veille-actions"><a href="https://news.google.com/rss/articles/CBMiwwFBVV95cUxPTzNFX2pUcXdlbDQ1a0FzSFBrSVBaQV9sRGZIU2JMQkVJYUZhVXM2bnBaMkgwbGt0RkRJNkRqTFYzVmI1ZWxBU2g5VXdONUl3MHJxTHNtcHpxV3VXd3g3OHlyY3RXQjh6bWlNODFvVW5kZnVwc0F2Ymo5UDhFV3Vuc0ZVcl9GNEhGOU41MjlEdHF4WjQ1MEFkTWFOR2czNkhhS19vOVhMcm9PWHd4aVZydWFBMTlMbjZvYmRJaDI3cDZMYzA?oc=5" target="_blank" rel="noopener noreferrer">Lire l’article complet ↗</a></p>
+        </article>
+
+        <article class="veille-card" data-topic="Cybersécurité" data-search="5 solutions d’ia qui renforcent la cybersécurité en 2026 - brief ia brief ia 5 solutions d’ia qui renforcent la cybersécurité en 2026    brief ia" data-date="2026-11-27">
+          <div class="card-meta"><span class="veille-cat">Cybersécurité · IA réseau</span><time>2026-11-27</time></div>
+          <h3><a href="https://news.google.com/rss/articles/CBMibkFVX3lxTE1CSHJBUzdEQWppM2hwbjN3RS1Sc1lnVlJUUy1MbHM3ak8tUUREWkFxZG5sa2kzeXVaRXhGeGlKclNoZG54ZVpSSnNyTGxZRGhpNDl4SUxKWlVpWUNCNVFiUC1WUDQ5TjI3UHRXQ0hB?oc=5" target="_blank" rel="noopener noreferrer">5 solutions d’IA qui renforcent la cybersécurité en 2026 - Brief IA</a></h3>
+          <p class="veille-source">Source : <a href="https://www.briefia.fr" target="_blank" rel="noopener noreferrer">Brief IA</a></p>
+          <p class="veille-summary">5 solutions d’IA qui renforcent la cybersécurité en 2026    Brief IA</p>
+          <p class="veille-actions"><a href="https://news.google.com/rss/articles/CBMibkFVX3lxTE1CSHJBUzdEQWppM2hwbjN3RS1Sc1lnVlJUUy1MbHM3ak8tUUREWkFxZG5sa2kzeXVaRXhGeGlKclNoZG54ZVpSSnNyTGxZRGhpNDl4SUxKWlVpWUNCNVFiUC1WUDQ5TjI3UHRXQ0hB?oc=5" target="_blank" rel="noopener noreferrer">Lire l’article complet ↗</a></p>
+        </article>
+
+        <article class="veille-card" data-topic="Réseau" data-search="evnhanoi utilise l&#x27;ia pour construire progressivement un réseau intelligent. - vietnam.vn vietnam.vn evnhanoi utilise l&#x27;ia pour construire progressivement un réseau intelligent.    vietnam.vn" data-date="2026-11-27">
+          <div class="card-meta"><span class="veille-cat">Réseau · IA réseau</span><time>2026-11-27</time></div>
+          <h3><a href="https://news.google.com/rss/articles/CBMijwFBVV95cUxOOV96N1AzMTd6T3ZISTROYU5OSkI4STJaZm1DS1pGak1vTWxaQlg3Vlh4NUlXbXItTnpBSHZPRGVjdFdhOVdRY3dCZGZ4NDNLU0hvTjVRYV9WV1FGTU9oU1FhQ3VEUGF5MUlmQnR2R2FjUjR0b2d2RkVNQWlvdXJVcFVKUnFyWW5NZkRMSmJSRQ?oc=5" target="_blank" rel="noopener noreferrer">EVNHANOI utilise l&#x27;IA pour construire progressivement un réseau intelligent. - Vietnam.vn</a></h3>
+          <p class="veille-source">Source : <a href="https://www.vietnam.vn" target="_blank" rel="noopener noreferrer">Vietnam.vn</a></p>
+          <p class="veille-summary">EVNHANOI utilise l&#x27;IA pour construire progressivement un réseau intelligent.    Vietnam.vn</p>
+          <p class="veille-actions"><a href="https://news.google.com/rss/articles/CBMijwFBVV95cUxOOV96N1AzMTd6T3ZISTROYU5OSkI4STJaZm1DS1pGak1vTWxaQlg3Vlh4NUlXbXItTnpBSHZPRGVjdFdhOVdRY3dCZGZ4NDNLU0hvTjVRYV9WV1FGTU9oU1FhQ3VEUGF5MUlmQnR2R2FjUjR0b2d2RkVNQWlvdXJVcFVKUnFyWW5NZkRMSmJSRQ?oc=5" target="_blank" rel="noopener noreferrer">Lire l’article complet ↗</a></p>
+        </article>
+
+        <article class="veille-card" data-topic="IA" data-search="s&amp;p global ratings place les notes aa de nvidia sous surveillance - unite.ai unite.ai s&amp;p global ratings place les notes aa de nvidia sous surveillance    unite.ai" data-date="2026-11-25">
+          <div class="card-meta"><span class="veille-cat">IA · IA réseau</span><time>2026-11-25</time></div>
+          <h3><a href="https://news.google.com/rss/articles/CBMijwFBVV95cUxNRmdEeUR0MVZ5TmVOWWxmUkpWSVZBUXFLb0VkUndoR29fc29QZ0JpQ2hidjRSOUNrZ0FRdEJIeW5YYlpnQ0tEandNN29CYjBRTkFNam1jUEVJSjgxUUM0X0wtQ2xoOF8tLUIyc0hGd1ZrNG9DRjdMRWRwN3pOY2MxWW45YUFsRzVhRjhXVWtxcw?oc=5" target="_blank" rel="noopener noreferrer">S&amp;P Global Ratings place les notes AA de NVIDIA sous surveillance - Unite.AI</a></h3>
+          <p class="veille-source">Source : <a href="https://www.unite.ai" target="_blank" rel="noopener noreferrer">Unite.AI</a></p>
+          <p class="veille-summary">S&amp;P Global Ratings place les notes AA de NVIDIA sous surveillance    Unite.AI</p>
+          <p class="veille-actions"><a href="https://news.google.com/rss/articles/CBMijwFBVV95cUxNRmdEeUR0MVZ5TmVOWWxmUkpWSVZBUXFLb0VkUndoR29fc29QZ0JpQ2hidjRSOUNrZ0FRdEJIeW5YYlpnQ0tEandNN29CYjBRTkFNam1jUEVJSjgxUUM0X0wtQ2xoOF8tLUIyc0hGd1ZrNG9DRjdMRWRwN3pOY2MxWW45YUFsRzVhRjhXVWtxcw?oc=5" target="_blank" rel="noopener noreferrer">Lire l’article complet ↗</a></p>
+        </article>
+
+        <article class="veille-card" data-topic="Cybersécurité" data-search="ia et devsecops : une sécurité plus intelligente, de nouveaux enjeux - ibm ibm ia et devsecops : une sécurité plus intelligente, de nouveaux enjeux    ibm" data-date="2026-11-24">
+          <div class="card-meta"><span class="veille-cat">Cybersécurité · IA réseau</span><time>2026-11-24</time></div>
+          <h3><a href="https://news.google.com/rss/articles/CBMiZEFVX3lxTFAwcU9NZW9PbGFoN3Y3WHFZZG5kcldfc2V0OGxqS2JxRlhEdzk1Y3lsSWJSYll4X3RFc1NJUWl5WUZIcURUWWVPajZuc016VzcwMkRpbmR0cmhfcTNIaEhiT1RkQ0M?oc=5" target="_blank" rel="noopener noreferrer">IA et DevSecOps : une sécurité plus intelligente, de nouveaux enjeux - IBM</a></h3>
+          <p class="veille-source">Source : <a href="https://www.ibm.com" target="_blank" rel="noopener noreferrer">IBM</a></p>
+          <p class="veille-summary">IA et DevSecOps : une sécurité plus intelligente, de nouveaux enjeux    IBM</p>
+          <p class="veille-actions"><a href="https://news.google.com/rss/articles/CBMiZEFVX3lxTFAwcU9NZW9PbGFoN3Y3WHFZZG5kcldfc2V0OGxqS2JxRlhEdzk1Y3lsSWJSYll4X3RFc1NJUWl5WUZIcURUWWVPajZuc016VzcwMkRpbmR0cmhfcTNIaEhiT1RkQ0M?oc=5" target="_blank" rel="noopener noreferrer">Lire l’article complet ↗</a></p>
+        </article>
+
+        <article class="veille-card" data-topic="Réseau" data-search="pourquoi les solutions ddi ne sont pas toujours idéales pour les dns faisant autorité - ibm ibm pourquoi les solutions ddi ne sont pas toujours idéales pour les dns faisant autorité    ibm" data-date="2026-11-24">
+          <div class="card-meta"><span class="veille-cat">Réseau · IA réseau</span><time>2026-11-24</time></div>
+          <h3><a href="https://news.google.com/rss/articles/CBMib0FVX3lxTFAzbVVjd2plX212Mk5BVW1rOU5iZW9NeGEzS3o1djc0elJQWkJGcHFsVHBNR3FGckpLeTMydm42bHZUZXM0cTIwUTVDYnQwTU9CbWZKYVozVUhtYjFYejZCd0dxS2JoZWo1c0VXSHEwUQ?oc=5" target="_blank" rel="noopener noreferrer">Pourquoi les solutions DDI ne sont pas toujours idéales pour les DNS faisant autorité - IBM</a></h3>
+          <p class="veille-source">Source : <a href="https://www.ibm.com" target="_blank" rel="noopener noreferrer">IBM</a></p>
+          <p class="veille-summary">Pourquoi les solutions DDI ne sont pas toujours idéales pour les DNS faisant autorité    IBM</p>
+          <p class="veille-actions"><a href="https://news.google.com/rss/articles/CBMib0FVX3lxTFAzbVVjd2plX212Mk5BVW1rOU5iZW9NeGEzS3o1djc0elJQWkJGcHFsVHBNR3FGckpLeTMydm42bHZUZXM0cTIwUTVDYnQwTU9CbWZKYVozVUhtYjFYejZCd0dxS2JoZWo1c0VXSHEwUQ?oc=5" target="_blank" rel="noopener noreferrer">Lire l’article complet ↗</a></p>
+        </article>
+
+        <article class="veille-card" data-topic="Réseau" data-search="réseaux électriques : l&#x27;intelligence artificielle sait prévoir les pannes, mais peut-on lui confier les commandes ? - les smartgrids les smartgrids réseaux électriques : l&#x27;intelligence artificielle sait prévoir les pannes, mais peut-on lui confier les commandes ?    les smartgrids" data-date="2026-11-23">
+          <div class="card-meta"><span class="veille-cat">Réseau · IA réseau</span><time>2026-11-23</time></div>
+          <h3><a href="https://news.google.com/rss/articles/CBMilgFBVV95cUxOM0UydHAyekU0QTNLMnd0bHA2c2xicGNpYXViU0pUTG9oazBEdy1aYTNoQ2V6X2ZrNmdjNHU1SFJ4MGxtakk3MXRacDRkRDg5WGdBVVZ2REoxdG01SW5tVHA2Z21IUVgweURLWDl1NmZMWEpzaDRibXp4R1l6QW9QOXB2bmktV0p3Y2dLTy1rSmFvdjhjRUE?oc=5" target="_blank" rel="noopener noreferrer">Réseaux électriques : l&#x27;intelligence artificielle sait prévoir les pannes, mais peut-on lui confier les commandes ? - Les Smartgrids</a></h3>
+          <p class="veille-source">Source : <a href="https://les-smartgrids.fr" target="_blank" rel="noopener noreferrer">Les Smartgrids</a></p>
+          <p class="veille-summary">Réseaux électriques : l&#x27;intelligence artificielle sait prévoir les pannes, mais peut-on lui confier les commandes ?    Les Smartgrids</p>
+          <p class="veille-actions"><a href="https://news.google.com/rss/articles/CBMilgFBVV95cUxOM0UydHAyekU0QTNLMnd0bHA2c2xicGNpYXViU0pUTG9oazBEdy1aYTNoQ2V6X2ZrNmdjNHU1SFJ4MGxtakk3MXRacDRkRDg5WGdBVVZ2REoxdG01SW5tVHA2Z21IUVgweURLWDl1NmZMWEpzaDRibXp4R1l6QW9QOXB2bmktV0p3Y2dLTy1rSmFvdjhjRUE?oc=5" target="_blank" rel="noopener noreferrer">Lire l’article complet ↗</a></p>
+        </article></section>
+<div class="bottom"><span id="result-count" aria-live="polite">Articles affichés</span><button id="more" class="more" type="button">Afficher plus</button></div>
+<p class="footer">Chaque carte contient un résumé et un lien vers l’article original. Les nouvelles publications sont récupérées par GitHub Actions selon son calendrier.</p>
 </main>
 <script>
-(function(){
- const cards=Array.from(document.querySelectorAll('#article-grid .card'));
- const search=document.getElementById('search');
- const category=document.getElementById('category');
- const reset=document.getElementById('reset');
- const more=document.getElementById('more');
- const count=document.getElementById('result-count');
- let limit=4;
- function update(){
-   const q=search.value.trim().toLocaleLowerCase('fr');
-   const topic=category.value;
-   const filtered=cards.filter(card=>{
-     const matchesText=!q||card.innerText.toLocaleLowerCase('fr').includes(q);
-     const topics=(card.dataset.topics||'').split(/\\s+/);
-     const matchesTopic=topic==='all'||topics.includes(topic);
-     return matchesText&&matchesTopic;
+(function() {
+ const cards = Array.from(document.querySelectorAll(".veille-card"));
+ const search = document.getElementById("search");
+ const category = document.getElementById("category");
+ const reset = document.getElementById("reset");
+ const more = document.getElementById("more");
+ const count = document.getElementById("result-count");
+ let visibleLimit = 6;
+ function update() {
+   const term = search.value.trim().toLowerCase();
+   const selected = category.value;
+   const filtered = cards.filter(card => {
+     const text = (card.dataset.search || card.innerText).toLowerCase();
+     return (!term || text.includes(term)) && (selected === "all" || card.dataset.topic === selected);
    });
-   cards.forEach(card=>card.hidden=true);
-   filtered.slice(0,limit).forEach(card=>card.hidden=false);
-   count.textContent=filtered.length+' article(s) trouvé(s) · '+Math.min(filtered.length,limit)+' affiché(s)';
-   more.hidden=filtered.length<=limit;
-   more.textContent='Afficher les '+Math.min(6,filtered.length-limit)+' article(s) suivant(s)';
+   cards.forEach(card => card.hidden = true);
+   filtered.slice(0, visibleLimit).forEach(card => card.hidden = false);
+   count.textContent = filtered.length + " article(s) trouvé(s) · " + Math.min(filtered.length, visibleLimit) + " affiché(s)";
+   more.hidden = filtered.length <= visibleLimit;
  }
- search.addEventListener('input',()=>{limit=4;update()});
- category.addEventListener('change',()=>{limit=4;update()});
- reset.addEventListener('click',()=>{search.value='';category.value='all';limit=4;update();search.focus()});
- more.addEventListener('click',()=>{limit+=4;update()});
+ search.addEventListener("input", () => {visibleLimit=6;update();});
+ category.addEventListener("change", () => {visibleLimit=6;update();});
+ reset.addEventListener("click", () => {search.value="";category.value="all";visibleLimit=6;update();search.focus();});
+ more.addEventListener("click", () => {visibleLimit += 6;update();});
  update();
 })();
 </script>
